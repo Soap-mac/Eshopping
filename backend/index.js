@@ -15,7 +15,7 @@ app.use(helmet({
 
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://eshopping-weld.vercel.app',
     credentials: true
 }));
 
