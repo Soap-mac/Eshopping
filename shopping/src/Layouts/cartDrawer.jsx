@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import { IoMdClose } from 'react-icons/io';
 import { MdShoppingCart, MdOutlineDeleteOutline, MdAdd, MdRemove } from 'react-icons/md';
 import { MyContext } from '../App';
-
+import { Link } from 'react-router-dom';
 
 function CartDrawer({ onUpdateQuantity = () => { }, onRemoveItem = () => { } }) {
     const { openCartDrawer, setOpenCartDrawer } = useContext(MyContext);
@@ -164,6 +164,9 @@ function CartDrawer({ onUpdateQuantity = () => { }, onRemoveItem = () => { } }) 
                                     View Cart
                                 </Button>
                                 <Button
+                                    component={Link}
+                                    to="/Checkout"
+                                    onClick={handleClose}
                                     fullWidth
                                     variant="contained"
                                     disableElevation
@@ -174,7 +177,9 @@ function CartDrawer({ onUpdateQuantity = () => { }, onRemoveItem = () => { } }) 
                                         fontSize: '13.5px',
                                         borderRadius: '10px',
                                         py: 1.15,
-                                        '&:hover': { background: 'linear-gradient(to right, #d97706, #c2410c)' },
+                                        '&:hover': {
+                                            background: 'linear-gradient(to right, #d97706, #c2410c)'
+                                        },
                                     }}
                                 >
                                     Checkout

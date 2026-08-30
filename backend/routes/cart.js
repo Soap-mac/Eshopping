@@ -149,27 +149,39 @@ router.post('/changeQuantity', async (req, res) => {
         const email = req.cookies.email;
         const newQty = Number(qty);
 
-        // Validation
         if (!email) {
-            return res.status(400).json({ message: 'You are not logged in, please login to change cart items' });
+            return res.status(400).json({
+                message: 'You are not logged in, please login to change cart items'
+            });
         }
-        if (newQty === undefined || !productId) {
-            return res.status(400).json({ message: 'Product ID and quantity are required' });
+
+        if (!Number.isInteger(newQty) || newQty < 0) {
+            return res.status(400).json({
+                message: 'Valid quantity is required'
+            });
         }
+
         if (!variantSku && !cartItemId) {
-            return res.status(400).json({ message: 'Either variant SKU or cart item ID is required' });
+            return res.status(400).json({
+                message: 'Either variant SKU or cart item ID is required'
+            });
         }
 
-        // Find user
         const userData = await user.findOne({ email });
+
         if (!userData) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({
+                message: 'User not found'
+            });
         }
 
-        // Find cart item
         let cart;
+
         if (cartItemId) {
-            cart = await CartProduct.findOne({ _id: cartItemId, userId: userData._id });
+            cart = await CartProduct.findOne({
+                _id: cartItemId,
+                userId: userData._id
+            });
         } else {
             cart = await CartProduct.findOne({
                 productId,
@@ -179,26 +191,41 @@ router.post('/changeQuantity', async (req, res) => {
         }
 
         if (!cart) {
-            return res.status(404).json({ message: 'Product not found in cart' });
+            return res.status(404).json({
+                message: 'Product not found in cart'
+            });
         }
 
-        // If quantity is 0, remove from cart
         if (newQty === 0) {
             userData.shopping_cart.pull(cart._id);
             await userData.save();
-            await CartProduct.deleteOne({ _id: cart._id });
-            return res.status(200).json({ message: 'Product removed from cart successfully' });
+
+            await CartProduct.deleteOne({
+                _id: cart._id
+            });
+
+            return res.status(200).json({
+                success: true,
+                message: 'Product removed from cart successfully'
+            });
         }
 
-        // Check stock availability
-        const product = await Product.findById(productId);
+        const product = await product.findById(cart.productId);
+
         if (!product) {
-            return res.status(404).json({ message: 'Product not found' });
+            return res.status(404).json({
+                message: 'Product not found'
+            });
         }
 
-        const variant = product.variants.find(v => v.sku === cart.variantSku);
+        const variant = product.variants.find(
+            v => v.sku === cart.variantSku
+        );
+
         if (!variant) {
-            return res.status(404).json({ message: 'Variant not found' });
+            return res.status(404).json({
+                message: 'Variant not found'
+            });
         }
 
         if (variant.stock < newQty) {
@@ -208,18 +235,22 @@ router.post('/changeQuantity', async (req, res) => {
             });
         }
 
-        // Update quantity
         cart.quantity = newQty;
         await cart.save();
 
         res.status(200).json({
+            success: true,
             message: 'Cart quantity updated successfully',
             cart
         });
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: 'Internal Server Error', error: error.message });
+
+        res.status(500).json({
+            message: 'Internal Server Error',
+            error: error.message
+        });
     }
 });
 
