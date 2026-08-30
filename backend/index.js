@@ -27,7 +27,6 @@ app.use((req, res, next) => {
     }
 });
 require('./databases/connection');
-const PORT = process.env.PORT || 8000;
 
 app.use('', require('./routes/AuthRoutes'));
 app.use('', require('./routes/userRoutes'));
@@ -43,6 +42,8 @@ app.use('', require('./routes/PaymentRoutes'));
 app.use('', require('./routes/AddressRoutes'));
 app.use('', require("./routes/searchingRoutes"));
 
-app.listen(PORT, () => {
-    console.log(`server is listining to port ${PORT}`);
+const PORT = process.env.PORT || 8000;
+
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on port ${PORT}`);
 });
