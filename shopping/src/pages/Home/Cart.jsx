@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import Top from '../../components/Top/Top'
 import Header from '../../components/Header/Header'
 import Navbar from '../../components/NavBar/Navbar'
-import { Link } from 'react-router-dom'
-import Button from '@mui/material/Button'
-import { MdShoppingCart } from "react-icons/md"
-import CartItem from '../../components/CartItem/CartItem'
 import Footer from '../../components/Footer/Footer'
+import Button from '@mui/material/Button'
+import { Link } from 'react-router-dom'
+import { MdShoppingCart, MdArrowBack } from 'react-icons/md'
+import CartItem from '../../components/CartItem/CartItem'
 import { handleError } from "../../utils"
 
 function Cart() {
@@ -49,8 +49,8 @@ function Cart() {
     }, [])
 
     const removeFromCart = (id) => {
-        setCartProducts(prev =>
-            prev.filter(item => item._id !== id)
+        setCartProducts((prev) =>
+            prev.filter((item) => item._id !== id)
         )
     }
 
@@ -94,32 +94,35 @@ function Cart() {
             <Header />
             <Navbar />
 
-            <div className="min-h-screen bg-transparent">
-                <div className="container mx-auto px-4 lg:px-[100px] py-8">
+            <main className="!min-h-screen !w-full !bg-transparent !text-amber-50">
+                <div className="!w-full !max-w-7xl !mx-auto !px-4 sm:!px-6 lg:!px-8 !py-10 lg:!py-12">
 
                     {loading ? (
-                        <div className="min-h-[500px] flex items-center justify-center">
-                            <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-700 border-t-amber-500" />
+                        <div className="!min-h-[500px] !w-full !flex !items-center !justify-center">
+                            <div className="!h-10 !w-10 !rounded-full !border-4 !border-gray-700 !border-t-amber-500 !animate-spin" />
                         </div>
                     ) : cartProducts.length === 0 ? (
 
-                        <div className="min-h-[500px] flex flex-col items-center justify-center text-center">
+                        <div className="!min-h-[550px] !w-full !flex !flex-col !items-center !justify-center !text-center !px-4">
 
-                            <MdShoppingCart className="text-amber-500 text-7xl mb-5" />
+                            <div className="!mb-6 !flex !h-20 !w-20 !items-center !justify-center !rounded-full !bg-amber-500/10">
+                                <MdShoppingCart className="!text-amber-500 !text-5xl" />
+                            </div>
 
-                            <h2 className="text-3xl font-bold text-amber-50 mb-3">
+                            <h1 className="!m-0 !mb-3 !text-3xl sm:!text-4xl !font-bold !text-amber-50">
                                 Your Cart is Empty
-                            </h2>
+                            </h1>
 
-                            <p className="text-gray-400 text-lg mb-7">
-                                Add some products to your cart and they will appear here.
+                            <p className="!m-0 !mb-8 !max-w-md !text-base sm:!text-lg !leading-relaxed !text-gray-400">
+                                Looks like you haven't added anything to your cart yet.
                             </p>
 
                             <Button
                                 component={Link}
                                 to="/"
-                                className="!bg-gradient-to-r !from-amber-600 !to-amber-500 hover:!from-amber-700 hover:!to-amber-600 !text-white !px-8 !py-3 !rounded-lg !font-semibold"
+                                className="!m-0 !bg-gradient-to-r !from-amber-600 !to-amber-500 hover:!from-amber-700 hover:!to-amber-600 !px-8 !py-3 !rounded-xl !text-white !font-semibold !normal-case !shadow-lg !transition-all !duration-200"
                             >
+                                <MdArrowBack className="!mr-2 !text-xl" />
                                 Continue Shopping
                             </Button>
 
@@ -127,26 +130,36 @@ function Cart() {
 
                     ) : (
 
-                        <div className="flex flex-col lg:flex-row gap-8 w-full">
+                        <div className="!w-full !grid !grid-cols-1 lg:!grid-cols-[minmax(0,1fr)_360px] !gap-8 xl:!gap-10">
 
-                            <div className="flex-1 lg:w-[70%]">
+                            <section className="!w-full !min-w-0">
 
-                                <div className="mb-5 pb-3 border-b-2 border-[#8b7a7a]">
+                                <div className="!mb-8 !pb-4 !border-b-2 !border-gray-700">
 
-                                    <h2 className="text-3xl font-bold text-amber-50 mb-2">
-                                        Your Cart
-                                    </h2>
+                                    <div className="!flex !flex-col sm:!flex-row sm:!items-end sm:!justify-between !gap-2">
 
-                                    <p className="text-gray-400 text-lg">
-                                        <span className="text-amber-400 font-semibold">
-                                            {totalItems}
-                                        </span>{" "}
-                                        {totalItems === 1 ? "Item" : "Items"} in your cart
-                                    </p>
+                                        <div>
+                                            <h1 className="!m-0 !mb-2 !text-3xl sm:!text-4xl !font-bold !text-amber-50">
+                                                Your Cart
+                                            </h1>
+
+                                            <p className="!m-0 !text-base sm:!text-lg !text-gray-400">
+                                                <span className="!font-semibold !text-amber-400">
+                                                    {totalItems}
+                                                </span>{" "}
+                                                {totalItems === 1 ? "item" : "items"} in your cart
+                                            </p>
+                                        </div>
+
+                                        <span className="!text-sm !text-gray-500">
+                                            Review your items before checkout
+                                        </span>
+
+                                    </div>
 
                                 </div>
 
-                                <div className="space-y-6">
+                                <div className="!w-full !space-y-6">
 
                                     {cartProducts.map((product) => (
                                         <CartItem
@@ -158,63 +171,85 @@ function Cart() {
 
                                 </div>
 
-                            </div>
+                            </section>
 
-                            <div className="lg:w-[30%]">
+                            <aside className="!w-full">
 
-                                <div className="bg-gray-800/60 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 sticky top-8">
+                                <div className="!w-full !bg-gray-800/60 !backdrop-blur-sm !border !border-gray-700/50 !rounded-2xl !p-6 lg:!p-7 lg:!sticky lg:!top-8 !shadow-2xl">
 
-                                    <h3 className="text-2xl font-bold text-amber-50 mb-6 pb-3 border-b border-gray-700/50">
-                                        Order Summary
-                                    </h3>
+                                    <div className="!mb-6 !pb-4 !border-b !border-gray-700/50">
 
-                                    <div className="space-y-4 mb-6">
+                                        <h2 className="!m-0 !text-2xl !font-bold !text-amber-50">
+                                            Order Summary
+                                        </h2>
 
-                                        <div className="flex justify-between items-center text-gray-300">
-                                            <span>Subtotal</span>
+                                    </div>
 
-                                            <span className="font-semibold text-amber-50">
+                                    <div className="!w-full !space-y-4">
+
+                                        <div className="!flex !items-center !justify-between !gap-4">
+                                            <span className="!text-gray-300">
+                                                Items
+                                            </span>
+
+                                            <span className="!font-medium !text-amber-50">
+                                                {totalItems}
+                                            </span>
+                                        </div>
+
+                                        <div className="!flex !items-center !justify-between !gap-4">
+                                            <span className="!text-gray-300">
+                                                Subtotal
+                                            </span>
+
+                                            <span className="!font-semibold !text-amber-50">
                                                 ₹{subtotal.toFixed(2)}
                                             </span>
                                         </div>
 
-                                        <div className="flex justify-between items-center text-gray-300">
-                                            <span>Taxes</span>
+                                        <div className="!flex !items-center !justify-between !gap-4">
+                                            <span className="!text-gray-300">
+                                                Taxes
+                                            </span>
 
-                                            <span className="font-semibold text-amber-50">
+                                            <span className="!font-semibold !text-amber-50">
                                                 ₹{taxes.toFixed(2)}
                                             </span>
                                         </div>
 
-                                        <div className="flex justify-between items-center text-gray-300">
-                                            <span>Delivery Charge</span>
+                                        <div className="!flex !items-center !justify-between !gap-4">
+                                            <span className="!text-gray-300">
+                                                Delivery Charge
+                                            </span>
 
-                                            <span className="font-semibold text-amber-50">
+                                            <span className="!font-semibold !text-amber-50">
                                                 ₹{deliveryCharge.toFixed(2)}
                                             </span>
                                         </div>
 
-                                        <div className="flex justify-between items-center text-gray-300">
-                                            <span>Estimated For</span>
+                                        <div className="!flex !items-center !justify-between !gap-4">
+                                            <span className="!text-gray-300">
+                                                Estimated For
+                                            </span>
 
-                                            <span className="text-amber-400 font-medium">
+                                            <span className="!font-medium !text-amber-400">
                                                 India
                                             </span>
                                         </div>
 
-                                        <div className="border-t border-gray-700/50 pt-4">
+                                    </div>
 
-                                            <div className="flex justify-between items-center">
+                                    <div className="!mt-6 !pt-5 !border-t !border-gray-700/50">
 
-                                                <span className="text-lg font-semibold text-amber-50">
-                                                    Grand Total
-                                                </span>
+                                        <div className="!flex !items-center !justify-between !gap-4">
 
-                                                <span className="text-2xl font-bold text-amber-400">
-                                                    ₹{grandTotal.toFixed(2)}
-                                                </span>
+                                            <span className="!text-xl !font-bold !text-amber-50">
+                                                Grand Total
+                                            </span>
 
-                                            </div>
+                                            <span className="!text-2xl !font-black !text-amber-400">
+                                                ₹{grandTotal.toFixed(2)}
+                                            </span>
 
                                         </div>
 
@@ -223,26 +258,39 @@ function Cart() {
                                     <Button
                                         component={Link}
                                         to="/Checkout"
-                                        className="!w-full !bg-gradient-to-r !from-amber-600 !to-amber-500 hover:!from-amber-700 hover:!to-amber-600 !text-white !py-4 !rounded-lg !font-semibold !text-lg !transition-all !duration-200 !shadow-lg hover:!shadow-xl !border-0"
+                                        className="!w-full !mt-7 !bg-gradient-to-r !from-amber-600 !to-amber-500 hover:!from-amber-700 hover:!to-amber-600 !text-white !py-4 !rounded-xl !font-bold !text-base sm:!text-lg !normal-case !transition-all !duration-200 !shadow-lg hover:!shadow-xl"
                                     >
-                                        <MdShoppingCart className="!mr-2" />
+                                        <MdShoppingCart className="!mr-2 !text-xl" />
                                         Proceed to Checkout
                                     </Button>
 
-                                    <p className="text-gray-400 text-sm text-center mt-4">
-                                        Free delivery on orders over ₹250
-                                    </p>
+                                    <Button
+                                        component={Link}
+                                        to="/"
+                                        variant="text"
+                                        className="!w-full !mt-3 !text-gray-400 hover:!text-amber-400 !normal-case !font-medium"
+                                    >
+                                        Continue Shopping
+                                    </Button>
+
+                                    <div className="!mt-5 !pt-4 !border-t !border-gray-700/50">
+
+                                        <p className="!m-0 !text-center !text-xs !leading-relaxed !text-gray-500">
+                                            Free delivery on orders over ₹250
+                                        </p>
+
+                                    </div>
 
                                 </div>
 
-                            </div>
+                            </aside>
 
                         </div>
 
                     )}
 
                 </div>
-            </div>
+            </main>
 
             <Footer />
         </>
