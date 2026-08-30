@@ -1,5 +1,5 @@
 import './App.css'
-import Help from './components/Help/help'
+import Help from './components/Help/Help'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './pages/Home/Home'
 import Login from './pages/Home/Login'
