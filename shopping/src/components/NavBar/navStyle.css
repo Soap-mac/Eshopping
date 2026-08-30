@@ -1,0 +1,32 @@
+.navContainer {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: aliceblue;
+    background-color: black;
+}
+
+.dropDown,
+.innerDropDown {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.group:hover>.dropDown,
+.group:hover>.innerDropDown {
+    opacity: 1;
+    visibility: visible;
+}
+
+.link {
+    color: aliceblue !important;
+    background-color: transparent !important;
+}
+
+.link:hover {
+    color: orange !important;
+}
+
+Button {
+    width: 120%;
+}

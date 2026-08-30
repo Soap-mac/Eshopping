@@ -1,0 +1,43 @@
+body {
+    overflow-x: hidden;
+}
+
+.mySwiper {
+    overflow: inherit !important;
+}
+
+.sliderCard {
+    width: 85vw;
+    max-width: 1000px;
+    transition: transform 0.4s ease;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    color: #fff;
+    border-radius: 100%;
+    width: 45px;
+    height: 45px;
+    /* or your preferred arrow color */
+    top: 50%;
+    transform: translateY(0%);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 22px !important;
+}
+
+/* Optional: If needed for spacing */
+.swiper-button-next {
+    right: -110px;
+}
+
+.swiper-button-prev {
+    left: 50px;
+}

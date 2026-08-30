@@ -1,0 +1,16 @@
+input {
+    padding: 5px;
+    height: 100%;
+    border-radius: 10px !important;
+    color: black;
+    /* border: 2px solid black;S */
+}
+
+.searchBox input::placeholder {
+    color: black;
+
+}
+
+.search-btn {
+    position: absolute;
+}

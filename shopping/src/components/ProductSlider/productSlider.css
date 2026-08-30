@@ -1,0 +1,49 @@
+.mySwiper3 {
+    background-color: black;
+}
+
+.productSlider {
+    padding: 20px;
+    margin-left: 150px !important;
+    margin-right: 150px !important;
+}
+
+.mySwiper3 {
+    overflow: hidden !important;
+}
+
+.sliderCard {
+    width: 85vw;
+    max-width: 1000px;
+    transition: transform 0.4s ease;
+}
+
+.mySwiper3 .swiper-button-next,
+.mySwiper3 .swiper-button-prev {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #181818;
+    color: #fff;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    /* or your preferred arrow color */
+    top: 38%;
+    transform: translateY(0%);
+}
+
+.mySwiper3 .swiper-button-next::after,
+.mySwiper3 .swiper-button-prev::after {
+    font-size: 10px !important;
+}
+
+/* Optional: If needed for spacing */
+.mySwiper3 .swiper-button-next {
+    right: 20px;
+}
+
+.mySwiper3 .swiper-button-prev {
+    left: 20px;
+}

@@ -1,0 +1,23 @@
+.categorySlider .swiper-button-next {
+    right: 0px;
+}
+
+.categorySlider .swiper-button-next::after,
+.categorySlider .swiper-button-prev::after {
+    font-size: 12px !important;
+}
+
+.categorySlider .swiper-button-next,
+.categorySlider .swiper-button-prev {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    color: #fff;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    /* or your preferred arrow color */
+    top: 50%;
+}

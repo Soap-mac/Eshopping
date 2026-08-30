@@ -1,0 +1,62 @@
+fashion:-
+    Mens-
+        Shirts
+        Tshirts
+        Trousers
+    Womens-
+        Dresses
+        Tops
+        Jeans
+    Footwear-
+        Mens Footwear
+        Womens Footwear
+Elecronics:-
+    Mobile Accessories-
+        SmartPhones
+        Accessories
+    Computer Accessories-
+        Laptops
+        Peripherals
+    Audio-
+        HEadPhones 
+        Speakers
+Beauty:-
+    SkinCare-
+        Face Care
+        BodyCare
+    HairCare-
+        Shampoo & Conditioner
+        Hair Styling
+    Makeup-
+        Eyes
+        Lips
+Books:-
+    Fiction-
+        Romance
+        Science Ficrion
+    Non Fiction-
+        Biographies
+        SelfHelp
+    Academic-
+        School Textbooks
+        Competitive TextBooks
+Groceries:-
+    Fresh Produced-
+        Fruits
+        Vegitables
+    Packadge Food-
+        snacks
+        beverages
+    dairy & Bakery
+        dairy
+        Bakery
+Home:-
+    Furniture-
+        Living Room
+        Bed Room
+    Kitchen & Dinning-
+        CookWare
+        TableWare 
+    Home Decore
+        Lighting
+        Furnishing

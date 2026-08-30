@@ -1,0 +1,282 @@
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
+import logo from '../assets/logo.jpeg';
+import { Button } from '@mui/material';
+import { MdOutlineDashboardCustomize } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
+import { AiOutlineProduct } from "react-icons/ai";
+import { FaProductHunt } from "react-icons/fa6";
+import { IoBagCheckSharp } from "react-icons/io5";
+import { MdSlideshow } from "react-icons/md";
+import { BiLogOut } from "react-icons/bi";
+import { FaChevronDown } from "react-icons/fa";
+import { FaChevronUp } from "react-icons/fa";
+import { Collapse } from 'react-collapse';
+
+function Sidebar() {
+    const [isOpenMenuIdx, setIsOpenMenuIdx] = useState('null');
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const openMenu = (idx) => {
+        setIsMenuOpen(!isMenuOpen);
+        setIsOpenMenuIdx(idx);
+    }
+
+    return (
+        <div className="bg-black min-h-screen w-[300px] !p-4 flex flex-col border-r border-gray-800">
+
+            <div className="!mb-8 flex justify-center">
+                <Link>
+                    <img src={logo} alt="Logo" className='h-[100px] w-[200px] object-contain' />
+                </Link>
+            </div>
+
+
+            <div className="flex-1">
+                <ul className="!space-y-3 transition-all duration-300">
+                    <li>
+                        <Button
+                            component={Link} to='/admindashboard'
+                            className="!w-full !justify-start !text-orange-400 !normal-case !border-2 !border-[#000] !rounded-[20px] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300 !text-[16px]"
+                            sx={{
+
+                                padding: '12px 16px',
+
+                            }}
+                        >
+                            <MdOutlineDashboardCustomize className="!mr-3 text-lg" />
+                            Dashboard
+                        </Button>
+                    </li>
+                    <li>
+                        <Button
+                            component={Link} to='/AllUsers'
+                            className="!w-full !justify-start !text-orange-400 !normal-case !border-2 !border-[#000] !rounded-[20px] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300 !text-[16px]"
+                            sx={{
+
+                                padding: '12px 16px',
+
+                            }}
+                        >
+                            <FaUser className="!mr-3 text-lg" />
+                            User
+                        </Button>
+                    </li>
+                    <li>
+                        <Button
+                            className="!w-full !justify-start !text-orange-400 !normal-case !border-2 !border-[#000] !rounded-[20px] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300 !text-[16px]"
+                            sx={{
+
+                                padding: '12px 16px',
+
+                            }}
+                            onClick={() => openMenu(3)}
+                        >
+                            <FaProductHunt className="!mr-3 text-lg" />
+                            Products
+                            {
+                                isMenuOpen && isOpenMenuIdx === 3 ? <FaChevronUp className='!ml-[98px]' /> : <FaChevronDown className='!ml-[98px]' />
+                            }
+
+                        </Button>
+                        {
+                            isOpenMenuIdx === 3 &&
+                            <Collapse isOpened={isMenuOpen}>
+                                <ul className="!space-y-3">
+                                    <li>
+                                        <Button
+                                            component={Link} to='/addproducts'
+                                            className="!ml-[40px] !w-[200px] !justify-start !text-orange-400 !normal-case !border-2 !border-[#000] !rounded-[20px] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300 !text-[16px]"
+                                            sx={{
+
+                                                padding: '8px 20px',
+
+                                            }}
+                                        >Add New Product</Button>
+                                    </li>
+                                    <li>
+                                        <Button
+                                            component={Link} to='/allproducts'
+                                            className="!ml-[40px] !w-[200px] !justify-start !text-orange-400 !normal-case !border-2 !border-[#000] !rounded-[20px] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300 !text-[16px]"
+                                            sx={{
+
+                                                padding: '8px 20px',
+
+                                            }}
+                                        >All Products</Button>
+                                    </li>
+                                </ul>
+                            </Collapse>
+                        }
+                    </li>
+                    <li>
+                        <Button
+                            className="!w-full !justify-start !text-orange-400 !normal-case !border-2 !border-[#000] !rounded-[20px] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300 !text-[16px]"
+                            sx={{
+
+                                padding: '12px 16px',
+
+                            }}
+                            onClick={() => openMenu(4)}
+                        >
+                            <AiOutlineProduct className="!mr-3 text-lg" />
+                            Category
+                            {
+                                isMenuOpen && isOpenMenuIdx === 4 ? <FaChevronUp className='!ml-[95px]' /> : <FaChevronDown className='!ml-[95px]' />
+                            }
+
+                        </Button>
+                        {
+                            isOpenMenuIdx === 4 &&
+                            <Collapse isOpened={isMenuOpen}>
+                                <ul className="!space-y-3">
+                                    <li>
+                                        <Button
+                                            component={Link} to='/allcategories'
+                                            className="!ml-[40px] !w-[200px] !justify-start !text-orange-400 !normal-case !border-2 !border-[#000] !rounded-[20px] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300 !text-[16px]"
+                                            sx={{
+
+                                                padding: '8px 20px',
+
+                                            }}
+                                        >Category List</Button>
+                                    </li>
+                                    <li>
+                                        <Button
+                                            component={Link} to='/AddCategory'
+                                            className="!ml-[40px] !w-[200px] !justify-start !text-orange-400 !normal-case !border-2 !border-[#000] !rounded-[20px] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300 !text-[16px]"
+                                            sx={{
+
+                                                padding: '8px 20px',
+
+                                            }}
+                                        >Add a Category</Button>
+                                    </li>
+                                    <li>
+                                        <Button
+                                            component={Link} to='/AllSubCategories'
+                                            className="!ml-[40px] !w-[200px] !justify-start !text-orange-400 !normal-case !border-2 !border-[#000] !rounded-[20px] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300 !text-[16px]"
+                                            sx={{
+
+                                                padding: '8px 20px',
+
+                                            }}
+                                        >SubCategory List</Button>
+                                    </li>
+                                    <li>
+                                        <Button
+                                            component={Link} to='/AddSubCategory'
+                                            className="!ml-[40px] !w-[200px] !justify-start !text-orange-400 !normal-case !border-2 !border-[#000] !rounded-[20px] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300 !text-[16px]"
+                                            sx={{
+
+                                                padding: '8px 20px',
+
+                                            }}
+                                        >Add a SubCategory</Button>
+                                    </li>
+                                    <li>
+                                        <Button
+                                            component={Link} to='/allInnerCategory'
+                                            className="!ml-[40px] !w-[200px] !justify-start !text-orange-400 !normal-case !border-2 !border-[#000] !rounded-[20px] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300 !text-[16px]"
+                                            sx={{
+
+                                                padding: '8px 20px',
+
+                                            }}
+                                        >Inner Category List</Button>
+                                    </li>
+                                    <li>
+                                        <Button
+                                            component={Link} to='/addInnerCategory'
+                                            className="!ml-[40px] !w-[200px] !justify-start !text-orange-400 !normal-case !border-2 !border-[#000] !rounded-[20px] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300 !text-[16px]"
+                                            sx={{
+
+                                                padding: '8px 20px',
+
+                                            }}
+                                        >Add Inner Category</Button>
+                                    </li>
+                                </ul>
+                            </Collapse>
+                        }
+                    </li>
+                    <li>
+                        <Button
+                            component={Link} to='/AllOrders'
+                            className="!w-full !justify-start !text-orange-400 !normal-case !border-2 !border-[#000] !rounded-[20px] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300 !text-[16px]"
+                            sx={{
+
+                                padding: '12px 16px',
+
+                            }}
+                        >
+                            <IoBagCheckSharp className="!mr-3 text-lg" />
+                            Orders
+                        </Button>
+                    </li>
+                    <li>
+                        <Button
+                            className="!w-full !justify-start !text-orange-400 !normal-case !border-2 !border-[#000] !rounded-[20px] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300 !text-[16px]"
+                            sx={{
+
+                                padding: '12px 16px',
+
+                            }}
+                            onClick={() => openMenu(6)}
+                        >
+                            <MdSlideshow className="!mr-3 text-lg" />
+                            Home Slides
+                            {
+                                isMenuOpen && isOpenMenuIdx === 6 ? <FaChevronUp className='!ml-[66px]' /> : <FaChevronDown className='!ml-[66px]' />
+                            }
+                        </Button>
+                        {
+                            isOpenMenuIdx === 6 &&
+                            <Collapse isOpened={isMenuOpen}>
+                                <ul className="!space-y-3">
+                                    <li>
+                                        <Button
+                                            component={Link} to='/Addslider'
+                                            className="!ml-[40px] !w-[200px] !justify-start !text-orange-400 !normal-case !border-2 !border-[#000] !rounded-[20px] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300 !text-[15px]"
+                                            sx={{
+
+                                                padding: '8px 20px',
+
+                                            }}
+                                        >Add Slider</Button>
+                                    </li>
+                                    <li>
+                                        <Button
+                                            component={Link} to='/allslider'
+                                            className="!ml-[40px] !w-[200px] !justify-start !text-orange-400 !normal-case !border-2 !border-[#000] !rounded-[20px] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300 !text-[15px]"
+                                            sx={{
+
+                                                padding: '8px 20px',
+
+                                            }}
+                                        >All Sliders</Button>
+                                    </li>
+                                </ul>
+                            </Collapse>
+                        }
+                    </li>
+                    <li>
+                        <Button
+                            className="!w-full !justify-start !text-orange-400 !normal-case !border-2 !border-[#000] !rounded-[20px] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300 !text-[16px]"
+                            sx={{
+
+                                padding: '12px 16px',
+
+                            }}
+                        >
+                            <BiLogOut className="!mr-3 text-lg" />
+                            Logout
+                        </Button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    )
+}
+
+export default Sidebar
