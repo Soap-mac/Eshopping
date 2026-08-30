@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ProductZoom from '../../components/ProductZoom/ProductZoom'
-import Top from '../../components/top/top'
+// import Top from '../../components/top/top'
 import Header from '../../components/Header/Header'
 import Navbar from '../../components/NavBar/Navbar'
 import Footer from "../../components/Footer/Footer"

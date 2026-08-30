@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from 'react'
-import Top from '../../components/top/top'
+// import Top from '../../components/top/top'
 import Header from '../../components/Header/Header'
 import Navbar from '../../components/NavBar/Navbar'
 import Slider from '../../components/Slider/Slider'
