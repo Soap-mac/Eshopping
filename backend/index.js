@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const helmet = require('helmet');
 
-app.use(morgan());
+app.use(morgan('combined'));
 app.use(cookieParser());
 
 app.use(helmet({
