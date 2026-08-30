@@ -210,7 +210,7 @@ router.post('/changeQuantity', async (req, res) => {
             });
         }
 
-        const product = await product.findById(cart.productId);
+        const product = await Product.findById(cart.productId);
 
         if (!product) {
             return res.status(404).json({
