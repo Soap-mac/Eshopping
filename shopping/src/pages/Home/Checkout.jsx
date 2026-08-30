@@ -9,10 +9,12 @@ import { Link } from 'react-router-dom';
 import { MdShoppingCart, MdLocationOn, MdPerson, MdPayment, MdCheck } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
 import { handleSucess, handleError } from "../../utils";
+import { useNavigate } from "react-router-dom";
 
 
 function Checkout() {
 
+    const navigate = useNavigate();
     const [cartProducts, setCartProducts] = useState([]);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -152,7 +154,7 @@ function Checkout() {
                         "Payment Successful"
                     );
                     setTimeout(() => {
-                        window.location.href = "/orders";
+                        navigate("/orders");
                     }, 1500);
                 }
                 else {
@@ -352,7 +354,7 @@ function Checkout() {
 
                     handleSucess("Payment Successful");
 
-                    window.location.href = "/orders";
+                    navigate("/orders");
 
                 }
             }
