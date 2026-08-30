@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-// import Top from '../../components/top/top'
+import Top from '../../components/Top/Top'
 import Header from '../../components/Header/Header'
 import Navbar from '../../components/NavBar/Navbar'
 import { Link } from 'react-router-dom'
