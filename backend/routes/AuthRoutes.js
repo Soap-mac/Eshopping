@@ -93,21 +93,20 @@ router.post('/login', async (req, res) => {
 
         res.cookie('token', token, {
             httpOnly: true,
-            secure: false,
-            sameSite: 'Lax',
-
+            secure: true,
+            sameSite: 'none',
         });
+
         res.cookie('email', exist.email, {
             httpOnly: true,
-            secure: false,
-            sameSite: 'Lax',
-
+            secure: true,
+            sameSite: 'none',
         });
+
         res.cookie('_id', exist._id, {
             httpOnly: true,
-            secure: false,
-            sameSite: 'Lax',
-
+            secure: true,
+            sameSite: 'none',
         });
 
         return res.json({
@@ -138,8 +137,23 @@ router.post('/logout', async (req, res) => {
         await exists.save();
         console.log('token removed from database');
 
-        res.clearCookie('token');
-        res.clearCookie('email');
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none'
+        });
+
+        res.clearCookie('email', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none'
+        });
+
+        res.clearCookie('_id', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none'
+        });
         return res.json({
             success: true,
             message: "logout successfull"
