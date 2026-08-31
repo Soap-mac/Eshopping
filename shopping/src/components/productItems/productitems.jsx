@@ -5,9 +5,9 @@ import { Button } from '@mui/material';
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { MdOutlineZoomOutMap, MdOutlineShoppingCart } from "react-icons/md";
-import { GoGitCompare, GoGitCompareFill } from "react-icons/go";
+import { GoGitCompare } from "react-icons/go";
 import { MyContext } from '../../App';
-
+import { FaCodeCompare } from "react-icons/fa6";
 
 function productitems(props) {
 
@@ -104,7 +104,7 @@ function productitems(props) {
                         className={`!w-[35px] !min-w-[25px] !h-[35px] !rounded-full shadow-md transition-colors ${compared ? '!bg-orange-600 !text-white' : '!bg-white !text-black hover:!bg-orange-600 hover:!text-white'
                             }`}
                     >
-                        {compared ? <GoGitCompareFill className='text-[18px]' /> : <GoGitCompare className='text-[18px]' />}
+                        {compared ? <FaCodeCompare className='text-[18px]' /> : <GoGitCompare className='text-[18px]' />}
                     </Button>
                 </div>
 
