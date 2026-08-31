@@ -10,7 +10,6 @@ function PopularProducts(props) {
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(false);
 
-    // fetch categories from backend
     useEffect(() => {
         const fetchCategories = async () => {
             setLoading(true);
@@ -20,7 +19,6 @@ function PopularProducts(props) {
                 const result = await response.json();
 
                 if (result.success && Array.isArray(result.allCategories)) {
-                    // only show top-level categories in this tab bar
                     const topLevel = result.allCategories
                         .filter((cat) => !cat.parentId)
                         .map((cat) => ({
@@ -43,7 +41,6 @@ function PopularProducts(props) {
         };
 
         fetchCategories();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const activeCategory = props.category || categories[0]?.name;
@@ -75,7 +72,6 @@ function PopularProducts(props) {
 
     return (
         <div className="relative flex items-center w-full !py-2">
-            {/* Left scroll button */}
             {canScrollLeft && (
                 <button
                     onClick={() => scroll('left')}
@@ -90,7 +86,6 @@ function PopularProducts(props) {
                 <div className="pointer-events-none absolute left-0 top-0 h-full w-14 bg-gradient-to-r from-black via-black to-transparent z-10" />
             )}
 
-            {/* Tabs */}
             <div
                 ref={scrollRef}
                 className="flex items-center gap-3 overflow-x-auto scroll-smooth w-full !px-12 no-scrollbar"
@@ -151,7 +146,6 @@ function PopularProducts(props) {
                 <div className="pointer-events-none absolute right-0 top-0 h-full w-14 bg-gradient-to-l from-black via-black to-transparent z-10" />
             )}
 
-            {/* Right scroll button */}
             {canScrollRight && (
                 <button
                     onClick={() => scroll('right')}
