@@ -78,7 +78,7 @@ export default function CategorySlider() {
                         className="!w-[104px]"
                     >
                         <Link
-                            to={`/products/${cat.name}`}
+                            to={`/products/${encodeURIComponent(cat.name)}`}
                             className="group flex flex-col items-center gap-3 outline-none"
                         >
                             <div className="!h-[88px] !w-[88px] rounded-full overflow-hidden bg-[#1c1b1b] ring-1 ring-white/10 group-hover:ring-orange-500/80 transition-all duration-300">
@@ -90,7 +90,7 @@ export default function CategorySlider() {
                                 />
                             </div>
                             <p className="text-[13px] font-medium text-white/65 tracking-wide text-center truncate w-full group-hover:text-orange-500 transition-colors duration-300">
-                                {/* {cat.name} */}
+                                {cat.name}
                             </p>
                         </Link>
                     </SwiperSlide>
