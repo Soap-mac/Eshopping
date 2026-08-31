@@ -38,9 +38,10 @@ function productitems(props) {
     };
 
     return (
-        <div className="productItem group relative rounded-2xl w-[190px] bg-[#302f2f] border border-white/[0.06] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-orange-500/30 hover:shadow-[0_10px_30px_rgba(0,0,0,0.45)]">
+        <div className="productItem group relative rounded-2xl w-[190px] h-[430px] flex flex-col bg-[#302f2f] border border-white/[0.06] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-orange-500/30 hover:shadow-[0_10px_30px_rgba(0,0,0,0.45)]">
 
-            <div className="imgWrapper relative w-full h-[220px] bg-[#221f1f] flex items-center justify-center overflow-hidden">
+            {/* image block — fixed height, never shrinks */}
+            <div className="imgWrapper relative w-full h-[220px] flex-shrink-0 bg-[#221f1f] flex items-center justify-center overflow-hidden">
 
                 {!imgLoaded && !imgError && (
                     <div className="absolute inset-0 bg-[#3a3838] animate-pulse" />
@@ -61,14 +62,12 @@ function productitems(props) {
                     </div>
                 )}
 
-                {/* top-left discount badge */}
                 {discountPercent ? (
                     <span className="absolute bg-orange-600 top-[10px] left-[10px] !px-2 !py-1 text-[12px] font-semibold rounded-md text-white z-10">
                         {discountPercent}% OFF
                     </span>
                 ) : null}
 
-                {/* out of stock ribbon */}
                 {!inStock && (
                     <div className="absolute inset-0 flex items-center justify-center z-10">
                         <span className="bg-black/80 text-white text-[13px] font-semibold !px-4 !py-1.5 rounded-full border border-white/20">
@@ -77,14 +76,12 @@ function productitems(props) {
                     </div>
                 )}
 
-                {/* low stock badge */}
                 {inStock && lowStock && (
                     <span className="absolute bottom-[10px] left-[10px] bg-red-600/90 text-white text-[11px] font-medium !px-2 !py-[3px] rounded-md z-10">
                         Only {item.countInStock} left
                     </span>
                 )}
 
-                {/* side action buttons */}
                 <div className="actions absolute top-[-300px] right-[5px] flex items-center gap-2 flex-col w-[50px] transition-all duration-400 group-hover:top-[15px] z-20">
                     <Button
                         onClick={(e) => stopAndRun(e, () => setWishlisted(!wishlisted))}
@@ -111,7 +108,6 @@ function productitems(props) {
                     </Button>
                 </div>
 
-                {/* add to cart — slides up from bottom on hover */}
                 {inStock && (
                     <button
                         onClick={(e) => stopAndRun(e, () => context?.addToCart?.(item))}
@@ -123,19 +119,20 @@ function productitems(props) {
                 )}
             </div>
 
-            <div className="info !p-3 w-full">
-                <Link to="/" className='link'>
-                    <p className='!text-[11px] text-white/45 whitespace-normal break-words uppercase tracking-wider'>
-                        {item?.brand}
-                    </p>
-                </Link>
+            {/* info block — flexes to fill remaining card height, price pinned to bottom */}
+            <div className="info !p-3 w-full flex-1 flex flex-col min-h-0">
+
+                <p className='!text-[11px] text-white/45 whitespace-normal break-words uppercase tracking-wider leading-[14px] h-[14px] overflow-hidden'>
+                    {item?.brand}
+                </p>
+
                 <Link to={`/Productdetail/${item?._id}`} className='link'>
-                    <p className='!text-[15px] text-white whitespace-normal break-words font-medium !mt-1 line-clamp-2 min-h-[40px]'>
+                    <p className='!text-[15px] text-white whitespace-normal break-words font-medium !mt-1.5 leading-[20px] h-[40px] overflow-hidden line-clamp-2'>
                         {item?.name}
                     </p>
                 </Link>
 
-                <div className="flex items-center gap-1.5 !pt-1.5">
+                <div className="flex items-center gap-1.5 !mt-1.5 h-[20px] overflow-hidden">
                     <Rating
                         name='size-small'
                         value={item?.rating || 0}
@@ -149,22 +146,23 @@ function productitems(props) {
                     ) : null}
                 </div>
 
-                <div className="flex items-baseline gap-2 !mt-1.5">
-                    <span className='newPrice text-orange-500 font-bold text-[17px]'>
-                        ${price?.toLocaleString()}
-                    </span>
-                    {hasDiscount && (
-                        <span className='oldPrice line-through text-white/40 text-[13px]'>
-                            ${oldPrice?.toLocaleString()}
+                {/* pushed to the very bottom of the card, same y-position every time */}
+                <div className="!mt-auto">
+                    <div className="flex items-baseline gap-2">
+                        <span className='newPrice text-orange-500 font-bold text-[17px]'>
+                            ${price?.toLocaleString()}
                         </span>
-                    )}
-                </div>
+                        {hasDiscount && (
+                            <span className='oldPrice line-through text-white/40 text-[13px]'>
+                                ${oldPrice?.toLocaleString()}
+                            </span>
+                        )}
+                    </div>
 
-                {hasDiscount && (
-                    <p className='text-[11px] text-green-500/90 font-medium !mt-0.5'>
-                        You save ${(oldPrice - price).toLocaleString()}
+                    <p className='text-[11px] text-green-500/90 font-medium !mt-0.5 h-[15px]'>
+                        {hasDiscount ? `You save $${(oldPrice - price).toLocaleString()}` : ''}
                     </p>
-                )}
+                </div>
             </div>
         </div>
     )

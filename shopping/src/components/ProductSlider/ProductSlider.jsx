@@ -10,7 +10,6 @@ function ProductSlider(props) {
     console.log(props.allProducts);
     console.log(props.category);
     const products = props.allProducts || [];
-    // console.log(filteredProducts[0]);
     return (
         <div className="productSlider h-[50px] bg-black">
             <Swiper
