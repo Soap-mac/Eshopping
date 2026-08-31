@@ -77,7 +77,6 @@ function Navbar() {
             <nav className="relative z-50 bg-black border-b border-gray-800/80 shadow-md shadow-black/30">
                 <div className="h-20 relative flex items-center !px-4 sm:!px-6 lg:!px-10">
 
-                    {/* Mobile menu trigger — opens the SidePanel */}
                     <button
                         onClick={openSide}
                         aria-label="Open menu"
@@ -86,7 +85,6 @@ function Navbar() {
                         <HiOutlineMenuAlt2 className="text-3xl" />
                     </button>
 
-                    {/* Centered nav + promo group */}
                     <div className="w-full flex items-center justify-center gap-8">
 
                         <ul className="hidden lg:flex items-center h-20">
