@@ -4,7 +4,8 @@ import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import { IoMdClose } from 'react-icons/io';
 import { MdFavorite, MdOutlineDeleteOutline, MdAddShoppingCart } from 'react-icons/md';
-import { MyContext } from '../App'; // adjust path if your folder structure differs
+import { MyContext } from '../App';
+
 
 function WishlistDrawer({ onMoveToCart = () => { }, onRemoveItem = () => { } }) {
     const { openWishlistDrawer, setOpenWishlistDrawer } = useContext(MyContext);
@@ -21,6 +22,7 @@ function WishlistDrawer({ onMoveToCart = () => { }, onRemoveItem = () => { } }) 
                     method: 'GET',
                     credentials: 'include',
                 });
+                console.log(res)
                 const data = await res.json();
                 setWishlistProducts(data.success !== false && Array.isArray(data.wishlist) ? data.wishlist : []);
             } catch (error) {

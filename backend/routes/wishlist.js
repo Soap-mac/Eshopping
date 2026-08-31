@@ -70,29 +70,20 @@ router.post('/addwishlist', authentication, async (req, res) => {
 
 
 router.get('/getwishlist', authentication, async (req, res) => {
-
     try {
 
         const wishlist = await Wishlist.find({
             userId: req.user.id
-        })
-            .populate("productId");
-
-
-        const allProducts = wishlist.map(
-            item => item.productId
-        );
-
+        }).populate('productId');
 
         res.status(200).json({
             success: true,
-            allProducts
+            wishlist
         });
-
 
     } catch (error) {
 
-        console.log(error);
+        console.error("Get wishlist error:", error);
 
         res.status(500).json({
             success: false,
@@ -100,9 +91,7 @@ router.get('/getwishlist', authentication, async (req, res) => {
         });
 
     }
-
 });
-
 
 router.delete('/deletewishlist/:productId', authentication, async (req, res) => {
 
