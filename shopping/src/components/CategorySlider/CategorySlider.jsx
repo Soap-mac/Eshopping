@@ -37,9 +37,6 @@ export default function CategorySlider() {
         fetchCats();
     }, []);
 
-    // loop needs a healthy multiple of visible slides to duplicate cleanly —
-    // with too few categories, Swiper's cloned loop slides can misalign
-    // with the visible ones and eat clicks. Only enable once there's enough.
     const canLoop = categories.length > 8;
 
     return (

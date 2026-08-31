@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Rating from '@mui/material/Rating';
 import { Button } from '@mui/material';
@@ -37,10 +37,104 @@ function productitems(props) {
         fn();
     };
 
+    useEffect(() => {
+
+        const checkWishlist = async () => {
+
+            try {
+
+                const res = await fetch(
+                    `${import.meta.env.VITE_API_URL}/getwishlist`,
+                    {
+                        method: 'GET',
+                        credentials: 'include'
+                    }
+                );
+
+                const data = await res.json();
+
+                if (data.success && data.allProducts) {
+
+                    const exists = data.allProducts.some(
+                        product => product?._id === item?._id
+                    );
+
+                    setWishlisted(exists);
+                }
+
+            } catch (error) {
+
+                console.log(error);
+
+            }
+
+        };
+
+        if (item?._id) {
+            checkWishlist();
+        }
+
+    }, [item?._id]);
+
+
+    const addWishlist = async (id) => {
+
+        try {
+
+            if (wishlisted) {
+
+                const res = await fetch(
+                    `${import.meta.env.VITE_API_URL}/deletewishlist/${id}`,
+                    {
+                        method: 'DELETE',
+                        credentials: 'include'
+                    }
+                );
+
+                const data = await res.json();
+
+                if (data.success) {
+                    setWishlisted(false);
+                }
+
+                return;
+            }
+
+
+            const res = await fetch(
+                `${import.meta.env.VITE_API_URL}/addwishlist`,
+                {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    credentials: "include",
+                    body: JSON.stringify({
+                        productId: id
+                    })
+                }
+            );
+
+            const data = await res.json();
+
+            if (data.success) {
+                setWishlisted(true);
+            }
+
+            console.log(data);
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+
+    }
+
+
     return (
         <div className="productItem group relative rounded-2xl w-[190px] h-[430px] flex flex-col bg-[#302f2f] border border-white/[0.06] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-orange-500/30 hover:shadow-[0_10px_30px_rgba(0,0,0,0.45)]">
 
-            {/* image block — fixed height, never shrinks */}
             <div className="imgWrapper relative w-full h-[220px] flex-shrink-0 bg-[#221f1f] flex items-center justify-center overflow-hidden">
 
                 {!imgLoaded && !imgError && (
@@ -84,7 +178,7 @@ function productitems(props) {
 
                 <div className="actions absolute top-[-300px] right-[5px] flex items-center gap-2 flex-col w-[50px] transition-all duration-400 group-hover:top-[15px] z-20">
                     <Button
-                        onClick={(e) => stopAndRun(e, () => setWishlisted(!wishlisted))}
+                        onClick={(e) => stopAndRun(e, () => addWishlist(item?._id))}
                         className={`!w-[35px] !min-w-[25px] !h-[35px] !rounded-full shadow-md transition-colors ${wishlisted ? '!bg-orange-600 !text-white' : '!bg-white !text-black hover:!bg-orange-600 hover:!text-white'
                             }`}
                     >
@@ -119,7 +213,6 @@ function productitems(props) {
                 )}
             </div>
 
-            {/* info block — flexes to fill remaining card height, price pinned to bottom */}
             <div className="info !p-3 w-full flex-1 flex flex-col min-h-0">
 
                 <p className='!text-[11px] text-white/45 whitespace-normal break-words uppercase tracking-wider leading-[14px] h-[14px] overflow-hidden'>
@@ -146,7 +239,6 @@ function productitems(props) {
                     ) : null}
                 </div>
 
-                {/* pushed to the very bottom of the card, same y-position every time */}
                 <div className="!mt-auto">
                     <div className="flex items-baseline gap-2">
                         <span className='newPrice text-orange-500 font-bold text-[17px]'>
