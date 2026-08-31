@@ -7,20 +7,10 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 
-import img1 from "../../assets/SliderImages/5092428.jpg";
-import img2 from "../../assets/SliderImages/6874380.jpg";
-import img3 from "../../assets/SliderImages/5092428.jpg";
-import img4 from "../../assets/SliderImages/6874380.jpg";
-import img5 from "../../assets/SliderImages/5092428.jpg";
-import img6 from "../../assets/SliderImages/6874380.jpg";
-import img7 from "../../assets/SliderImages/5092428.jpg";
-import img8 from "../../assets/SliderImages/6874380.jpg";
-import img9 from "../../assets/SliderImages/5092428.jpg";
-import img10 from "../../assets/SliderImages/6874380.jpg";
-
 // Import required modules
 import { FreeMode, Navigation } from 'swiper/modules';
 import { handleError } from '../../utils';
+import { Link } from 'react-router-dom';
 
 export default function CategorySlider() {
 
@@ -62,16 +52,19 @@ export default function CategorySlider() {
                         key={index}
                         className="!min-w-[140px] !max-w-[180px] cursor-pointer"
                     >
-                        <div className="flex flex-col items-center !w-full !h-44">
-                            <img
-                                src={cat.image}
-                                alt={`Slide ${index + 1}`}
-                                className="!w-30 !h-30 md:h-36 object-cover rounded-xl shadow-md transition-transform duration-300 hover:scale-105"
-                            />
-                            <p className="!mt-4 flex justify-center items-center text-lg font-medium text-center text-[#ff7b2e] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)]  !px-2 !py-1 rounded-lg w-[100px] h-[50px] shadow-sm">
-                                {cat.name}
-                            </p>
-                        </div>
+                        <Link to={`/products/${cat.name}`}>
+                            <div className="flex flex-col items-center !w-full !h-44">
+                                <img
+                                    src={cat.image}
+                                    alt={`Slide ${index + 1}`}
+                                    className="!w-30 !h-30 md:h-36 object-cover rounded-xl shadow-md transition-transform duration-300 hover:scale-105"
+                                />
+                                <p className="!mt-4 flex justify-center items-center text-lg font-medium text-center text-[#ff7b2e] bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)]  !px-2 !py-1 rounded-lg w-[100px] h-[50px] shadow-sm">
+                                    {cat.name}
+                                </p>
+
+                            </div>
+                        </Link>
                     </SwiperSlide>
 
                 ))}
