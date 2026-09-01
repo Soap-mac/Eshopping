@@ -1,5 +1,18 @@
 .categorySlider {
     position: relative;
+    --icon-size: 96px;
+}
+
+@media (min-width: 640px) {
+    .categorySlider {
+        --icon-size: 112px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .categorySlider {
+        --icon-size: 136px;
+    }
 }
 
 /* Edge fade */
@@ -45,14 +58,12 @@
     border-radius: 999px;
 }
 
-/* Nav arrows — sit in the padding gutter, never over content */
-.mySwiper2 {
-    --swiper-navigation-sides-offset: -48px;
-    overflow: visible;
-}
-
+/* Nav arrows — kept fully INSIDE the slider's own box, no negative offsets,
+   so no ancestor overflow:hidden can ever clip or block them. */
 .mySwiper2 .swiper-button-prev,
 .mySwiper2 .swiper-button-next {
+    top: calc(var(--icon-size) / 2);
+    transform: translateY(-50%);
     width: 46px;
     height: 46px;
     border-radius: 9999px;
@@ -65,6 +76,14 @@
     z-index: 3;
     transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease,
         box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mySwiper2 .swiper-button-prev {
+    left: 8px;
+}
+
+.mySwiper2 .swiper-button-next {
+    right: 8px;
 }
 
 .mySwiper2 .swiper-button-prev:hover,

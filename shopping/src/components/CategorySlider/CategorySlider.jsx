@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
@@ -14,6 +14,7 @@ const SKELETON_COUNT = 8;
 export default function CategorySlider() {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
+    const swiperRef = useRef(null);
 
     useEffect(() => {
         let ignore = false;
@@ -37,17 +38,46 @@ export default function CategorySlider() {
         return () => { ignore = true; };
     }, []);
 
+    const N = categories.length;
+    // Enough copies that even an ultra-wide screen never runs out of buffer to slide into.
+    const repeatCount = N === 0 ? 0 : N > 15 ? 3 : 9;
+    const middleStart = Math.floor(repeatCount / 2) * N;
+    const loopCategories = N > 0
+        ? Array.from({ length: repeatCount }, () => categories).flat()
+        : [];
+
+    // Once real data lands, jump instantly to the middle copy before paint.
+    useLayoutEffect(() => {
+        if (!loading && N > 0 && swiperRef.current) {
+            swiperRef.current.update();
+            swiperRef.current.slideTo(middleStart, 0, false);
+        }
+    }, [loading, N]);
+
+    // If a drag or arrow-click carries us into the first or last copy,
+    // silently snap back to the same position in the middle copy.
+    const handleTransitionEnd = (swiper) => {
+        if (N === 0) return;
+        const idx = swiper.activeIndex;
+        const safeStart = N; // leave at least one full copy of buffer on each side
+        const safeEnd = repeatCount * N - N;
+        if (idx < safeStart || idx >= safeEnd) {
+            const newIndex = (idx % N) + middleStart;
+            swiper.slideTo(newIndex, 0, false);
+        }
+    };
+
     return (
         <div className="categorySlider px-10 sm:px-14 md:px-16 lg:px-20 py-10 sm:py-12">
-            {!loading && categories.length === 0 ? (
+            {!loading && N === 0 ? (
                 <p className="text-white/40 text-[14px]">No categories available right now.</p>
             ) : (
                 <Swiper
+                    onSwiper={(s) => { swiperRef.current = s; }}
+                    onTransitionEnd={handleTransitionEnd}
                     slidesPerView="auto"
                     spaceBetween={40}
                     navigation={true}
-                    loop={true}
-                    loopedSlides={Math.max(categories.length * 3, 24)}
                     grabCursor={true}
                     modules={[Navigation]}
                     className="mySwiper2"
@@ -63,8 +93,8 @@ export default function CategorySlider() {
                         ))}
 
                     {!loading &&
-                        categories.map((cat, index) => (
-                            <SwiperSlide key={cat._id || index} className="!w-[112px] sm:!w-[128px] lg:!w-[144px]">
+                        loopCategories.map((cat, i) => (
+                            <SwiperSlide key={`${cat._id || cat.name}-${i}`} className="!w-[112px] sm:!w-[128px] lg:!w-[144px]">
                                 <Link
                                     to={`/products/${encodeURIComponent(cat.name)}`}
                                     className="category-card group flex flex-col items-center gap-3 outline-none"
