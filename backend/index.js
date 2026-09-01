@@ -44,6 +44,14 @@ app.use('', require("./routes/searchingRoutes"));
 
 const PORT = process.env.PORT || 8000;
 
+app.get('/wakeup', (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: 'Server is awake',
+        timestamp: new Date().toISOString()
+    });
+});
+
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${PORT}`);
 });
