@@ -2,29 +2,24 @@
     position: relative;
 }
 
-/* Spread evenly across the full width when nothing overflows */
-.categorySlider.is-fitted .mySwiper2 .swiper-wrapper {
-    justify-content: space-evenly;
-}
-
-/* Edge fade once it's an actual scrollable slider */
-.categorySlider.is-scrollable::before,
-.categorySlider.is-scrollable::after {
+/* Edge fade — always shown now, since loop mode means the row is always slidable */
+.categorySlider::before,
+.categorySlider::after {
     content: '';
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 56px;
+    width: 64px;
     pointer-events: none;
     z-index: 2;
 }
 
-.categorySlider.is-scrollable::before {
+.categorySlider::before {
     left: 0;
     background: linear-gradient(to right, var(--category-bg, #0b0c10), transparent);
 }
 
-.categorySlider.is-scrollable::after {
+.categorySlider::after {
     right: 0;
     background: linear-gradient(to left, var(--category-bg, #0b0c10), transparent);
 }
@@ -50,42 +45,49 @@
     border-radius: 999px;
 }
 
-/* Nav arrows — centered against the whole card (icon + label), not just the icon */
+/* Nav arrows — masterclass pass */
 .mySwiper2 {
-    --swiper-navigation-sides-offset: 0px;
+    --swiper-navigation-sides-offset: 4px;
 }
 
 .mySwiper2 .swiper-button-prev,
 .mySwiper2 .swiper-button-next {
-    width: 40px;
-    height: 40px;
+    width: 46px;
+    height: 46px;
     border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: rgba(255, 255, 255, 0.75);
-    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    background: rgba(20, 20, 24, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.85);
+    z-index: 3;
+    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease,
+        box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .mySwiper2 .swiper-button-prev:hover,
 .mySwiper2 .swiper-button-next:hover {
-    background: rgba(249, 115, 22, 0.14);
-    border-color: rgba(249, 115, 22, 0.55);
-    color: #f97316;
+    background: #f97316;
+    border-color: #f97316;
+    color: #0b0c10;
+    box-shadow: 0 6px 22px -2px rgba(249, 115, 22, 0.55);
+    transform: translateY(-50%) scale(1.08);
 }
 
 .mySwiper2 .swiper-button-prev:active,
 .mySwiper2 .swiper-button-next:active {
-    transform: translateY(-50%) scale(0.92);
+    transform: translateY(-50%) scale(0.94);
 }
 
 .mySwiper2 .swiper-button-prev::after,
 .mySwiper2 .swiper-button-next::after {
     content: '';
-    width: 9px;
-    height: 9px;
-    border-top: 2px solid currentColor;
-    border-right: 2px solid currentColor;
+    width: 10px;
+    height: 10px;
+    border-top: 2.5px solid currentColor;
+    border-right: 2.5px solid currentColor;
+    border-radius: 1px;
 }
 
 .mySwiper2 .swiper-button-prev::after {
@@ -97,7 +99,7 @@
 }
 
 .mySwiper2 .swiper-button-disabled {
-    opacity: 0;
+    opacity: 0.35;
     pointer-events: none;
 }
 
@@ -136,7 +138,9 @@
     }
 
     .category-ring,
-    .category-card img {
+    .category-card img,
+    .mySwiper2 .swiper-button-prev,
+    .mySwiper2 .swiper-button-next {
         transition: none !important;
     }
 }

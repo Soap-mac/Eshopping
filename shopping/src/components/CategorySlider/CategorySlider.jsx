@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
@@ -15,9 +15,8 @@ const SKELETON_COUNT = 8;
 export default function CategorySlider() {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [isOverflowing, setIsOverflowing] = useState(false);
 
-    React.useEffect(() => {
+    useEffect(() => {
         let ignore = false;
         const fetchCats = async () => {
             setLoading(true);
@@ -39,33 +38,22 @@ export default function CategorySlider() {
         return () => { ignore = true; };
     }, []);
 
-    const canLoop = categories.length > 8;
-    const syncOverflow = (swiper) => swiper && setIsOverflowing(!swiper.isLocked);
-
     return (
-        <div
-            className={`categorySlider px-6 md:px-10 lg:px-16 py-10 sm:py-12 ${!loading && isOverflowing ? 'is-scrollable' : 'is-fitted'
-                }`}
-        >
+        <div className="categorySlider px-6 md:px-10 lg:px-16 py-10 sm:py-12">
             {!loading && categories.length === 0 ? (
                 <p className="text-white/40 text-[14px]">No categories available right now.</p>
             ) : (
                 <Swiper
-                    onSwiper={syncOverflow}
-                    onResize={syncOverflow}
-                    onLock={() => setIsOverflowing(false)}
-                    onUnlock={() => setIsOverflowing(true)}
                     slidesPerView="auto"
                     spaceBetween={40}
                     freeMode={{ enabled: true, momentumBounce: false }}
                     navigation={true}
-                    watchOverflow={true}
+                    loop={true}
+                    loopAdditionalSlides={12}
                     grabCursor={true}
                     threshold={10}
                     preventClicks={false}
                     preventClicksPropagation={false}
-                    loop={canLoop}
-                    rewind={!canLoop}
                     modules={[FreeMode, Navigation]}
                     className="mySwiper2"
                 >
