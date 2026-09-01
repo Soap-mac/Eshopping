@@ -2,14 +2,14 @@
     position: relative;
 }
 
-/* Edge fade — always shown now, since loop mode means the row is always slidable */
+/* Edge fade */
 .categorySlider::before,
 .categorySlider::after {
     content: '';
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 64px;
+    width: 72px;
     pointer-events: none;
     z-index: 2;
 }
@@ -45,9 +45,10 @@
     border-radius: 999px;
 }
 
-/* Nav arrows — masterclass pass */
+/* Nav arrows — sit in the padding gutter, never over content */
 .mySwiper2 {
-    --swiper-navigation-sides-offset: 4px;
+    --swiper-navigation-sides-offset: -48px;
+    overflow: visible;
 }
 
 .mySwiper2 .swiper-button-prev,
@@ -55,7 +56,7 @@
     width: 46px;
     height: 46px;
     border-radius: 9999px;
-    background: rgba(20, 20, 24, 0.55);
+    background: rgba(20, 20, 24, 0.65);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.14);
@@ -96,11 +97,6 @@
 
 .mySwiper2 .swiper-button-next::after {
     transform: rotate(45deg) translate(-1px, -1px);
-}
-
-.mySwiper2 .swiper-button-disabled {
-    opacity: 0.35;
-    pointer-events: none;
 }
 
 /* Skeleton shimmer */

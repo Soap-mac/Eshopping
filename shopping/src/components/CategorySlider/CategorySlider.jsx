@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
-import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import './CategorySlider.css';
 
-import { FreeMode, Navigation } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import { handleError } from '../../utils';
 import { Link } from 'react-router-dom';
 
@@ -39,22 +38,18 @@ export default function CategorySlider() {
     }, []);
 
     return (
-        <div className="categorySlider px-6 md:px-10 lg:px-16 py-10 sm:py-12">
+        <div className="categorySlider px-10 sm:px-14 md:px-16 lg:px-20 py-10 sm:py-12">
             {!loading && categories.length === 0 ? (
                 <p className="text-white/40 text-[14px]">No categories available right now.</p>
             ) : (
                 <Swiper
                     slidesPerView="auto"
                     spaceBetween={40}
-                    freeMode={{ enabled: true, momentumBounce: false }}
                     navigation={true}
                     loop={true}
-                    loopAdditionalSlides={12}
+                    loopedSlides={Math.max(categories.length * 3, 24)}
                     grabCursor={true}
-                    threshold={10}
-                    preventClicks={false}
-                    preventClicksPropagation={false}
-                    modules={[FreeMode, Navigation]}
+                    modules={[Navigation]}
                     className="mySwiper2"
                 >
                     {loading &&
