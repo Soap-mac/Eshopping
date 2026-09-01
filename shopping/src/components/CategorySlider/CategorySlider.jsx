@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-// Swiper core styles MUST load before your custom overrides,
-// otherwise your arrow/nav styling gets overridden by Swiper's defaults.
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
@@ -46,11 +44,11 @@ export default function CategorySlider() {
 
     return (
         <div
-            className={`categorySlider px-4 sm:px-6 md:px-10 lg:px-20 mt-5 ${!loading && isOverflowing ? 'is-scrollable' : 'is-centered'
+            className={`categorySlider px-6 md:px-10 lg:px-16 py-10 sm:py-12 ${!loading && isOverflowing ? 'is-scrollable' : 'is-fitted'
                 }`}
         >
             {!loading && categories.length === 0 ? (
-                <p className="text-white/40 text-[14px] py-8">No categories available right now.</p>
+                <p className="text-white/40 text-[14px]">No categories available right now.</p>
             ) : (
                 <Swiper
                     onSwiper={syncOverflow}
@@ -58,7 +56,7 @@ export default function CategorySlider() {
                     onLock={() => setIsOverflowing(false)}
                     onUnlock={() => setIsOverflowing(true)}
                     slidesPerView="auto"
-                    spaceBetween={28}
+                    spaceBetween={40}
                     freeMode={{ enabled: true, momentumBounce: false }}
                     navigation={true}
                     watchOverflow={true}
@@ -73,22 +71,22 @@ export default function CategorySlider() {
                 >
                     {loading &&
                         Array.from({ length: SKELETON_COUNT }).map((_, i) => (
-                            <SwiperSlide key={`skeleton-${i}`} className="!w-[96px] sm:!w-[104px]">
+                            <SwiperSlide key={`skeleton-${i}`} className="!w-[112px] sm:!w-[128px] lg:!w-[144px]">
                                 <div className="flex flex-col items-center gap-3">
-                                    <div className="category-skeleton-circle h-20 w-20 sm:h-[88px] sm:w-[88px] rounded-full" />
-                                    <div className="category-skeleton-line h-[10px] w-16 rounded-full" />
+                                    <div className="category-skeleton-circle h-24 w-24 sm:h-28 sm:w-28 lg:h-[136px] lg:w-[136px] rounded-full" />
+                                    <div className="category-skeleton-line h-[11px] w-20 rounded-full" />
                                 </div>
                             </SwiperSlide>
                         ))}
 
                     {!loading &&
                         categories.map((cat, index) => (
-                            <SwiperSlide key={cat._id || index} className="!w-[96px] sm:!w-[104px]">
+                            <SwiperSlide key={cat._id || index} className="!w-[112px] sm:!w-[128px] lg:!w-[144px]">
                                 <Link
                                     to={`/products/${encodeURIComponent(cat.name)}`}
                                     className="category-card group flex flex-col items-center gap-3 outline-none"
                                 >
-                                    <span className="category-ring relative flex h-20 w-20 sm:h-[88px] sm:w-[88px] items-center justify-center rounded-full">
+                                    <span className="category-ring relative flex h-24 w-24 sm:h-28 sm:w-28 lg:h-[136px] lg:w-[136px] items-center justify-center rounded-full">
                                         <span className="h-full w-full overflow-hidden rounded-full bg-[#1c1b1b]">
                                             <img
                                                 src={cat.image}
@@ -98,7 +96,7 @@ export default function CategorySlider() {
                                             />
                                         </span>
                                     </span>
-                                    <p className="text-[13px] font-medium text-white/65 tracking-wide text-center truncate w-full group-hover:text-orange-500 transition-colors duration-300">
+                                    <p className="text-[14px] sm:text-[15px] font-medium text-white/65 tracking-wide text-center truncate w-full group-hover:text-orange-500 transition-colors duration-300">
                                         {cat.name}
                                     </p>
                                 </Link>

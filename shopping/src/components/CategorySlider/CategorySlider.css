@@ -1,28 +1,19 @@
 .categorySlider {
     position: relative;
-    --icon-size: 80px;
-    --category-bg: #0b0c10;
-    /* set this to your page's real background hex */
 }
 
-@media (min-width: 640px) {
-    .categorySlider {
-        --icon-size: 88px;
-    }
+/* Spread evenly across the full width when nothing overflows */
+.categorySlider.is-fitted .mySwiper2 .swiper-wrapper {
+    justify-content: space-evenly;
 }
 
-/* Center the row when there aren't enough categories to scroll */
-.categorySlider.is-centered .mySwiper2 .swiper-wrapper {
-    justify-content: center;
-}
-
-/* Edge fade so it reads as scrollable */
+/* Edge fade once it's an actual scrollable slider */
 .categorySlider.is-scrollable::before,
 .categorySlider.is-scrollable::after {
     content: '';
     position: absolute;
     top: 0;
-    bottom: 26px;
+    bottom: 0;
     width: 56px;
     pointer-events: none;
     z-index: 2;
@@ -30,12 +21,12 @@
 
 .categorySlider.is-scrollable::before {
     left: 0;
-    background: linear-gradient(to right, var(--category-bg), transparent);
+    background: linear-gradient(to right, var(--category-bg, #0b0c10), transparent);
 }
 
 .categorySlider.is-scrollable::after {
     right: 0;
-    background: linear-gradient(to left, var(--category-bg), transparent);
+    background: linear-gradient(to left, var(--category-bg, #0b0c10), transparent);
 }
 
 /* Icon ring + hover treatment */
@@ -49,8 +40,8 @@
 .category-card:hover .category-ring,
 .category-card:focus-visible .category-ring {
     background: linear-gradient(145deg, rgba(249, 115, 22, 0.55), rgba(249, 115, 22, 0.15));
-    box-shadow: 0 6px 16px -4px rgba(249, 115, 22, 0.35);
-    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -4px rgba(249, 115, 22, 0.35);
+    transform: translateY(-3px);
 }
 
 .category-card:focus-visible {
@@ -59,17 +50,15 @@
     border-radius: 999px;
 }
 
-/* Nav arrows */
+/* Nav arrows — centered against the whole card (icon + label), not just the icon */
 .mySwiper2 {
     --swiper-navigation-sides-offset: 0px;
 }
 
 .mySwiper2 .swiper-button-prev,
 .mySwiper2 .swiper-button-next {
-    width: 36px;
-    height: 36px;
-    top: calc(var(--icon-size) / 2);
-    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
     border-radius: 9999px;
     background: rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(6px);
@@ -93,8 +82,8 @@
 .mySwiper2 .swiper-button-prev::after,
 .mySwiper2 .swiper-button-next::after {
     content: '';
-    width: 8px;
-    height: 8px;
+    width: 9px;
+    height: 9px;
     border-top: 2px solid currentColor;
     border-right: 2px solid currentColor;
 }
