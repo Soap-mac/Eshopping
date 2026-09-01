@@ -1,18 +1,5 @@
 .categorySlider {
     position: relative;
-    --icon-size: 96px;
-}
-
-@media (min-width: 640px) {
-    .categorySlider {
-        --icon-size: 112px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .categorySlider {
-        --icon-size: 136px;
-    }
 }
 
 /* Edge fade */
@@ -58,40 +45,46 @@
     border-radius: 999px;
 }
 
-/* Nav arrows — kept fully INSIDE the slider's own box, no negative offsets,
-   so no ancestor overflow:hidden can ever clip or block them. */
+/* Nav arrows — centered against the full slide (icon + label), not just the icon */
 .mySwiper2 .swiper-button-prev,
 .mySwiper2 .swiper-button-next {
-    top: calc(var(--icon-size) / 2);
+    top: 50%;
     transform: translateY(-50%);
-    width: 46px;
-    height: 46px;
+    width: 44px;
+    height: 44px;
     border-radius: 9999px;
-    background: rgba(20, 20, 24, 0.65);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    color: rgba(255, 255, 255, 0.85);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.03));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
     z-index: 3;
-    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease,
-        box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease,
+        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 640px) {
+
+    .mySwiper2 .swiper-button-prev,
+    .mySwiper2 .swiper-button-next {
+        width: 48px;
+        height: 48px;
+    }
 }
 
 .mySwiper2 .swiper-button-prev {
-    left: 8px;
+    left: 12px;
 }
 
 .mySwiper2 .swiper-button-next {
-    right: 8px;
+    right: 12px;
 }
 
 .mySwiper2 .swiper-button-prev:hover,
 .mySwiper2 .swiper-button-next:hover {
     background: #f97316;
     border-color: #f97316;
-    color: #0b0c10;
-    box-shadow: 0 6px 22px -2px rgba(249, 115, 22, 0.55);
+    box-shadow: 0 10px 28px -6px rgba(249, 115, 22, 0.6);
     transform: translateY(-50%) scale(1.08);
 }
 
@@ -100,22 +93,31 @@
     transform: translateY(-50%) scale(0.94);
 }
 
+/* Crisp SVG chevron via mask, instead of a border-trick corner */
 .mySwiper2 .swiper-button-prev::after,
 .mySwiper2 .swiper-button-next::after {
     content: '';
-    width: 10px;
-    height: 10px;
-    border-top: 2.5px solid currentColor;
-    border-right: 2.5px solid currentColor;
-    border-radius: 1px;
-}
-
-.mySwiper2 .swiper-button-prev::after {
-    transform: rotate(-135deg) translate(1px, -1px);
+    width: 18px;
+    height: 18px;
+    background-color: rgba(255, 255, 255, 0.85);
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    transition: background-color 0.25s ease;
 }
 
 .mySwiper2 .swiper-button-next::after {
-    transform: rotate(45deg) translate(-1px, -1px);
+    transform: scaleX(-1);
+}
+
+.mySwiper2 .swiper-button-prev:hover::after,
+.mySwiper2 .swiper-button-next:hover::after {
+    background-color: #0b0c10;
 }
 
 /* Skeleton shimmer */
