@@ -74,7 +74,7 @@ function WishlistDrawer() {
                         <EmptyWishlist onClose={handleClose} />
                     ) : (
                         <div className="!flex !min-h-full !flex-col">
-                            <ul className="!m-auto !w-full !space-y-3">
+                            <ul className="m-auto !w-full !space-y-3">
                                 {wishlistProducts.map((product) => (
                                     <WishlistItemRow
                                         key={product._id}
