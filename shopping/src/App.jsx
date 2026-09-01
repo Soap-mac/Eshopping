@@ -13,8 +13,7 @@ import Profile from './pages/Home/Profile'
 import Wishlist from './pages/Home/Wishlist'
 import Orders from './pages/Orders'
 import DashBoard from './adminPages/DashBoard'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import AllProducts from './adminPages/AllProducts'
 import AddProducts from './adminPages/AddProducts'
 import AllCategories from './adminPages/AllCategories'
@@ -88,6 +87,175 @@ function App() {
   const [phone, setPhone] = useState('');
 
   const [sliders, setSliders] = useState([]);
+  const [wishlist, setWishlist] = useState({});
+  const [wishlistLoaded, setWishlistLoaded] = useState(false);
+
+  const fetchWishlist = useCallback(async () => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/getwishlist`, {
+        method: 'GET',
+        credentials: 'include',
+      });
+      const data = await res.json();
+
+      if (data.success && Array.isArray(data.wishlist)) {
+        const map = {};
+        data.wishlist.forEach(w => {
+          if (w?.productId?._id) {
+            map[w.productId._id] = w.productId;
+          }
+        });
+        setWishlist(map);
+      } else {
+        setWishlist({});
+      }
+    } catch (error) {
+      console.log(error);
+      setWishlist({});
+    } finally {
+      setWishlistLoaded(true);
+    }
+  }, []);
+
+  const isWishlisted = useCallback(
+    (productId) => Boolean(wishlist[productId]),
+    [wishlist]
+  );
+
+  const addToWishlist = useCallback(async (product) => {
+    if (!product?._id) return false;
+
+    setWishlist(prev => ({ ...prev, [product._id]: product })); // optimistic
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/addwishlist`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ productId: product._id }),
+      });
+      const data = await res.json();
+
+      if (!data.success) {
+        setWishlist(prev => {
+          const next = { ...prev };
+          delete next[product._id];
+          return next;
+        });
+      }
+      return data.success;
+    } catch (error) {
+      console.log(error);
+      setWishlist(prev => {
+        const next = { ...prev };
+        delete next[product._id];
+        return next;
+      });
+      return false;
+    }
+  }, []);
+
+  const removeFromWishlist = useCallback(async (productId) => {
+    if (!productId) return false;
+
+    let previousProduct;
+    setWishlist(prev => {
+      previousProduct = prev[productId];
+      const next = { ...prev };
+      delete next[productId];
+      return next;
+    });
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/deletewishlist/${productId}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      const data = await res.json();
+
+      if (!data.success && previousProduct) {
+        setWishlist(prev => ({ ...prev, [productId]: previousProduct }));
+      }
+      return data.success;
+    } catch (error) {
+      console.log(error);
+      if (previousProduct) {
+        setWishlist(prev => ({ ...prev, [productId]: previousProduct }));
+      }
+      return false;
+    }
+  }, []);
+
+  const toggleWishlist = useCallback((product) => {
+    if (!product?._id) return;
+    if (isWishlisted(product._id)) {
+      removeFromWishlist(product._id);
+    } else {
+      addToWishlist(product);
+    }
+  }, [isWishlisted, addToWishlist, removeFromWishlist]);
+
+
+  const [cart, setCart] = useState([]);
+  const [cartLoaded, setCartLoaded] = useState(false);
+
+  const fetchCart = useCallback(async () => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/getCart`, {
+        method: 'GET',
+        credentials: 'include',
+      });
+      const data = await res.json();
+      setCart(Array.isArray(data.cart) ? data.cart : []);
+    } catch (error) {
+      console.log(error);
+      setCart([]);
+    } finally {
+      setCartLoaded(true);
+    }
+  }, []);
+
+  const addToCart = useCallback(async (product, quantity = 1, variantSku = null) => {
+    if (!product?._id) return false;
+
+    const variant = variantSku
+      ? product.variants?.find(v => v.sku === variantSku)
+      : product.variants?.[0];
+
+    if (!variant?.sku) {
+      console.warn(
+        `addToCart: no variant found for product "${product.name}" (${product._id}). ` +
+        `Your backend /addToCart route requires a variantSku, but this product has none available.`
+      );
+      return false;
+    }
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/addToCart`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          productId: product._id,
+          quantity,
+          variantSku: variant.sku,
+        }),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        await fetchCart();
+        setOpenCartDrawer(true);
+        return true;
+      }
+
+      console.warn('addToCart failed:', data?.message);
+      return false;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }, [fetchCart]);
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -120,9 +288,16 @@ function App() {
     checkLogin();
   }, []);
 
+  useEffect(() => {
+    fetchWishlist();
+    fetchCart();
+  }, [fetchWishlist, fetchCart]);
+
   const value = {
     setOpenProductModle, setOpenCartDrawer, openProductModle, openCartDrawer, isLogin, setIsLogin, isAuthenticated, setIsAuthenticated,
-    avatar, setAvatar, name, setName, email, setEmail, phone, setPhone, sliders, setSliders, openWishlistDrawer, setOpenWishlistDrawer
+    avatar, setAvatar, name, setName, email, setEmail, phone, setPhone, sliders, setSliders, openWishlistDrawer, setOpenWishlistDrawer,
+    wishlist, wishlistLoaded, isWishlisted, addToWishlist, removeFromWishlist, toggleWishlist, refreshWishlist: fetchWishlist,
+    cart, cartLoaded, addToCart, refreshCart: fetchCart,
   }
 
 
