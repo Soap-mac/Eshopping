@@ -36,6 +36,12 @@ import { createContext } from 'react'
 
 const MyContext = createContext();
 
+// Messages the authVerify middleware / wishlist-auth routes send back
+// when a request comes from a logged-out or expired session. Used to tell
+// "you're not logged in" apart from other failures (e.g. "already wishlisted"),
+// so we only redirect to /Login for the former.
+const AUTH_FAILURE_MESSAGES = ['unauthorized user', 'Invalid token'];
+
 function App() {
   const router = createBrowserRouter([
     {
@@ -87,7 +93,15 @@ function App() {
   const [phone, setPhone] = useState('');
 
   const [sliders, setSliders] = useState([]);
-  const [wishlist, setWishlist] = useState({});
+
+  // ============================================
+  // WISHLIST — single shared source of truth.
+  // Fetched once here; every ProductItem card and the WishlistDrawer
+  // just read/write this instead of hitting /getwishlist themselves.
+  // Add/remove are optimistic (instant UI change), and roll back only
+  // if the server call actually fails.
+  // ============================================
+  const [wishlist, setWishlist] = useState({});       // { [productId]: product }
   const [wishlistLoaded, setWishlistLoaded] = useState(false);
 
   const fetchWishlist = useCallback(async () => {
@@ -122,8 +136,11 @@ function App() {
     [wishlist]
   );
 
+  // Returns { success, authRequired } so callers (ProductItem) can tell
+  // "this failed because you're logged out" apart from other failures,
+  // and redirect to /Login only in that case.
   const addToWishlist = useCallback(async (product) => {
-    if (!product?._id) return false;
+    if (!product?._id) return { success: false, authRequired: false };
 
     setWishlist(prev => ({ ...prev, [product._id]: product })); // optimistic
 
@@ -141,9 +158,13 @@ function App() {
           const next = { ...prev };
           delete next[product._id];
           return next;
-        });
+        }); // rollback
       }
-      return data.success;
+
+      return {
+        success: !!data.success,
+        authRequired: !data.success && AUTH_FAILURE_MESSAGES.includes(data.message),
+      };
     } catch (error) {
       console.log(error);
       setWishlist(prev => {
@@ -151,19 +172,19 @@ function App() {
         delete next[product._id];
         return next;
       });
-      return false;
+      return { success: false, authRequired: false };
     }
   }, []);
 
   const removeFromWishlist = useCallback(async (productId) => {
-    if (!productId) return false;
+    if (!productId) return { success: false, authRequired: false };
 
     let previousProduct;
     setWishlist(prev => {
       previousProduct = prev[productId];
       const next = { ...prev };
       delete next[productId];
-      return next;
+      return next; // optimistic
     });
 
     try {
@@ -174,28 +195,32 @@ function App() {
       const data = await res.json();
 
       if (!data.success && previousProduct) {
-        setWishlist(prev => ({ ...prev, [productId]: previousProduct }));
+        setWishlist(prev => ({ ...prev, [productId]: previousProduct })); // rollback
       }
-      return data.success;
+
+      return {
+        success: !!data.success,
+        authRequired: !data.success && AUTH_FAILURE_MESSAGES.includes(data.message),
+      };
     } catch (error) {
       console.log(error);
       if (previousProduct) {
         setWishlist(prev => ({ ...prev, [productId]: previousProduct }));
       }
-      return false;
+      return { success: false, authRequired: false };
     }
   }, []);
 
-  const toggleWishlist = useCallback((product) => {
-    if (!product?._id) return;
-    if (isWishlisted(product._id)) {
-      removeFromWishlist(product._id);
-    } else {
-      addToWishlist(product);
-    }
+  const toggleWishlist = useCallback(async (product) => {
+    if (!product?._id) return { success: false, authRequired: false };
+    return isWishlisted(product._id)
+      ? removeFromWishlist(product._id)
+      : addToWishlist(product);
   }, [isWishlisted, addToWishlist, removeFromWishlist]);
 
-
+  // ============================================
+  // CART
+  // ============================================
   const [cart, setCart] = useState([]);
   const [cartLoaded, setCartLoaded] = useState(false);
 
@@ -288,6 +313,8 @@ function App() {
     checkLogin();
   }, []);
 
+  // Fetch wishlist + cart ONCE when the app loads (not per component).
+  // If the visitor isn't logged in yet, these just resolve to empty state.
   useEffect(() => {
     fetchWishlist();
     fetchCart();

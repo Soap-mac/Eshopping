@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Rating from '@mui/material/Rating';
 import { Button } from '@mui/material';
 import { CiHeart } from "react-icons/ci";
@@ -10,12 +10,14 @@ import { MyContext } from '../../App';
 function productitems(props) {
 
     const context = useContext(MyContext);
+    const navigate = useNavigate();
     const item = props?.item;
 
     const [imgLoaded, setImgLoaded] = useState(false);
     const [imgError, setImgError] = useState(false);
 
-    // Wishlist state lives in context now — no per-card network call.
+    // Wishlist state lives in context — no per-card network call, and this
+    // stays in sync everywhere (drawer, other cards) the instant it changes.
     const wishlisted = context?.isWishlisted?.(item?._id) ?? false;
 
     const oldPrice = item?.oldPrice;
@@ -34,6 +36,17 @@ function productitems(props) {
         e.preventDefault();
         e.stopPropagation();
         fn();
+    };
+
+    const handleWishlistToggle = (e) => {
+        stopAndRun(e, async () => {
+            const result = await context?.toggleWishlist?.(item);
+            // Only redirect if the server actually says "you're not logged in" —
+            // not on every failure (e.g. a harmless race condition).
+            if (result?.authRequired) {
+                navigate('/Login');
+            }
+        });
     };
 
     return (
@@ -82,8 +95,9 @@ function productitems(props) {
 
                 <div className="actions !absolute !top-[-300px] !right-[5px] !flex !items-center !gap-2 !flex-col !w-[50px] !transition-all !duration-400 group-hover:!top-[15px] !z-20">
                     <Button
-                        onClick={(e) => stopAndRun(e, () => context?.toggleWishlist?.(item))}
-                        className={`!w-[35px] !min-w-[25px] !h-[35px] !rounded-full !shadow-md !transition-colors ${wishlisted ? '!bg-orange-600 !text-white' : '!bg-white !text-black hover:!bg-orange-600 hover:!text-white'
+                        onClick={handleWishlistToggle}
+                        aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+                        className={`!w-[35px] !min-w-[25px] !h-[35px] !rounded-full !shadow-md !transition-colors ${wishlisted ? '!bg-pink-600 !text-white' : '!bg-white !text-black hover:!bg-pink-600 hover:!text-white'
                             }`}
                     >
                         {wishlisted ? <FaHeart className='!text-[16px]' /> : <CiHeart className='!text-[20px]' />}
