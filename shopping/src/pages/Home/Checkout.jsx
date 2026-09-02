@@ -26,6 +26,7 @@ function Checkout() {
     const [phone, setPhone] = useState();
     const [addressId, setAddressId] = useState("");
     const [paymentMethod, setPaymentMethod] = useState("RAZORPAY");
+    const [isProcessingPayment, setIsProcessingPayment] = useState(false);
     const [addressAdded, setAddressAdded] = useState(false);
     const [priceDetails, setPriceDetails] = useState({
         subtotal: 0,
@@ -122,6 +123,8 @@ function Checkout() {
 
     const checkout = async () => {
 
+        if (isProcessingPayment) return;
+
         if (!cartProducts || cartProducts.length === 0) {
             handleError("Cart is empty");
             return;
@@ -131,6 +134,8 @@ function Checkout() {
             handleError("Please select a delivery address");
             return;
         }
+
+        setIsProcessingPayment(true);
 
         if (paymentMethod === "COD") {
             try {
@@ -142,30 +147,28 @@ function Checkout() {
                             "Content-Type": "application/json"
                         },
                         credentials: "include",
-                        body: JSON.stringify({
-                            addressId
-                        })
+                        body: JSON.stringify({ addressId })
                     }
                 );
+
                 const result = await res.json();
-                console.log(result);
-                if (result.success) {
-                    handleSucess(
-                        "Payment Successful"
-                    );
-                    setTimeout(() => {
-                        navigate("/orders");
-                    }, 1500);
+
+                if (!res.ok || !result.success) {
+                    handleError(result.message || "Unable to place COD order");
+                    return;
                 }
-                else {
-                    handleError(result.message);
-                }
-            }
-            catch (error) {
-                console.log(error);
+
+                handleSucess("Order placed successfully");
+                setTimeout(() => navigate("/orders"), 1500);
+            } catch (error) {
+                console.error("COD checkout error:", error);
+                handleError("Unable to place order. Please try again.");
+            } finally {
+                setIsProcessingPayment(false);
             }
             return;
         }
+
         try {
             const res = await fetch(
                 `${import.meta.env.VITE_API_URL}/create-order`,
@@ -175,23 +178,26 @@ function Checkout() {
                         "Content-Type": "application/json"
                     },
                     credentials: "include",
-                    body: JSON.stringify({
-                        addressId
-                    })
+                    body: JSON.stringify({ addressId })
                 }
             );
-            console.log(res)
+
             const result = await res.json();
-            console.log(result);
-            if (result.success) {
-                setPriceDetails(result.priceDetails);
-                openRazorpay(result);
+
+            if (!res.ok || !result.success) {
+                handleError(result.message || "Unable to create payment order");
+                setIsProcessingPayment(false);
+                return;
             }
+
+            setPriceDetails(result.priceDetails);
+            openRazorpay(result);
+        } catch (error) {
+            console.error("Checkout error:", error);
+            handleError("Unable to start payment. Please try again.");
+            setIsProcessingPayment(false);
         }
-        catch (error) {
-            console.log(error);
-        }
-    }
+    };
 
 
     const addAddress = async () => {
@@ -329,63 +335,98 @@ function Checkout() {
     };
 
     const openRazorpay = (data) => {
+        const key = import.meta.env.VITE_RAZORPAY_KEY_ID;
+
+        if (!key) {
+            handleError("Razorpay is not configured on the frontend");
+            setIsProcessingPayment(false);
+            return;
+        }
+
+        if (!window.Razorpay) {
+            handleError("Razorpay checkout could not be loaded. Please refresh and try again.");
+            setIsProcessingPayment(false);
+            return;
+        }
+
         const options = {
-            key: data.key,
+            key,
             amount: data.amount,
             currency: data.currency,
             name: "ArpitCart",
             description: "Order Payment",
-            order_id: data.razorpayOrder.id,
+            order_id: data.order_id,
             handler: async function (response) {
-                const res = await fetch(
-                    `${import.meta.env.VITE_API_URL}/verify-payment`,
+                try {
+                    const res = await fetch(
+                        `${import.meta.env.VITE_API_URL}/verify-payment`,
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            credentials: "include",
+                            body: JSON.stringify({
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_signature: response.razorpay_signature
+                            })
+                        }
+                    );
+
+                    const result = await res.json();
+
+                    if (!res.ok || !result.success) {
+                        handleError(result.message || "Payment verification failed");
+                        return;
+                    }
+
+                    handleSucess("Payment Successful");
+                    navigate("/orders");
+                } catch (error) {
+                    console.error("Payment verification error:", error);
+                    handleError("Payment was received, but verification failed. Please contact support.");
+                } finally {
+                    setIsProcessingPayment(false);
+                }
+            },
+            modal: {
+                ondismiss: function () {
+                    setIsProcessingPayment(false);
+                    handleError("Payment cancelled");
+                }
+            }
+        };
+
+        const razor = new window.Razorpay(options);
+
+        razor.on("payment.failed", async function (response) {
+            try {
+                await fetch(
+                    `${import.meta.env.VITE_API_URL}/payment-failed`,
                     {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
                         },
                         credentials: "include",
-                        body: JSON.stringify(response)
+                        body: JSON.stringify({
+                            razorpay_order_id: response.error?.metadata?.order_id || data.order_id,
+                            error: response.error?.description || "Payment failed"
+                        })
                     }
                 );
-                const result = await res.json();
-                console.log(result);
-                if (result.success) {
-
-                    handleSucess("Payment Successful");
-
-                    navigate("/orders");
-
-                }
+            } catch (error) {
+                console.error("Failed to record payment failure:", error);
+            } finally {
+                setIsProcessingPayment(false);
+                handleError(response.error?.description || "Payment failed");
             }
-        };
-        const razor = new window.Razorpay(options);
-        razor.on('payment.failed', async function (response) {
-
-            await fetch(
-                `${import.meta.env.VITE_API_URL}/payment-failed`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    credentials: "include",
-                    body: JSON.stringify({
-                        razorpay_order_id:
-                            response.error.metadata.order_id,
-
-                        error:
-                            response.error.description
-                    })
-                }
-            );
-
-
-            handleError("Payment failed");
-
         });
+
         razor.open();
-    }
+    };
+
 
     return (
         <>
@@ -747,11 +788,11 @@ function Checkout() {
 
                                     <Button
                                         onClick={checkout}
-                                        disabled={cartProducts.length === 0}
+                                        disabled={cartProducts.length === 0 || isProcessingPayment}
                                         sx={primaryButtonSx}
                                     >
                                         <MdShoppingCart className="!mr-2.5 text-lg" />
-                                        Proceed to payment
+                                        {isProcessingPayment ? "Processing..." : "Proceed to payment"}
                                     </Button>
 
                                     <div className="!mt-5 text-center !space-y-1.5">
