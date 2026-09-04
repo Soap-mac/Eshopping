@@ -176,10 +176,11 @@ function Header() {
                                         <li className='list-none'>
                                             <Link
                                                 to="/login"
-                                                className='!flex !items-center !gap-2 !px-4 !h-[42px] lg:!h-[56px] !rounded-full !border !border-white/[0.12] !bg-white/[0.03] !text-gray-200 hover:!text-amber-400 hover:!border-amber-500/60 hover:!bg-[rgba(245,158,11,0.08)] !transition-all !duration-300 !text-[14px] lg:!text-[15px] !font-medium whitespace-nowrap'
+                                                className='!flex !items-center !gap-2 !px-4 !h-[42px] lg:!h-[56px] !rounded-full !border !border-white/[0.12] !bg-white/[0.03] !text-gray-200 hover:!border-amber-500/60 hover:!bg-[rgba(245,158,11,0.08)] !transition-all !duration-300 !text-[14px] lg:!text-[15px] !font-medium whitespace-nowrap'
                                             >
                                                 <FaUser className='text-[13px] opacity-70' />
-                                                Login <span className="text-gray-500">/</span> Signup
+                                                <span className='link'>Login</span>
+                                                <span className="text-gray-500">/</span> <span className='link'>Signup</span>
                                             </Link>
                                         </li> :
                                         <div>
