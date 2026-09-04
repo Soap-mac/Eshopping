@@ -39,6 +39,7 @@ function Navbar() {
 
                 catRes.allCategories.forEach(category => {
                     menu[category.name] = {
+                        image: category.image,
                         submenu: [],
                         innerSubMenu: [],
                     }
@@ -158,7 +159,7 @@ function Navbar() {
                 </div>
             </nav>
 
-            <SidePanel openSide={openSide} isOpenSide={isOpenSide} setOpenSide={setOpenSide} />
+            <SidePanel openSide={openSide} isOpenSide={isOpenSide} setOpenSide={setOpenSide} menus={menus} />
             <ToastContainer />
         </>
     )

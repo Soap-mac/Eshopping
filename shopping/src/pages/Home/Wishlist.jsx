@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Top from '../../components/Top/Top'
 import Header from '../../components/Header/Header'
 import Navbar from '../../components/NavBar/Navbar'
@@ -63,10 +63,10 @@ function Wishlist() {
         <>
 
             <div className="!min-h-screen">
-                <div className="container !mx-auto !px-[100px] !py-8 !pt-[60px] !w-[100%] !bg-transparent">
+                <div className="container !mx-auto !px-4 sm:!px-8 lg:!px-[100px] !py-8 !pt-8 lg:!pt-[60px] !w-[100%] !bg-transparent">
                     <div className="flex flex-col lg:flex-row !gap-8 !w-full">
                         <ProfileSide />
-                        <div className="flex-1 lg:!w-[70%] w-[70%]">
+                        <div className="flex-1 w-full lg:!w-[70%]">
                             <div className="!mb-5 !pb-3 border-b-[2px] border-[#8b7a7a]">
                                 <h2 className="text-3xl font-bold text-amber-50 !mb-2">Your Wishlist</h2>
                                 <p className="text-gray-400 text-lg">

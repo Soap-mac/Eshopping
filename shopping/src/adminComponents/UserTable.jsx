@@ -47,7 +47,7 @@ function UserTable(props) {
                 <br />
 
                 <div className="backdrop-blur-lg bg-gray-900/40 border border-gray-700/50 rounded-2xl shadow-2xl">
-                    <div className="">
+                    <div className="overflow-x-auto">
                         <table className="w-full text-sm text-left overflow-hidden">
                             <thead className="text-base text-amber-100 uppercase bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-b border-gray-700/50">
                                 <tr>

@@ -10,7 +10,7 @@ function AllOrders() {
                 <Sidebar />
             </div>
 
-            <div className="flex-1 h-full bg-transparent">
+            <div className="flex-1 h-full bg-transparent min-w-0">
 
                 <div className="bg-transparent rounded-xl !p-6 border border-slate-700 !mx-4 md:mx-6 lg:mx-10 !my-6 hover:border-orange-500/50 transition-all duration-300">
                     <div className="flex items-center justify-between !mb-6">

@@ -118,25 +118,25 @@ function AllInnerCategories() {
                 <Sidebar />
             </div>
 
-            <div className="flex-1 h-full bg-transparent">
+            <div className="flex-1 h-full bg-transparent min-w-0">
 
                 <div className="bg-gradient-to-br from-gray-900/60 to-gray-800/40 backdrop-blur-sm rounded-2xl !p-8 border border-slate-700/50 !mx-4 md:mx-6 lg:mx-10 !my-6 hover:border-orange-500/50 transition-all duration-500 shadow-2xl">
-                    <div className="flex items-center justify-between !mb-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 !mb-6">
                         <div className="flex items-center gap-4">
                             <div className="!p-3 bg-orange-500/20 rounded-xl border border-orange-500/30">
                                 <BiCategory className="text-2xl text-orange-400" />
                             </div>
                             <div>
-                                <h1 className="text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent !mb-2">
+                                <h1 className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent !mb-2">
                                     All Categories
                                 </h1>
-                                <p className="text-gray-400 text-lg">
+                                <p className="text-gray-400 text-base sm:text-lg">
                                     Manage your entire Category inventory with ease
                                 </p>
                             </div>
                         </div>
 
-                        <button className="!px-8 !py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white !w-[200px] font-semibold rounded-xl hover:from-orange-400 hover:to-orange-500 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-orange-500/30 group relative overflow-hidden">
+                        <button className="!px-8 !py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white w-full sm:!w-[200px] font-semibold rounded-xl hover:from-orange-400 hover:to-orange-500 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-orange-500/30 group relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             <div className="relative flex items-center gap-3">
                                 <HiSparkles className="text-xl group-hover:rotate-12 transition-transform duration-300" />
@@ -161,8 +161,8 @@ function AllInnerCategories() {
                                     </span>
                                 </div>
 
-                                <div className="flex items-center gap-4">
-                                    <Box className="min-w-[300px]">
+                                <div className="flex items-center gap-4 w-full lg:w-auto">
+                                    <Box className="min-w-0 w-full lg:min-w-[300px] lg:w-auto">
                                         <TextField
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}

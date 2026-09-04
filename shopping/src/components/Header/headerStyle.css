@@ -5,6 +5,8 @@
     color: white;
     background-color: black;
     height: 90px;
+    gap: 16px;
+    padding: 0 16px;
 }
 
 .gap {
@@ -24,6 +26,54 @@
     margin-left: 100px;
     height: 120px;
     width: 150px;
+}
+
+/* ---- Responsive header ----
+   Desktop (>=1024px) keeps the original 3-column, wide-logo layout
+   untouched. Below that the header becomes a two-row stack: logo +
+   account/wishlist/cart icons on row one, the full-width search bar
+   on row two, so nothing gets squeezed into an unreadable sliver. */
+@media (max-width: 1023px) {
+    .headerContainer {
+        height: auto;
+        padding: 10px 12px;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .headerImg {
+        margin-left: 0;
+        height: 40px;
+        width: auto;
+    }
+
+    .col3 {
+        margin-left: 0;
+    }
+
+    .second {
+        margin-left: 0;
+    }
+
+    .gap {
+        width: 10px;
+    }
+}
+
+@media (max-width: 639px) {
+    .headerContainer {
+        padding: 8px 10px;
+        gap: 8px;
+    }
+
+    .headerImg {
+        height: 32px;
+    }
+
+    .gap {
+        width: 0;
+        display: none;
+    }
 }
 
 /* Profile Dropdown Menu Styles */

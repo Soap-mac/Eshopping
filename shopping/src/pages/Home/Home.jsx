@@ -65,17 +65,16 @@ function Home() {
           <Slider />
           <CategorySlider />
           <br />
-          <div className="freeShipping !mt-4 !h-[150px] w-full bg-black">
-            <br />
-            <div className="freeBox flex items-center justify-around text-[#fff] border-2 border-amber-50 rounded-md !ml-7 !h-[100px] w-[95%]">
-              <div className="first font-medium text-[30px] flex gap-3">
-                <TbTruckDelivery className='text-[44px]' />
+          <div className="freeShipping !mt-4 !py-4 sm:!h-[150px] w-full bg-black">
+            <div className="freeBox flex flex-col sm:flex-row items-center justify-around text-center sm:text-left gap-3 sm:gap-4 text-[#fff] border-2 border-amber-50 rounded-md !mx-4 sm:!ml-7 sm:!mr-4 !py-5 sm:!py-0 sm:!h-[100px] w-[calc(100%-2rem)] sm:w-[95%]">
+              <div className="first font-medium text-[20px] sm:text-[30px] flex items-center gap-2 sm:gap-3">
+                <TbTruckDelivery className='text-[30px] sm:text-[44px]' />
                 <p>FREE SHIPPING</p>
               </div>
-              <div className="second text-[20px]">
+              <div className="second text-[14px] sm:text-[20px] !px-4 sm:!px-0">
                 <p>Free Shipping now on your first order over $200</p>
               </div>
-              <div className="third font-bold text-[30px]">
+              <div className="third font-bold text-[22px] sm:text-[30px]">
                 <p>ONLY $200</p>
               </div>
             </div>
@@ -86,17 +85,17 @@ function Home() {
 
         </div>
 
-        <section className='popularProducts !p-5 !text-white bg-black !h-[auto]'>
-          <div className="container flex items-center justify-around">
-            <div className="popularProductLeft text-white !ml-8">
-              <h2 className='text-[30px] font-bold !pt-[15px]'>Popular Products</h2>
-              <p>Do not miss the current offers by the end of this month </p>
+        <section className='popularProducts !p-4 sm:!p-5 !text-white bg-black !h-[auto]'>
+          <div className="container flex flex-col lg:flex-row lg:items-center justify-around gap-4 lg:gap-6">
+            <div className="popularProductLeft text-white text-center lg:text-left !ml-0 lg:!ml-8">
+              <h2 className='text-[24px] sm:text-[30px] font-bold !pt-[15px]'>Popular Products</h2>
+              <p className="text-[14px] sm:text-base">Do not miss the current offers by the end of this month </p>
             </div>
-            <div className="popularProductRight w-[70%] h-full !text-white">
+            <div className="popularProductRight w-full lg:w-[70%] h-full !text-white">
               <PopularProducts category={category} setCategory={setCategory} />
             </div>
           </div>
-          <div className="h-[450px] w-[110%] !ml-[-80px]">
+          <div className="!mt-4 sm:mt-0 min-h-[280px] sm:min-h-[380px] w-full">
             {loading && <p className="text-white text-center">Loading...</p>}
             {!loading && allProducts.length > 0 &&
               <ProductSlider items={5} allProducts={allProducts} category={category} />

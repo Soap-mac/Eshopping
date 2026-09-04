@@ -90,7 +90,7 @@ function Cart() {
 
     return (
         <>
-            <Top />
+            {/* <Top /> */}
             <Header />
             <Navbar />
 

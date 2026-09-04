@@ -72,7 +72,7 @@ function ProductsTable({
             <div className="max-w-7xl !mx-auto">
                 <h3 className='text-orange-500 text-3xl font-bold !mb-8 !px-2'>PRODUCTS</h3>
 
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div className="!text-gray-200">
                         <Select
 
@@ -103,7 +103,7 @@ function ProductsTable({
                             <MenuItem value={'Home'}>Home</MenuItem>
                         </Select>
                     </div>
-                    <div className="!mr-[50px]">
+                    <div className="sm:!mr-[50px]">
                         <Box
                         >
 
@@ -128,7 +128,7 @@ function ProductsTable({
                 </div>
 
                 <div className="backdrop-blur-lg bg-gray-900/40 border border-gray-700/50 rounded-2xl shadow-2xl">
-                    <div className="">
+                    <div className="overflow-x-auto">
                         <table className="w-full text-sm text-left overflow-hidden">
                             <thead className="text-base text-amber-100 uppercase bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-b border-gray-700/50">
                                 <tr>

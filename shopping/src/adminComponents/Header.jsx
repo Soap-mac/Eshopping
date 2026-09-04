@@ -38,9 +38,9 @@ function Header() {
 
     return (
         <>
-            <div className="!text-white bg-black border-b border-gray-700 w-[1240px] h-[90px]">
-                <div className="flex items-center justify-between !p-4">
-                    <div className="flex items-center gap-2">
+            <div className="!text-white bg-black border-b border-gray-700 w-full h-[70px] lg:h-[90px]">
+                <div className="flex items-center justify-between !p-3 sm:!p-4 !pl-16 lg:!pl-4">
+                    <div className="hidden lg:flex items-center gap-2">
                         <Button className='!w-[56px] !min-w-[0px] !h-[56px] !text-orange-400 !rounded-full !text-[18px] !border-2 !border-[#5b5656] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300'>
                             <IoMenu className='text-[20px]' />
                         </Button>
@@ -48,7 +48,7 @@ function Header() {
                             <FaSearch className='text-[20px]' />
                         </Button>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3 !ml-auto">
                         <div>
                             <Button
                                 id="basic-button"
@@ -56,7 +56,7 @@ function Header() {
                                 aria-haspopup="true"
                                 aria-expanded={open ? 'true' : undefined}
                                 onClick={handleClick}
-                                className='!w-[55px] !min-w-[0px] !h-[55px] !text-orange-400 !rounded-full !text-[18px] !border-2 !border-[#5b5656] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300'
+                                className='!w-[42px] lg:!w-[55px] !min-w-[0px] !h-[42px] lg:!h-[55px] !text-orange-400 !rounded-full !text-[18px] !border-2 !border-[#5b5656] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300'
                             >
                                 <FaUser className='text-[20px]' />
                             </Button>
@@ -173,7 +173,7 @@ function Header() {
                                 </div>
                             </Menu>
                         </div>
-                        <div className="!w-[56px] !min-w-[0px] !h-[56px] !text-orange-400 !rounded-full !text-[18px] flex justify-center items-center !pr-1 !border-2 !border-[#5b5656] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300">
+                        <div className="!w-[42px] lg:!w-[56px] !min-w-[0px] !h-[42px] lg:!h-[56px] !text-orange-400 !rounded-full !text-[18px] flex justify-center items-center !pr-1 !border-2 !border-[#5b5656] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] hover:!translate-y-[-2px] !transition-all !duration-300">
                             <IconButton aria-label="cart">
                                 <StyledBadge badgeContent={4} color="secondary">
                                     <FaBell className='!text-orange-400' />

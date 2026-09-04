@@ -95,7 +95,7 @@ function AddInnerCategory() {
             </div>
 
 
-            <div className="flex-1 h-full bg-transparent">
+            <div className="flex-1 h-full bg-transparent min-w-0">
                 <div className="!mx-4 md:mx-6 lg:mx-10 !my-6">
 
                     <div className="bg-gradient-to-br from-gray-900/60 to-gray-800/40 backdrop-blur-sm rounded-2xl !p-8 border border-slate-700/50 hover:border-orange-500/50 transition-all duration-500 shadow-2xl !mb-8">
@@ -105,10 +105,10 @@ function AddInnerCategory() {
                                     <BiCategory className="text-2xl text-orange-400" />
                                 </div>
                                 <div>
-                                    <h1 className="text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent !mb-2">
+                                    <h1 className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent !mb-2">
                                         Add New Inner Category
                                     </h1>
-                                    <p className="text-gray-400 text-lg">
+                                    <p className="text-gray-400 text-base sm:text-lg">
                                         Create a new Inner Category for your store inventory
                                     </p>
                                 </div>

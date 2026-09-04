@@ -4,7 +4,7 @@ import Top from '../Top/Top'
 function Help() {
   return (
     <div>
-      <Top />
+      {/* <Top /> */}
     </div>
   )
 }

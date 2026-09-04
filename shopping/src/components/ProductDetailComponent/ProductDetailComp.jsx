@@ -92,7 +92,7 @@ function ProductDetailComp(props) {
     };
 
     return (
-        <div className={`info text-amber-50 flex flex-col justify-center`} style={{ width: `${props.width}%` }}>
+        <div className={`info productDetailInfo text-amber-50 flex flex-col justify-center !px-4 lg:!px-0`} style={{ width: `${props.width}%` }}>
             <h3 className='text-[30px] !mb-[5px]'>{props?.product?.name}</h3>
             <p className=''>Brand: {props?.product?.brand}</p>
             <div className="rating-review flex items-center !mb-[20px]">

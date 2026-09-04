@@ -50,9 +50,9 @@ function productitems(props) {
     };
 
     return (
-        <div className="productItem group !relative !rounded-2xl !w-[190px] !h-[430px] !flex !flex-col !bg-[#302f2f] !border !border-white/[0.06] !overflow-hidden !transition-all !duration-300 hover:!-translate-y-1 hover:!border-orange-500/30 hover:!shadow-[0_10px_30px_rgba(0,0,0,0.45)]">
+        <div className="productItem group !relative !rounded-2xl !w-full !max-w-[190px] !h-[360px] sm:!h-[430px] !flex !flex-col !bg-[#302f2f] !border !border-white/[0.06] !overflow-hidden !transition-all !duration-300 hover:!-translate-y-1 hover:!border-orange-500/30 hover:!shadow-[0_10px_30px_rgba(0,0,0,0.45)]">
 
-            <div className="imgWrapper !relative !w-full !h-[220px] !flex-shrink-0 !bg-[#221f1f] !flex !items-center !justify-center !overflow-hidden">
+            <div className="imgWrapper !relative !w-full !h-[180px] sm:!h-[220px] !flex-shrink-0 !bg-[#221f1f] !flex !items-center !justify-center !overflow-hidden">
 
                 {!imgLoaded && !imgError && (
                     <div className="!absolute !inset-0 !bg-[#3a3838] !animate-pulse" />
@@ -93,7 +93,7 @@ function productitems(props) {
                     </span>
                 )}
 
-                <div className="actions !absolute !top-[-300px] !right-[5px] !flex !items-center !gap-2 !flex-col !w-[50px] !transition-all !duration-400 group-hover:!top-[15px] !z-20">
+                <div className="actions !absolute !top-[-300px] !right-[5px] !flex !items-center !gap-2 !flex-col !w-[50px] !transition-all !duration-400 group-hover:!top-[15px] max-lg:!top-[15px] !z-20">
                     <Button
                         onClick={handleWishlistToggle}
                         aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
@@ -115,7 +115,7 @@ function productitems(props) {
                 {inStock && (
                     <button
                         onClick={(e) => stopAndRun(e, () => context?.addToCart?.(item))}
-                        className="!absolute !left-0 !right-0 !bottom-[-45px] group-hover:!bottom-0 !flex !items-center !justify-center !gap-2 !py-2.5 !bg-orange-600 !text-white !text-[13px] !font-semibold !tracking-wide !transition-all !duration-300 hover:!bg-orange-500 !z-20"
+                        className="!absolute !left-0 !right-0 !bottom-[-45px] group-hover:!bottom-0 max-lg:!bottom-0 !flex !items-center !justify-center !gap-2 !py-2 sm:!py-2.5 !bg-orange-600 !text-white !text-[12px] sm:!text-[13px] !font-semibold !tracking-wide !transition-all !duration-300 hover:!bg-orange-500 !z-20"
                     >
                         <MdOutlineShoppingCart className='!text-[16px]' />
                         ADD TO CART

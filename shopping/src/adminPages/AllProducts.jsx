@@ -58,12 +58,12 @@ function AllProducts() {
                 <Sidebar />
             </div>
 
-            <div className="flex-1 h-full bg-transparent">
+            <div className="flex-1 h-full bg-transparent min-w-0">
 
                 <div className="bg-transparent rounded-xl !p-6 border border-slate-700 !mx-4 md:mx-6 lg:mx-10 !my-6 hover:border-orange-500/50 transition-all duration-300">
-                    <div className="flex items-center justify-between !mb-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 !mb-6">
                         <div>
-                            <h1 className="text-3xl font-bold text-white !mb-2">
+                            <h1 className="text-2xl sm:text-3xl font-bold text-white !mb-2">
                                 All Products
                             </h1>
                             <p className="text-gray-400">
@@ -71,7 +71,7 @@ function AllProducts() {
                             </p>
                         </div>
                         <Link to='/addproducts'>
-                            <button className="!px-6 !py-3 !w-[300px] bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-400 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-orange-500/25 group flex items-center justify-center hover:cursor-pointer">
+                            <button className="!px-6 !py-3 w-full sm:!w-[300px] bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-400 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-orange-500/25 group flex items-center justify-center hover:cursor-pointer">
                                 <span className="!mr-2 text-xl group-hover:rotate-90 transition-transform duration-300">+</span>
                                 <div className="">Add Product</div>
 

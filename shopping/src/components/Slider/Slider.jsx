@@ -64,7 +64,7 @@ function Slider() {
                             <img
                                 src={slider.image}
                                 alt={`Slide ${index + 1}`}
-                                className="rounded-2xl object-cover !h-[400px] !w-full"
+                                className="rounded-2xl object-cover !h-[180px] sm:!h-[260px] md:!h-[320px] lg:!h-[400px] !w-full"
                             />
                         </SwiperSlide>
                     ))}

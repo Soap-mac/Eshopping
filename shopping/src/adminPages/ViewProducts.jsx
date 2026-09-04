@@ -40,7 +40,7 @@ function ViewProducts() {
                             <div className="flex flex-col lg:flex-row items-start gap-8 relative">
 
                                 <div className="w-full lg:w-[50%]">
-                                    <div className="bg-gradient-to-br from-orange-900/10 to-black border border-orange-900/30 rounded-xl !p-6 shadow-xl h-[600px] flex items-center justify-center">
+                                    <div className="bg-gradient-to-br from-orange-900/10 to-black border border-orange-900/30 rounded-xl !p-4 sm:!p-6 shadow-xl min-h-[380px] lg:min-h-[600px] flex items-center justify-center">
                                         <ProductZoom />
                                     </div>
                                 </div>

@@ -8,8 +8,31 @@
     margin-right: 150px !important;
 }
 
+/* The 150px side margins above only make sense on wide desktop viewports;
+   below that they were eating almost the entire screen width. Scale them
+   down progressively so the slider always has real room to breathe. */
+@media (max-width: 1279px) {
+    .productSlider {
+        margin-left: 60px !important;
+        margin-right: 60px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .productSlider {
+        padding: 10px;
+        margin-left: 16px !important;
+        margin-right: 16px !important;
+    }
+}
+
 .mySwiper3 {
     overflow: hidden !important;
+    /* Slides can end mid-card at the container edge; a hard clip there reads
+       as a stray line where the card's grey meets the black background.
+       Fading the last ~48px on each side blends it away instead. */
+    -webkit-mask-image: linear-gradient(to right, transparent 0, black 32px, black calc(100% - 32px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, black 32px, black calc(100% - 32px), transparent 100%);
 }
 
 .sliderCard {

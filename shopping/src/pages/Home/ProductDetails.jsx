@@ -137,10 +137,10 @@ function ProductDetails() {
 
     return product && (
         <>
-            <Top />
+            {/* <Top /> */}
             <Header />
             <Navbar />
-            <div className="breadcrum-container !text-amber-50 !pt-[10px] !pb-[10px] !px-[90px] bg-[#1e1e1e]">
+            <div className="breadcrum-container !text-amber-50 !pt-[10px] !pb-[10px] !px-4 sm:!px-8 lg:!px-[90px] bg-[#1e1e1e]">
                 <div role="presentation" >
                     <Breadcrumbs aria-label="breadcrumb" className='!text-amber-50'>
                         <Link underline="hover" color="inherit" href="/" className='link transition'>
@@ -156,15 +156,15 @@ function ProductDetails() {
                     </Breadcrumbs>
                 </div>
             </div>
-            <div className="information bg-black flex">
-                <div className="productMagnify w-[40%] h-[85vh]">
+            <div className="information bg-black flex flex-col lg:flex-row !px-4 sm:!px-8 lg:!px-0 !py-4 lg:!py-0 gap-6 lg:gap-0">
+                <div className="productMagnify w-full lg:w-[40%] h-[55vh] sm:h-[65vh] lg:h-[85vh]">
                     <ProductZoom productImg={product.images} />
                 </div>
                 <ProductDetailComp width={55} product={product} revs={reviews.length} />
             </div>
 
             <div className="bg-black">
-                <div className="flex bg-black text-amber-50 gap-[60px] !pl-[100px] text-[18px]">
+                <div className="flex bg-black text-amber-50 gap-4 sm:gap-[60px] !px-4 sm:!pl-[100px] sm:!pr-4 text-[14px] sm:text-[18px] overflow-x-auto whitespace-nowrap">
                     <span className={`hover:text-amber-600 cursor-pointer ${tabs === 0 && 'text-amber-700'}`} onClick={() => setTabs(0)}>Description</span>
                     <span className={`hover:text-amber-600 cursor-pointer ${tabs === 1 && 'text-amber-700'}`} onClick={() => setTabs(1)}>Additional Info</span>
                     <span className={`hover:text-amber-600 cursor-pointer ${tabs === 2 && 'text-amber-700'}`} onClick={() => setTabs(2)}>Review</span>
@@ -172,7 +172,7 @@ function ProductDetails() {
                 <div className="bg-black !shadow-md w-full text-[#c5c1c1]">
                     {
                         tabs === 0 &&
-                        <div className="border-amber-50 border-2 !ml-[100px] w-[1300px] shadow-md !pt-3 bg-black !mt-7 rounded-[20px] !px-[50px]">
+                        <div className="border-amber-50 border-2 !mx-4 sm:!ml-[100px] sm:!mr-4 lg:!mr-[100px] w-auto lg:max-w-[1300px] shadow-md !pt-3 bg-black !mt-7 rounded-[20px] !px-4 sm:!px-[50px]">
                             <p className='!mt-[10px]'>{product?.description}</p>
 
                             <h4 className='!mt-[20px] text-[18px]'>Light Weight Design</h4>
@@ -192,16 +192,16 @@ function ProductDetails() {
 
                     {
                         (tabs === 2) &&
-                        <div className="border-amber-50 border-2 !ml-[100px] w-[1300px] shadow-md !pt-3 bg-black !mt-7 rounded-[20px] !px-[50px]">
+                        <div className="border-amber-50 border-2 !mx-4 sm:!ml-[100px] sm:!mr-4 lg:!mr-[100px] w-auto lg:max-w-[1300px] shadow-md !pt-3 bg-black !mt-7 rounded-[20px] !px-4 sm:!px-[50px]">
                             <div className="!mt-[20px] text-[18px]">Customer Reviews</div>
-                            <div className="scroll w-full overflow-y-scroll overflow-x-hidden !mt-[20px] !max-h-[300px] !pr-[200px]">
+                            <div className="scroll w-full overflow-y-scroll overflow-x-hidden !mt-[20px] !max-h-[300px] !pr-2 sm:!pr-[50px] lg:!pr-[200px]">
                                 {reviews.length > 0 && reviews.map((rev) => (
-                                    <div className="w-[1100px] flex items-center justify-between !pt-[10px] border-b-2 border-b-[#5f5c5c] !pb-[20px]">
-                                        <div className="w-full flex items-center gap-6">
-                                            <div className="w-[70px] h-[70px] overflow-hidden rounded-full">
+                                    <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between !pt-[10px] border-b-2 border-b-[#5f5c5c] !pb-[20px] gap-3">
+                                        <div className="w-full flex items-center gap-4 sm:gap-6">
+                                            <div className="w-[56px] h-[56px] sm:w-[70px] sm:h-[70px] flex-shrink-0 overflow-hidden rounded-full">
                                                 <img src={rev?.userId.avatar} alt="" className='w-full' />
                                             </div>
-                                            <div className="w-[80%] flex justify-between items-center gap-[50px]">
+                                            <div className="w-full flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2 sm:gap-[50px]">
                                                 <div className="">
                                                     <p className='text-[15px]'>{rev?.userId?.userName}</p>
                                                     <p className='text-[15px]'>
@@ -215,7 +215,7 @@ function ProductDetails() {
                                                         })}
                                                     </p>
 
-                                                    <p className='text-[15px] !mt-[10px]'>{rev?.comment}</p>
+                                                    <p className='text-[15px] !mt-[10px] break-words'>{rev?.comment}</p>
                                                 </div>
                                                 <div className="">
                                                     <Rating name='size-small' defaultValue={rev?.rating} size='medium' readOnly className='text-white !pt-3' />
@@ -243,7 +243,7 @@ function ProductDetails() {
                                         rows={4}
                                         onChange={(event) => setReview(event.target.value)}
                                         value={review}
-                                        className='!bg-[#363535] !w-[80%] !mt-[30px] !rounded-[30px] focus:!text-amber-50'
+                                        className='!bg-[#363535] !w-full sm:!w-[80%] !mt-[30px] !rounded-[30px] focus:!text-amber-50'
                                         sx={{
                                             backgroundColor: '#363535',
                                             borderRadius: '30px',
@@ -291,8 +291,8 @@ function ProductDetails() {
 
             </div>
 
-            <div className="w-[100%] h-[470px] bg-black">
-                <p className='text-amber-50 !ml-[100px] text-[22px] !pt-[20px]'>Product You Might Like</p>
+            <div className="w-[100%] min-h-[320px] sm:min-h-[400px] lg:h-[470px] bg-black !pb-6">
+                <p className='text-amber-50 !px-4 sm:!ml-[100px] sm:!px-0 text-[18px] sm:text-[22px] !pt-[20px]'>Product You Might Like</p>
                 <ProductSlider items={6} allProducts={relatedProducts} />
             </div>
 

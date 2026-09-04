@@ -123,7 +123,7 @@ function signup() {
 
                                     />
                                 </div>
-                                <div className="grid grid-cols-2 items-center gap-[30px]">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 items-start gap-5 sm:gap-[30px]">
                                     <div className="passwords">
                                         <label htmlFor="password" className="form-label">Password</label>
                                         <input
@@ -136,11 +136,11 @@ function signup() {
 
                                         />
                                         {
-                                            !showPassword && <FaEye className='text-[#fe6404] text-[25px] absolute top-[360px] right-[300px] cursor-pointer drop-shadow-[0_0_9px_#fe6404]' onClick={() => setShowPassword(!showPassword)} />
+                                            !showPassword && <FaEye className='text-[#fe6404] text-[22px] absolute top-[42px] right-[14px] cursor-pointer drop-shadow-[0_0_9px_#fe6404]' onClick={() => setShowPassword(!showPassword)} />
 
                                         }
                                         {
-                                            showPassword && <FaEyeSlash className='text-[#fe6404] text-[25px] absolute top-[360px] right-[300px] cursor-pointer drop-shadow-[0_0_9px_#fe6404]' onClick={() => setShowPassword(!showPassword)} />
+                                            showPassword && <FaEyeSlash className='text-[#fe6404] text-[22px] absolute top-[42px] right-[14px] cursor-pointer drop-shadow-[0_0_9px_#fe6404]' onClick={() => setShowPassword(!showPassword)} />
 
                                         }
                                     </div>
@@ -156,11 +156,11 @@ function signup() {
 
                                         />
                                         {
-                                            !showCnfPassword && <FaEye className='text-[#fe6404] text-[25px] absolute top-[360px] right-[20px] cursor-pointer drop-shadow-[0_0_9px_#fe6404]' onClick={() => setCnfShowPassword(!showCnfPassword)} />
+                                            !showCnfPassword && <FaEye className='text-[#fe6404] text-[22px] absolute top-[42px] right-[14px] cursor-pointer drop-shadow-[0_0_9px_#fe6404]' onClick={() => setCnfShowPassword(!showCnfPassword)} />
 
                                         }
                                         {
-                                            showCnfPassword && <FaEyeSlash className='text-[#fe6404] text-[25px] absolute top-[360px] right-[20px] cursor-pointer drop-shadow-[0_0_9px_#fe6404]' onClick={() => setCnfShowPassword(!showCnfPassword)} />
+                                            showCnfPassword && <FaEyeSlash className='text-[#fe6404] text-[22px] absolute top-[42px] right-[14px] cursor-pointer drop-shadow-[0_0_9px_#fe6404]' onClick={() => setCnfShowPassword(!showCnfPassword)} />
 
                                         }
                                     </div>

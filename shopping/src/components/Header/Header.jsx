@@ -54,8 +54,10 @@ const WishlistBadge = styled(StyledBadge)(() => ({
 }));
 
 // Shared visual treatment for the round action buttons (profile / wishlist / cart)
+// Sizes down on small/medium screens so three of these plus the login link
+// never overflow a narrow header row; back to the original 56px at desktop.
 const actionBtnClass =
-    '!w-[56px] !min-w-[0px] !h-[56px] !text-orange-400 !rounded-full !text-[18px] flex justify-center items-center !pr-1 ' +
+    '!w-[42px] lg:!w-[56px] !min-w-[0px] !h-[42px] lg:!h-[56px] !text-orange-400 !rounded-full !text-[18px] flex justify-center items-center !pr-1 ' +
     '!border-2 !border-[#5b5656] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] ' +
     'hover:!-translate-y-[2px] !transition-all !duration-300 focus-visible:!outline focus-visible:!outline-2 focus-visible:!outline-[#f59e0b] focus-visible:!outline-offset-2';
 
@@ -164,18 +166,22 @@ function Header() {
     return (
         <>
             <div className="header">
-                <div className="headerContainer flex items-center justify-between border-b-1 border-gray-700">
-                    <div className="col1 w-[25%]">
-                        <img className='headerImg' src={logo} alt="logo" />
-                    </div>
-                    <div className="col2 w-[45%]">
-                        <Search />
-                    </div>
-                    <div className="col3 w-[30%]">
-                        <ul className='flex items-center gap-3'>
+                <div className="headerContainer !flex !flex-col lg:!flex-row lg:!items-center lg:!justify-between border-b-1 border-gray-700">
+                    {/* On mobile this row groups logo + actions together (logo left, actions
+                        right) as the header's first line, with search as its own full-width
+                        line below. At lg+, `contents` removes this wrapper from the layout
+                        so col1/col3 become direct flex children again — laid out via their
+                        own explicit lg:order values alongside col2, reproducing the original
+                        logo / search / actions column order exactly. */}
+                    <div className="flex items-center justify-between w-full min-w-0 lg:contents">
+                        <div className="col1 lg:order-1 lg:w-[25%] flex-shrink-0">
+                            <img className='headerImg' src={logo} alt="logo" />
+                        </div>
+                        <div className="col3 lg:order-3 lg:w-[30%] min-w-0 flex-shrink-0">
+                            <ul className='flex items-center gap-2 sm:gap-3'>
                             {
                                 context?.isLogin === false ?
-                                    <li className='list-none'>
+                                    <li className='list-none text-sm sm:text-base whitespace-nowrap'>
                                         <Link to="/login" className='link'>Login</Link> / <Link to="/signup" className='link'>Signup</Link>
                                     </li> :
                                     <div>
@@ -186,7 +192,7 @@ function Header() {
                                                 aria-haspopup="true"
                                                 aria-expanded={open ? 'true' : undefined}
                                                 onClick={handleClick}
-                                                className={`${actionBtnClass} !ml-[50px]`}
+                                                className={`${actionBtnClass} lg:!ml-[50px]`}
                                             >
                                                 <FaUser className='text-[20px]' />
                                             </Button>
@@ -270,6 +276,10 @@ function Header() {
                                 </Tooltip>
                             </li>
                         </ul>
+                        </div>
+                    </div>
+                    <div className="col2 lg:order-2 w-full lg:w-[45%] !mt-2 lg:!mt-0">
+                        <Search />
                     </div>
                 </div>
             </div>

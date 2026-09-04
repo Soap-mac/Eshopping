@@ -18,7 +18,7 @@ import { FreeMode, Navigation } from 'swiper/modules';
 
 function DashboardSlider(props) {
     return (
-        <div className="w-[1158px] max-w-[1260px] !mx-auto !px-4 md:px-6 lg:px-10 !my-6">
+        <div className="w-full max-w-[1260px] !mx-auto !px-4 md:px-6 lg:px-10 !my-6">
             <div className="!mb-6">
                 <h2 className="text-2xl font-bold text-white !mb-2">Dashboard Overview</h2>
                 <p className="text-gray-400">Track your business performance metrics</p>

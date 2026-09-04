@@ -430,7 +430,7 @@ function Checkout() {
 
     return (
         <>
-            <Top />
+            {/* <Top /> */}
             <Header />
             <Navbar />
 

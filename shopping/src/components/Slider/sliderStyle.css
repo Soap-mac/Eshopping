@@ -41,3 +41,31 @@ body {
 .swiper-button-prev {
     left: 50px;
 }
+
+/* The -110px/50px offsets above only clear the slide edge on very wide
+   desktop viewports where the 90%-wide container leaves that much margin.
+   On tablet/mobile there isn't room, so the arrows would land off-screen —
+   pull them back onto the visible slide instead. */
+@media (max-width: 1279px) {
+    .swiper-button-next {
+        right: 8px;
+    }
+
+    .swiper-button-prev {
+        left: 8px;
+    }
+}
+
+@media (max-width: 639px) {
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 34px;
+        height: 34px;
+    }
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        font-size: 16px !important;
+    }
+}

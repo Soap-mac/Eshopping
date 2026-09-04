@@ -5,9 +5,9 @@ import Button from '@mui/material/Button';
 
 function WishList({ product }) {
     return (
-        <div className="cart-product-card backdrop-blur-sm border flex items-center border-gray-700/50 !p-6 rounded-xl hover:bg-gray-800/80 transition-all duration-300 hover:border-amber-500/30 hover:shadow-xl hover:shadow-amber-500/10">
-            <div className="flex items-start gap-6 justify-center">
-                <div className="!w-24 !h-24 rounded-lg overflow-hidden flex-shrink-0 border border-gray-600/50">
+        <div className="cart-product-card relative backdrop-blur-sm border flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 border-gray-700/50 !p-4 sm:!p-6 rounded-xl hover:bg-gray-800/80 transition-all duration-300 hover:border-amber-500/30 hover:shadow-xl hover:shadow-amber-500/10">
+            <div className="flex items-start gap-4 sm:gap-6 justify-center w-full sm:w-auto !pr-10 sm:!pr-0">
+                <div className="!w-20 !h-20 sm:!w-24 sm:!h-24 rounded-lg overflow-hidden flex-shrink-0 border border-gray-600/50">
                     <Link>
                         <img
                             src={product.images?.[0]}
@@ -17,10 +17,10 @@ function WishList({ product }) {
                     </Link>
                 </div>
 
-                <div className="flex-1 !space-y-4">
+                <div className="flex-1 !space-y-3 sm:!space-y-4 min-w-0">
                     <div className="relative">
                         <Link>
-                            <h3 className="text-lg font-semibold text-amber-50 leading-tight hover:text-amber-400 transition-colors">
+                            <h3 className="text-base sm:text-lg font-semibold text-amber-50 leading-tight hover:text-amber-400 transition-colors">
                                 {product.name}
                             </h3>
                         </Link>
@@ -31,7 +31,7 @@ function WishList({ product }) {
 
                     </div>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 flex-wrap">
 
                         <span className="text-gray-500 line-through text-sm">${product.oldPrice}</span>
                         <span className="text-amber-400 font-bold text-xl">${product.price}</span>
@@ -41,9 +41,9 @@ function WishList({ product }) {
                     </div>
                 </div>
             </div>
-            <Button className='!border !border-amber-50 !w-[200px] !bg-amber-600 !ml-[80px] !text-[15px] !min-w-[0px] !h-[50px]  !text-amber-50'>Add To Cart</Button>
-            <button className="absolute !w-[40px] !h-[40px] top-2 right-2 !pl-[7px] !text-gray-400 hover:!text-red-400 hover:bg-red-500/10 rounded-full transition-all duration-200 !flex !justify-between !items-center">
-                <IoMdClose className="!w-6 !h-6" />
+            <Button className='!border !border-amber-50 !w-full sm:!w-[160px] !bg-amber-600 sm:!ml-auto !text-[15px] !min-w-[0px] !h-[46px] sm:!h-[50px]  !text-amber-50'>Add To Cart</Button>
+            <button className="absolute !w-[36px] !h-[36px] sm:!w-[40px] sm:!h-[40px] top-2 right-2 !pl-[7px] !text-gray-400 hover:!text-red-400 hover:bg-red-500/10 rounded-full transition-all duration-200 !flex !justify-center !items-center">
+                <IoMdClose className="!w-5 !h-5 sm:!w-6 sm:!h-6" />
             </button>
         </div>
     )

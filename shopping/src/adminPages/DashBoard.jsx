@@ -42,7 +42,7 @@ function DashBoard() {
                     <Sidebar />
                 </div>
 
-                <div className="h-full">
+                <div className="h-full w-full lg:w-auto min-w-0">
                     <Header />
 
                     <div className="bg-transparent rounded-xl !p-8 border border-slate-700 !mx-4 md:mx-6 lg:mx-10 !my-6 hover:border-orange-500/50 transition-all duration-300">
@@ -59,7 +59,7 @@ function DashBoard() {
                                     </p>
                                 </div>
 
-                                <button className="!w-[300px] !px-6 !py-3 bg-orange-500 text-white font-semibold rounded-[20px] hover:bg-orange-400 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-orange-500/25 group">
+                                <button className="w-full sm:!w-[300px] !px-6 !py-3 bg-orange-500 text-white font-semibold rounded-[20px] hover:bg-orange-400 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-orange-500/25 group">
                                     <span className="!mr-2 text-xl group-hover:rotate-90 transition-transform duration-300">+</span>
                                     Add New Product
                                 </button>

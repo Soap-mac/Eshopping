@@ -124,19 +124,19 @@ function Profile() {
         <>
             {isLogin &&
                 <>
-                    <div className="text-amber-50 flex !bg-transparent min-h-screen !p-8 !px-[100px] !pt-[60px]">
+                    <div className="text-amber-50 flex flex-col lg:flex-row !bg-transparent min-h-screen !p-4 sm:!p-8 lg:!px-[100px] !pt-8 sm:!pt-[60px] gap-6 lg:gap-0">
                         <ProfileSide />
-                        <div className="profile-right w-[65%] !ml-8">
-                            <div className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 rounded-2xl !p-8 shadow-2xl">
-                                <div className="profile-right-heading !mb-8">
-                                    <h2 className="text-[40px] font-bold text-amber-50 capitalize">
+                        <div className="profile-right w-full lg:w-[65%] lg:!ml-8">
+                            <div className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 rounded-2xl !p-5 sm:!p-8 shadow-2xl">
+                                <div className="profile-right-heading !mb-6 sm:!mb-8">
+                                    <h2 className="text-[26px] sm:text-[32px] lg:text-[40px] font-bold text-amber-50 capitalize">
                                         Your Profile
                                     </h2>
-                                    <p className="text-gray-400 text-[18px] !mt-2">Manage your personal information</p>
+                                    <p className="text-gray-400 text-[15px] sm:text-[18px] !mt-2">Manage your personal information</p>
                                 </div>
-                                <div className="flex gap-6 !mb-6">
+                                <div className="flex flex-col sm:flex-row gap-6 !mb-6">
                                     <div className="profile-right-name flex-1">
-                                        <label htmlFor="Name" className="block text-[20px] font-medium text-gray-300 !mb-3">Name</label>
+                                        <label htmlFor="Name" className="block text-[16px] sm:text-[20px] font-medium text-gray-300 !mb-3">Name</label>
                                         <TextField
                                             id="outlined-basic"
                                             label="Enter your name"
@@ -149,7 +149,7 @@ function Profile() {
                                         />
                                     </div>
                                     <div className="profile-right-email flex-1">
-                                        <label htmlFor="Name" className="block text-[20px] font-medium text-gray-300 !mb-3">Email</label>
+                                        <label htmlFor="Name" className="block text-[16px] sm:text-[20px] font-medium text-gray-300 !mb-3">Email</label>
                                         <TextField
                                             id="outlined-basic"
                                             label="Enter your email"
@@ -163,7 +163,7 @@ function Profile() {
                                     </div>
                                 </div>
                                 <div className="!mb-8">
-                                    <label htmlFor="Name" className="block text-[20px] font-medium text-gray-300 !mb-3">Phone Number</label>
+                                    <label htmlFor="Name" className="block text-[16px] sm:text-[20px] font-medium text-gray-300 !mb-3">Phone Number</label>
                                     <TextField
                                         id="outlined-basic"
                                         label="Enter your phone number"
@@ -175,11 +175,11 @@ function Profile() {
                                         onChange={(e) => setPhone(e.target.value)}
                                     />
                                 </div>
-                                <div className="flex gap-4">
-                                    <Button onClick={saveDetails} className="!flex-1 !bg-gradient-to-r !from-amber-600 !to-amber-500 hover:!from-amber-700 hover:!to-amber-600 !text-white !py-4 !rounded-xl !font-bold !text-lg !transition-all !duration-300 !shadow-lg hover:!shadow-2xl !border-0 !transform hover:!scale-105 !normal-case">
+                                <div className="flex flex-col sm:flex-row gap-4">
+                                    <Button onClick={saveDetails} className="!flex-1 !bg-gradient-to-r !from-amber-600 !to-amber-500 hover:!from-amber-700 hover:!to-amber-600 !text-white !py-3.5 sm:!py-4 !rounded-xl !font-bold !text-base sm:!text-lg !transition-all !duration-300 !shadow-lg hover:!shadow-2xl !border-0 !transform hover:!scale-105 !normal-case">
                                         Save Changes
                                     </Button>
-                                    <Button className="!flex-1 !bg-gray-700 hover:!bg-gray-600 !text-gray-300 hover:!text-white !py-4 !rounded-xl !font-bold !text-lg !transition-all !duration-300 !shadow-lg hover:!shadow-2xl !border-0 !normal-case">
+                                    <Button className="!flex-1 !bg-gray-700 hover:!bg-gray-600 !text-gray-300 hover:!text-white !py-3.5 sm:!py-4 !rounded-xl !font-bold !text-base sm:!text-lg !transition-all !duration-300 !shadow-lg hover:!shadow-2xl !border-0 !normal-case">
                                         Cancel
                                     </Button>
                                 </div>

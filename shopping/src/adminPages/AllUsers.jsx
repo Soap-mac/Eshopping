@@ -39,7 +39,7 @@ function AllUsers() {
                 <Sidebar />
             </div>
 
-            <div className="flex-1 h-full bg-transparent">
+            <div className="flex-1 h-full bg-transparent min-w-0">
 
                 <div className="!mx-4 md:mx-6 lg:mx-10">
                     <UserTable data={AllUsers} />

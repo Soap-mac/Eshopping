@@ -19,7 +19,7 @@ function AddSlider(props) {
     const { sliders, setSliders } = context;
 
     return (
-        <div className="categorySlider !px-20 !md:px-12 !lg:px-20">
+        <div className="categorySlider !px-4 sm:!px-8 md:!px-12 lg:!px-20">
             <Swiper
                 slidesPerView="auto"
                 spaceBetween={20}

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/free-mode';
@@ -7,14 +7,16 @@ import { FreeMode, Navigation } from 'swiper/modules';
 import Productitems from '../productItems/productitems';
 import "./productSlider.css"
 function ProductSlider(props) {
-    console.log(props.allProducts);
-    console.log(props.category);
     const products = props.allProducts || [];
     return (
-        <div className="productSlider h-[50px] bg-black">
+        <div className="productSlider bg-black">
             <Swiper
-                slidesPerView={props.items}
-                spaceBetween={60}
+                slidesPerView="auto"
+                spaceBetween={16}
+                breakpoints={{
+                    768: { spaceBetween: 30 },
+                    1280: { spaceBetween: 60 },
+                }}
                 freeMode={true}
                 navigation={true}
                 modules={[Navigation]}
