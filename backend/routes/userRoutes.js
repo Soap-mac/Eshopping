@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: multer.diskStorage({}), limits: { fileSize: 50 * 1024 * 1024 } });
 
-router.post('/upload-avatar', upload.single('file'), async (req, res) => {
+router.post('/upload-avatar', authentication, upload.single('file'), async (req, res) => {
     try {
         const file = req.file;
         if (!file) {
@@ -27,14 +27,8 @@ router.post('/upload-avatar', upload.single('file'), async (req, res) => {
                 message: "No file uploaded"
             });
         }
-        const email = req.cookies.email;
-        if (!email) {
-            return res.json({
-                success: false,
-                message: "User not logged in"
-            });
-        }
-        const userExists = await user.findOne({ email });
+
+        const userExists = await user.findById({ email });
         if (!userExists) {
             return res.json({
                 success: false,
@@ -68,16 +62,10 @@ router.post('/upload-avatar', upload.single('file'), async (req, res) => {
     }
 });
 
-router.post('/remove-avatar', async (req, res) => {
+router.post('/remove-avatar', authentication, async (req, res) => {
     try {
-        const email = req.cookies.email;
-        if (!email) {
-            return res.json({
-                success: false,
-                message: "User not logged in"
-            });
-        }
-        const userExists = await user.findOne({ email });
+
+        const userExists = await user.findById({ email });
         if (!userExists) {
             return res.json({
                 success: false,
@@ -111,16 +99,10 @@ router.post('/remove-avatar', async (req, res) => {
     }
 });
 
-router.get('/profileDetails', async (req, res) => {
+router.get('/profileDetails', authentication, async (req, res) => {
     try {
-        const email = req.cookies.email;
-        if (!email) {
-            return res.json({
-                success: false,
-                message: "User not logged in"
-            });
-        }
-        const userExists = await user.findOne({ email });
+
+        const userExists = await user.findById({ email });
         if (!userExists) {
             return res.json({
                 success: false,
@@ -145,40 +127,42 @@ router.get('/profileDetails', async (req, res) => {
     }
 });
 
-router.post('/update-profile', async (req, res) => {
-    const { name, email, mobile } = req.body;
-    const userEmail = req.cookies.email;
-    if (!userEmail) {
-        return res.json({
-            success: false,
-            message: "User not logged in"
-        });
-    }
-    const userExists = await user.findOne({ email: userEmail });
-    if (!userExists) {
-        return res.json({
-            success: false,
-            message: "User not found"
-        });
-    }
-    userExists.userName = name || userExists.userName;
-    userExists.email = email || userExists.email;
-    userExists.mobile = mobile || userExists.mobile;
-    await userExists.save();
+router.post('/update-profile', authentication, async (req, res) => {
+    try {
+        const { name, email, mobile } = req.body;
 
-    return res.json({
-        success: true,
-        message: "Profile updated successfully",
-        user: {
-            name: userExists.userName,
-            email: userExists.email,
-            mobile: userExists.mobile,
-            avatar: userExists.avatar
+        const userExists = await user.findById({ email });
+        if (!userExists) {
+            return res.json({
+                success: false,
+                message: "User not found"
+            });
         }
-    });
+        userExists.userName = name || userExists.userName;
+        userExists.email = email || userExists.email;
+        userExists.mobile = mobile || userExists.mobile;
+        await userExists.save();
+
+        return res.json({
+            success: true,
+            message: "Profile updated successfully",
+            user: {
+                name: userExists.userName,
+                email: userExists.email,
+                mobile: userExists.mobile,
+                avatar: userExists.avatar
+            }
+        });
+    } catch (error) {
+        console.log('Internal Server Error' + error);
+        return res.json({
+            success: false,
+            message: "Failed to fetch profile details"
+        });
+    }
 });
 
-router.get('/allusers', async (req, res) => {
+router.get('/allusers', authentication, async (req, res) => {
     try {
         const allUsers = await user.find();
         if (allUsers.length === 0) {

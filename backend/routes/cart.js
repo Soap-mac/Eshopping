@@ -3,8 +3,9 @@ const router = express.Router();
 const CartProduct = require('../models/cartProduct');
 const Product = require('../models/products');
 const user = require('../models/user');
+const authentication = require('../middlewares/authVerify');
 
-// Helper function to compare variant options
+
 const variantsMatch = (options1, options2) => {
     const map1 = new Map(Object.entries(options1 || {}));
     const map2 = new Map(Object.entries(options2 || {}));
@@ -17,7 +18,6 @@ const variantsMatch = (options1, options2) => {
     return true;
 };
 
-// Helper function to find matching variant in product
 const findMatchingVariant = (product, selectedOptions) => {
     return product.variants.find(variant => {
         const variantOptions = Object.fromEntries(variant.options);
@@ -25,20 +25,13 @@ const findMatchingVariant = (product, selectedOptions) => {
     });
 };
 
-// ============================================
-// ADD TO CART
-// ============================================
-router.post('/addToCart', async (req, res) => {
+router.post('/addToCart', authentication, async (req, res) => {
     try {
-        const email = req.cookies.email;
         const { productId, quantity, variantSku, selectedOptions } = req.body;
 
         const qty = Number(quantity);
 
-        // Validation
-        if (!email) {
-            return res.status(400).json({ message: 'You are not logged in, please login to add products to cart' });
-        }
+
         if (!productId || !qty) {
             return res.status(400).json({ message: 'Product ID and quantity are required' });
         }
@@ -46,19 +39,16 @@ router.post('/addToCart', async (req, res) => {
             return res.status(400).json({ message: 'Either variant SKU or selected options are required' });
         }
 
-        // Find user
-        const userData = await user.findOne({ email });
+        const userData = await user.findById({ email });
         if (!userData) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        // Find product
         const product = await Product.findById(productId);
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });
         }
 
-        // Find the specific variant
         let selectedVariant;
         if (variantSku) {
             selectedVariant = product.variants.find(v => v.sku === variantSku);
@@ -70,7 +60,6 @@ router.post('/addToCart', async (req, res) => {
             return res.status(404).json({ message: 'Selected variant not found' });
         }
 
-        // Check stock availability
         if (selectedVariant.stock < qty) {
             return res.status(400).json({
                 message: `Insufficient stock. Only ${selectedVariant.stock} units available`,
@@ -78,12 +67,10 @@ router.post('/addToCart', async (req, res) => {
             });
         }
 
-        // Calculate prices
         const variantPrice = selectedVariant.price || product.price;
         const discount = product.discount || 0;
         const finalPrice = variantPrice - (variantPrice * discount / 100);
 
-        // Check if variant already exists in cart
         const existingCart = await CartProduct.findOne({
             userId: userData._id,
             productId: product._id,
@@ -93,7 +80,6 @@ router.post('/addToCart', async (req, res) => {
         if (existingCart) {
             const newQuantity = existingCart.quantity + qty;
 
-            // Check if new quantity exceeds stock
             if (newQuantity > selectedVariant.stock) {
                 return res.status(400).json({
                     message: `Cannot add more. Maximum available: ${selectedVariant.stock}`,
@@ -111,7 +97,6 @@ router.post('/addToCart', async (req, res) => {
             });
         }
 
-        // Create new cart item
         const variantOptions = Object.fromEntries(selectedVariant.options);
 
         const newCart = new CartProduct({
@@ -140,20 +125,12 @@ router.post('/addToCart', async (req, res) => {
     }
 });
 
-// ============================================
-// CHANGE QUANTITY
-// ============================================
-router.post('/changeQuantity', async (req, res) => {
+router.post('/changeQuantity', authentication, async (req, res) => {
     try {
         const { qty, productId, variantSku, cartItemId } = req.body;
-        const email = req.cookies.email;
         const newQty = Number(qty);
 
-        if (!email) {
-            return res.status(400).json({
-                message: 'You are not logged in, please login to change cart items'
-            });
-        }
+
 
         if (!Number.isInteger(newQty) || newQty < 0) {
             return res.status(400).json({
@@ -167,7 +144,7 @@ router.post('/changeQuantity', async (req, res) => {
             });
         }
 
-        const userData = await user.findOne({ email });
+        const userData = await user.findById({ email });
 
         if (!userData) {
             return res.status(404).json({
@@ -254,15 +231,11 @@ router.post('/changeQuantity', async (req, res) => {
     }
 });
 
-router.get('/getCart', async (req, res) => {
+router.get('/getCart', authentication, async (req, res) => {
     try {
-        const email = req.cookies.email;
 
-        if (!email) {
-            return res.status(400).json({ message: 'You are not logged in' });
-        }
 
-        const userData = await user.findOne({ email });
+        const userData = await user.findById({ email });
         if (!userData) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -311,16 +284,12 @@ router.get('/getCart', async (req, res) => {
     }
 });
 
-router.post('/removeFromcart', async (req, res) => {
+router.post('/removeFromcart', authentication, async (req, res) => {
     try {
         const { cartItemId, productId, variantSku } = req.body;
-        const email = req.cookies.email;
 
-        if (!email) {
-            return res.status(400).json({ message: 'You are not logged in, please login to delete cart items' });
-        }
 
-        const userData = await user.findOne({ email });
+        const userData = await user.findById({ email });
         if (!userData) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -357,15 +326,11 @@ router.post('/removeFromcart', async (req, res) => {
 });
 
 
-router.get('/validateCart', async (req, res) => {
+router.get('/validateCart', authentication, async (req, res) => {
     try {
-        const email = req.cookies.email;
 
-        if (!email) {
-            return res.status(400).json({ message: 'You are not logged in' });
-        }
 
-        const userData = await user.findOne({ email });
+        const userData = await user.findById({ email });
         if (!userData) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -413,15 +378,11 @@ router.get('/validateCart', async (req, res) => {
 });
 
 
-router.delete('/clearCart', async (req, res) => {
+router.delete('/clearCart', authentication, async (req, res) => {
     try {
-        const email = req.cookies.email;
 
-        if (!email) {
-            return res.status(400).json({ message: 'You are not logged in' });
-        }
 
-        const userData = await user.findOne({ email });
+        const userData = await user.findById({ email });
         if (!userData) {
             return res.status(404).json({ message: 'User not found' });
         }

@@ -125,7 +125,9 @@ function Profile() {
             {isLogin &&
                 <>
                     <div className="text-amber-50 flex flex-col lg:flex-row !bg-transparent min-h-screen !p-4 sm:!p-8 lg:!px-[100px] !pt-8 sm:!pt-[60px] gap-6 lg:gap-0">
-                        <ProfileSide />
+                        <div className="w-full lg:w-[35%] lg:sticky lg:top-8 lg:self-start lg:h-fit">
+                            <ProfileSide />
+                        </div>
                         <div className="profile-right w-full lg:w-[65%] lg:!ml-8">
                             <div className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 rounded-2xl !p-5 sm:!p-8 shadow-2xl">
                                 <div className="profile-right-heading !mb-6 sm:!mb-8">

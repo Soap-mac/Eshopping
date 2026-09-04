@@ -7,36 +7,53 @@ const user = require('../models/user');
 const upload = multer();
 
 router.post('/addAddress', upload.none(), async (req, res) => {
-    const address = req.body;
-    console.log(address);
-    console.log(address.street);
-    const email = req.cookies.email;
-    const person = await user.findOne({ email: email });
-    console.log(person);
+    try {
+        const address = req.body;
+        const email = req.cookies.email;
 
-    const exist = Address.find({ address_line: address.street, pincode: address.pin, country: address.country });
+        if (!email) {
+            return res.status(401).json({ message: "You are not logged in" });
+        }
 
-    if (exist) {
-        res.status(409).json({ message: "Address already exists" })
+        const person = await user.findOne({ email: email });
+        if (!person) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        const exists = await Address.findOne({
+            address_line: address.street,
+            pincode: address.pin,
+            userId: person._id
+        });
+
+        if (exists) {
+            return res.status(409).json({ message: "Address already exists" });
+        }
+
+        const newAddress = new Address({
+            address_line: address.street,
+            state: address.state,
+            city: address.city,
+            pincode: address.pin,
+            country: "India",
+            mobile: Number(address.phone),
+            status: true,
+            userId: person._id,
+        });
+
+        await newAddress.save();
+
+        person.address_details.push(newAddress._id);
+        await person.save();
+
+        return res.status(200).json({ success: true, message: "Address added" });
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Server error", error: error.message });
     }
-    const newAddress = new Address({
-        address_line: address.street,
-        state: address.state,
-        city: address.city,
-        pincode: address.pin,
-        country: "India",
-        mobile: Number(address.phone),
-        status: true,
-        userId: person._id,
-    });
-
-    person.address_details.push(newAddress);
-    await person.save();
-
-    await newAddress.save();
-
-    res.status(200).status({ message: "Address added" });
 })
+
 
 router.get('/getAddresses', async (req, res) => {
     try {

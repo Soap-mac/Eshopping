@@ -19,11 +19,8 @@ function Wishlist() {
 
 
     useEffect(() => {
-
         const fetchWishlist = async () => {
-
             try {
-
                 const response = await fetch(
                     `${import.meta.env.VITE_API_URL}/getwishlist`,
                     {
@@ -32,30 +29,22 @@ function Wishlist() {
                     }
                 );
 
-
                 const data = await response.json();
 
-                console.log(data);
-
+                console.log("Wishlist response:", data);
 
                 if (data.success) {
-                    setWishlist(data.allProducts);
+                    setWishlist(data.wishlist || []);
+                } else {
+                    setWishlist([]);
                 }
 
-
+            } catch (error) {
+                console.log("Wishlist error:", error);
+                setWishlist([]);
             }
-            catch (error) {
-
-                console.log(error);
-
-            }
-
-        }
-
-
+        };
         fetchWishlist();
-
-
     }, []);
 
 
@@ -70,7 +59,7 @@ function Wishlist() {
                             <div className="!mb-5 !pb-3 border-b-[2px] border-[#8b7a7a]">
                                 <h2 className="text-3xl font-bold text-amber-50 !mb-2">Your Wishlist</h2>
                                 <p className="text-gray-400 text-lg">
-                                    <span className="text-amber-400 font-semibold">{wishlist.length}</span> {" "}Items are present currently
+                                    <span className="text-amber-400 font-semibold">{wishlist.length || 0}</span> {" "}Items are present currently
                                 </p>
                             </div>
 

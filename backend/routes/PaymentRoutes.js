@@ -7,7 +7,7 @@ const user = require('../models/user');
 const Order = require('../models/orders');
 const CartProduct = require('../models/cartProduct');
 const calculatePrice = require('../utils/orderCalculation');
-
+const authentication = require('../middlewares/authVerify');
 const router = express.Router();
 
 if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
@@ -19,20 +19,11 @@ const razorpay = new Razorpay({
     key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
-// ============================================
-// CREATE RAZORPAY ORDER
-// ============================================
 router.post('/create-order', async (req, res) => {
     try {
-        const email = req.cookies.email;
         const { addressId } = req.body;
 
-        if (!email) {
-            return res.status(401).json({
-                success: false,
-                message: 'User not authenticated'
-            });
-        }
+
 
         if (!addressId) {
             return res.status(400).json({
@@ -48,7 +39,7 @@ router.post('/create-order', async (req, res) => {
             });
         }
 
-        const person = await user.findOne({ email });
+        const person = await user.findById({ email });
 
         if (!person) {
             return res.status(404).json({
@@ -134,7 +125,6 @@ router.post('/create-order', async (req, res) => {
         const { tax, deliveryCharge, totalAmount } = calculatePrice(subTotal);
         const amount = Math.round(totalAmount * 100);
 
-        // Razorpay accepts INR amounts in paise. Minimum allowed here is ₹1.
         if (!Number.isInteger(amount) || amount < 100) {
             return res.status(400).json({
                 success: false,
@@ -209,9 +199,6 @@ router.post('/create-order', async (req, res) => {
     }
 });
 
-// ============================================
-// VERIFY RAZORPAY PAYMENT SIGNATURE
-// ============================================
 router.post('/verify-payment', async (req, res) => {
     try {
         const {
@@ -280,7 +267,6 @@ router.post('/verify-payment', async (req, res) => {
             });
         }
 
-        // Re-check stock immediately before marking the order as paid.
         for (const item of orderData.items) {
             const product = await products.findById(item.productId);
 
@@ -306,7 +292,6 @@ router.post('/verify-payment', async (req, res) => {
             }
         }
 
-        // Payment is now cryptographically verified; consume the reserved stock.
         for (const item of orderData.items) {
             const product = await products.findById(item.productId);
             const variant = product?.variants.find(
@@ -358,16 +343,11 @@ router.post('/verify-payment', async (req, res) => {
 router.post('/create-cod-order', async (req, res) => {
     try {
 
-        const email = req.cookies.email;
 
         const { addressId } = req.body;
 
 
-        if (!email) {
-            return res.status(401).json({
-                message: "User not logged in"
-            });
-        }
+
 
 
         if (!addressId) {
@@ -377,9 +357,8 @@ router.post('/create-cod-order', async (req, res) => {
         }
 
 
-        const person = await user.findOne({
-            email
-        });
+        const person = await user.findById({ email });
+
 
 
         if (!person) {

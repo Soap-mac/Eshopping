@@ -43,6 +43,10 @@ router.post('/signup', async (req, res) => {
         });
     } catch (error) {
         console.log('Internal Server Error' + error);
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error"
+        });
     }
 })
 
@@ -123,16 +127,10 @@ router.post('/login', async (req, res) => {
 
 router.post('/logout', async (req, res) => {
     try {
-        const email = req.cookies.email;
-        const exists = await user.findOne({ email });
+        const exists = await user.findById(req.user.id);
         if (!exists) {
-            return res.json({
-                success: false,
-                message: "User not found"
-            });
+            return res.json({ success: false, message: "User not found" });
         }
-        console.log(exists);
-        console.log('logout called');
         exists.token = null;
         await exists.save();
         console.log('token removed from database');

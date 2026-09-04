@@ -86,35 +86,37 @@ router.post('/addproduct', upload.array('files'), async (req, res) => {
         if (!images || images.length === 0) {
             return res.status(400).json({ message: 'Images are required' });
         }
+        if (!variants) {
+            return res.status(400).json({ message: 'Variants are required' });
+        }
+
+        const parsedVariants = JSON.parse(variants);
+        const generatedVariants = generateVariantCombinations(parsedVariants, name);
+
+        if (generatedVariants.length === 0) {
+            return res.status(400).json({ message: 'At least one variant option is required' });
+        }
+
+        generatedVariants[generatedVariants.length - 1].price = price;
+        generatedVariants[generatedVariants.length - 1].stock = count;
+
         const exists = await Product.findOne({ name });
-        // console.log(exists);
-        // console.log(exists.variants);
-        // console.log(exists.variants[0].options);
-        const test1 = exists.variants[0].sku;
-        console.log(test1);
-        const p = JSON.parse(variants);
-        const test = generateVariantCombinations(p, name);
-        console.log(p);
-        // console.log(test[0].options);
-        const test2 = test[0].sku;
-        console.log(test2)
-        console.log(test1 === test2);
-        // p.forEach((att) => {
-        //     att.value
-        // })
+
+        // Product with this name already exists -> add these as new variants
+        // instead of creating a duplicate product.
         if (exists) {
-            const duplicate = exists.variants.some(v => v.sku === test[0].sku);
+            const duplicate = exists.variants.some(v => v.sku === generatedVariants[0].sku);
             if (duplicate) {
                 return res.status(400).json({ message: 'Product already exists' });
             }
-            console.log(test[0]);
-            exists.variants.addToSet(test[0]);
-            const varSize = exists.variants.length;
-            await exists.save();
-            res.status(201).json({
-                success: true,
-                message: `${varSize}th variants of this product added`,
 
+            exists.variants.push(...generatedVariants);
+            await exists.save();
+
+            return res.status(201).json({
+                success: true,
+                message: `Added ${generatedVariants.length} new variant(s). This product now has ${exists.variants.length} total.`,
+                product: exists
             });
         }
 
@@ -127,24 +129,6 @@ router.post('/addproduct', upload.array('files'), async (req, res) => {
         }
 
         const imgUrls = await Promise.all(images.map(image => uploadImage(image.path)));
-
-        let variantsArray = [];
-        if (variants) {
-            const parsedVariants = JSON.parse(variants);
-            variantsArray = generateVariantCombinations(parsedVariants, name);
-
-            if (variantsArray.length === 0) {
-                return res.status(400).json({ message: 'At least one variant option is required' });
-            }
-        } else {
-            return res.status(400).json({ message: 'Variants are required' });
-        }
-
-        variantsArray[variantsArray.length - 1].price = price;
-        variantsArray[variantsArray.length - 1].stock = count;
-
-        console.log(variantsArray[variantsArray.length - 1].price + "       " +
-            variantsArray[variantsArray.length - 1].count);
 
         const newproduct = new Product({
             name,
@@ -161,21 +145,21 @@ router.post('/addproduct', upload.array('files'), async (req, res) => {
             catName: category,
             SubcatName: subCategory,
             innersubcatName: innerSubCategory,
-            variants: variantsArray
+            variants: generatedVariants
         });
 
         await newproduct.save();
 
-        res.status(201).json({
+        return res.status(201).json({
             success: true,
-            message: `Product added successfully with ${variantsArray.length} variants`,
+            message: `Product added successfully with ${generatedVariants.length} variants`,
             product: newproduct,
-            variantsGenerated: variantsArray.length
+            variantsGenerated: generatedVariants.length
         });
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: 'Server error', error: error.message });
+        return res.status(500).json({ message: 'Server error', error: error.message });
     }
 });
 
