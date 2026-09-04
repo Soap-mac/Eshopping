@@ -53,14 +53,11 @@ const WishlistBadge = styled(StyledBadge)(() => ({
     },
 }));
 
-// Shared visual treatment for the round action buttons (profile / wishlist / cart)
-// Sizes down on small/medium screens so three of these plus the login link
-// never overflow a narrow header row; back to the original 56px at desktop.
 const actionBtnClass =
-    '!w-[42px] lg:!w-[56px] !min-w-[0px] !h-[42px] lg:!h-[56px] !text-orange-400 !rounded-full !text-[18px] flex justify-center items-center !pr-1 ' +
-    '!border-2 !border-[#5b5656] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.1)] ' +
-    'hover:!-translate-y-[2px] !transition-all !duration-300 focus-visible:!outline focus-visible:!outline-2 focus-visible:!outline-[#f59e0b] focus-visible:!outline-offset-2';
-
+    '!w-[42px] lg:!w-[56px] !min-w-[0px] !h-[42px] lg:!h-[56px] !text-orange-400 !rounded-full !text-[18px] flex justify-center items-center ' +
+    '!border !border-white/[0.12] !bg-white/[0.03] hover:!border-[#f59e0b] hover:!bg-[rgba(245,158,11,0.12)] ' +
+    'hover:!-translate-y-[2px] hover:!shadow-[0_4px_14px_rgba(245,158,11,0.25)] !transition-all !duration-300 ' +
+    'focus-visible:!outline focus-visible:!outline-2 focus-visible:!outline-[#f59e0b] focus-visible:!outline-offset-2';
 function Header() {
     const navigate = useNavigate();
     const context = useContext(MyContext);
@@ -167,115 +164,107 @@ function Header() {
         <>
             <div className="header">
                 <div className="headerContainer !flex !flex-col lg:!flex-row lg:!items-center lg:!justify-between border-b-1 border-gray-700">
-                    {/* On mobile this row groups logo + actions together (logo left, actions
-                        right) as the header's first line, with search as its own full-width
-                        line below. At lg+, `contents` removes this wrapper from the layout
-                        so col1/col3 become direct flex children again — laid out via their
-                        own explicit lg:order values alongside col2, reproducing the original
-                        logo / search / actions column order exactly. */}
+
                     <div className="flex items-center justify-between w-full min-w-0 lg:contents">
                         <div className="col1 lg:order-1 lg:w-[25%] flex-shrink-0">
                             <img className='headerImg' src={logo} alt="logo" />
                         </div>
                         <div className="col3 lg:order-3 lg:w-[30%] min-w-0 flex-shrink-0">
                             <ul className='flex items-center gap-2 sm:gap-3'>
-                            {
-                                context?.isLogin === false ?
-                                    <li className='list-none text-sm sm:text-base whitespace-nowrap'>
-                                        <Link to="/login" className='link'>Login</Link> / <Link to="/signup" className='link'>Signup</Link>
-                                    </li> :
-                                    <div>
-                                        <Tooltip title="My Account" arrow>
-                                            <Button
-                                                id="basic-button"
-                                                aria-controls={open ? 'basic-menu' : undefined}
-                                                aria-haspopup="true"
-                                                aria-expanded={open ? 'true' : undefined}
-                                                onClick={handleClick}
-                                                className={`${actionBtnClass} lg:!ml-[50px]`}
+                                {
+                                    context?.isLogin === false ?
+                                        <li className='list-none'>
+                                            <Link
+                                                to="/login"
+                                                className='!flex !items-center !gap-2 !px-4 !h-[42px] lg:!h-[56px] !rounded-full !border !border-white/[0.12] !bg-white/[0.03] !text-gray-200 hover:!text-amber-400 hover:!border-amber-500/60 hover:!bg-[rgba(245,158,11,0.08)] !transition-all !duration-300 !text-[14px] lg:!text-[15px] !font-medium whitespace-nowrap'
                                             >
-                                                <FaUser className='text-[20px]' />
-                                            </Button>
-                                        </Tooltip>
-                                        <Menu
-                                            id="basic-menu"
-                                            anchorEl={anchorEl}
-                                            open={open}
-                                            onClose={handleClose}
-                                            slotProps={{ list: { 'aria-labelledby': 'basic-button' } }}
-                                            className='profile-dropdown-menu'
-                                        >
-                                            <div className="!px-4 !py-3 border-b border-gray-600">
-                                                <div className="flex items-center !space-x-3">
-                                                    <img
-                                                        className="!w-12 !h-12 rounded-full object-cover !ring-2 !ring-orange-400/20"
-                                                        src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.jpg?semt=ais_hybrid&w=740"
-                                                        alt="Profile"
-                                                    />
-                                                    <div className="flex-1 !min-w-0">
-                                                        <p className="text-sm font-semibold text-white truncate">{context?.name}</p>
-                                                        <p className="text-xs text-gray-400 truncate">{context?.email}</p>
+                                                <FaUser className='text-[13px] opacity-70' />
+                                                Login <span className="text-gray-500">/</span> Signup
+                                            </Link>
+                                        </li> :
+                                        <div>
+                                            <Tooltip title="My Account" arrow>
+                                                <Button
+                                                    id="basic-button"
+                                                    aria-controls={open ? 'basic-menu' : undefined}
+                                                    aria-haspopup="true"
+                                                    aria-expanded={open ? 'true' : undefined}
+                                                    onClick={handleClick}
+                                                    className={`${actionBtnClass} lg:!ml-[50px]`}
+                                                >
+                                                    <FaUser className='text-[20px]' />
+                                                </Button>
+                                            </Tooltip>
+                                            <Menu
+                                                id="basic-menu"
+                                                anchorEl={anchorEl}
+                                                open={open}
+                                                onClose={handleClose}
+                                                slotProps={{ list: { 'aria-labelledby': 'basic-button' } }}
+                                                className='profile-dropdown-menu'
+                                            >
+                                                <div className="!px-4 !py-3 border-b border-gray-600">
+                                                    <div className="flex items-center !space-x-3">
+                                                        <img
+                                                            className="!w-12 !h-12 rounded-full object-cover !ring-2 !ring-orange-400/20"
+                                                            src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-isolated-background-avatar-profile-picture-man_1293239-4841.jpg?semt=ais_hybrid&w=740"
+                                                            alt="Profile"
+                                                        />
+                                                        <div className="flex-1 !min-w-0">
+                                                            <p className="text-sm font-semibold text-white truncate">{context?.name}</p>
+                                                            <p className="text-xs text-gray-400 truncate">{context?.email}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div className="!py-2">
-                                                <MenuItem onClick={handleClose} className="!px-4 !py-3 hover:!bg-gray-700 !transition-colors !duration-200" sx={{ color: '#e5e7eb', '&:hover': { backgroundColor: '#374151' } }}>
-                                                    <Link to='/profile'>
+                                                <div className="!py-2">
+                                                    <MenuItem onClick={handleClose} className="!px-4 !py-3 hover:!bg-gray-700 !transition-colors !duration-200" sx={{ color: '#e5e7eb', '&:hover': { backgroundColor: '#374151' } }}>
+                                                        <Link to='/profile'>
+                                                            <div className="flex items-center !space-x-3 !w-full">
+                                                                <FaUser className="text-orange-400 text-sm" />
+                                                                <span className="text-sm font-medium">My Profile</span>
+                                                            </div>
+                                                        </Link>
+                                                    </MenuItem>
+
+
+                                                    <MenuItem className="!px-4 !py-3 hover:!bg-gray-700 !transition-colors !duration-200" sx={{ color: '#e5e7eb', '&:hover': { backgroundColor: '#374151' } }}>
                                                         <div className="flex items-center !space-x-3 !w-full">
-                                                            <FaUser className="text-orange-400 text-sm" />
-                                                            <span className="text-sm font-medium">My Profile</span>
+                                                            <FaHeart className="text-orange-400 text-sm" />
+                                                            <span className="text-sm font-medium">Wishlist</span>
                                                         </div>
-                                                    </Link>
-                                                </MenuItem>
+                                                    </MenuItem>
+                                                </div>
 
-                                                {/* <MenuItem onClick={handleClose} className="!px-4 !py-3 hover:!bg-gray-700 !transition-colors !duration-200" sx={{ color: '#e5e7eb', '&:hover': { backgroundColor: '#374151' } }}>
-                                                    <div className="flex items-center !space-x-3 !w-full">
-                                                        <MdShoppingBag className="text-orange-400 text-sm" />
-                                                        <span className="text-sm font-medium">My Orders</span>
-                                                    </div>
-                                                </MenuItem> */}
-
-                                                <MenuItem className="!px-4 !py-3 hover:!bg-gray-700 !transition-colors !duration-200" sx={{ color: '#e5e7eb', '&:hover': { backgroundColor: '#374151' } }}>
-                                                    <div className="flex items-center !space-x-3 !w-full">
-                                                        <FaHeart className="text-orange-400 text-sm" />
-                                                        <span className="text-sm font-medium">Wishlist</span>
-                                                    </div>
-                                                </MenuItem>
-                                            </div>
-
-                                            <div className="border-t border-gray-600 !py-2">
-                                                <MenuItem onClick={handleClose} className="!px-4 !py-3 hover:!bg-red-900/20 !transition-colors !duration-200" sx={{ color: '#ef4444', '&:hover': { backgroundColor: 'rgba(239, 68, 68, 0.1)' } }}>
-                                                    <div className="flex items-center !space-x-3 !w-full" onClick={handleLogout}>
-                                                        <BiLogOut className="text-red-500 text-sm" />
-                                                        <span className="text-sm font-medium">Logout</span>
-                                                    </div>
-                                                </MenuItem>
-                                            </div>
-                                        </Menu>
-                                    </div>
-                            }
-                            <div className="gap"></div>
-
-                            <li className={actionBtnClass} onClick={() => context.setOpenWishlistDrawer(true)}>
-                                <Tooltip title="Wishlist" arrow>
-                                    <IconButton aria-label={`wishlist, ${wishlistCount} items`}>
-                                        <WishlistBadge badgeContent={wishlistCount} max={99} color="secondary">
+                                                <div className="border-t border-gray-600 !py-2">
+                                                    <MenuItem onClick={handleClose} className="!px-4 !py-3 hover:!bg-red-900/20 !transition-colors !duration-200" sx={{ color: '#ef4444', '&:hover': { backgroundColor: 'rgba(239, 68, 68, 0.1)' } }}>
+                                                        <div className="flex items-center !space-x-3 !w-full" onClick={handleLogout}>
+                                                            <BiLogOut className="text-red-500 text-sm" />
+                                                            <span className="text-sm font-medium">Logout</span>
+                                                        </div>
+                                                    </MenuItem>
+                                                </div>
+                                            </Menu>
+                                        </div>
+                                }
+                                <span className="hidden sm:block h-6 w-px bg-white/10 !mx-1"></span>
+                                <li className={actionBtnClass} onClick={() => context.setOpenWishlistDrawer(true)}>
+                                    <Tooltip title="Wishlist" arrow>
+                                        <IconButton className='!p-0' aria-label={`wishlist, ${wishlistCount} items`}>                                            <WishlistBadge badgeContent={wishlistCount} max={99} color="secondary">
                                             <FaRegHeart className='!text-orange-400' />
                                         </WishlistBadge>
-                                    </IconButton>
-                                </Tooltip>
-                            </li>
-                            <li className={actionBtnClass} onClick={() => context.setOpenCartDrawer(true)}>
-                                <Tooltip title="Cart" arrow>
-                                    <IconButton aria-label={`cart, ${cartCount} items`}>
-                                        <CartBadge badgeContent={cartCount} max={99} color="secondary">
+                                        </IconButton>
+                                    </Tooltip>
+                                </li>
+                                <li className={actionBtnClass} onClick={() => context.setOpenCartDrawer(true)}>
+                                    <Tooltip title="Cart" arrow>
+                                        <IconButton className='!p-0' aria-label={`cart, ${cartCount} items`}>                                            <CartBadge badgeContent={cartCount} max={99} color="secondary">
                                             <IoIosCart className='!text-orange-400' />
                                         </CartBadge>
-                                    </IconButton>
-                                </Tooltip>
-                            </li>
-                        </ul>
+                                        </IconButton>
+                                    </Tooltip>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div className="col2 lg:order-2 w-full lg:w-[45%] !mt-2 lg:!mt-0">
