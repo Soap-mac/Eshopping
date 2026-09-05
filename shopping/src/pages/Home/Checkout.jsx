@@ -6,7 +6,7 @@ import Footer from '../../components/Footer/Footer'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
-import { MdShoppingCart, MdLocationOn, MdPerson, MdPayment, MdCheck } from "react-icons/md";
+import { MdShoppingCart, MdLocationOn, MdPerson, MdPayment, MdCheck, MdEdit, MdDelete } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
 import { handleSucess, handleError } from "../../utils";
 import { useNavigate } from "react-router-dom";
@@ -37,6 +37,7 @@ function Checkout() {
 
     const [addresses, setAddresses] = useState([]);
     const [showAddressForm, setShowAddressForm] = useState(false);
+    const [editingAddressId, setEditingAddressId] = useState(null);
 
     useEffect(() => {
         const fetchAddresses = async () => {
@@ -221,11 +222,11 @@ function Checkout() {
 
         formData.append('name', name);
         formData.append('email', email);
-        formData.append('address_line', addressLine);
+        formData.append('street', addressLine);
         formData.append('city', city);
         formData.append('state', state);
-        formData.append('pincode', pin);
-        formData.append('mobile', phone);
+        formData.append('pin', pin);
+        formData.append('phone', phone);
         formData.append('country', 'India');
         try {
             const res = await fetch(
@@ -241,6 +242,9 @@ function Checkout() {
             if (result.success) {
                 setAddressId(result.address._id);
                 setAddressAdded(true);
+                setShowAddressForm(false);
+                resetAddressForm();
+                await refetchAddresses();
                 handleSucess("Address added successfully");
             }
             else {
@@ -252,6 +256,113 @@ function Checkout() {
         }
     }
 
+    const refetchAddresses = async () => {
+        try {
+            const res = await fetch(
+                `${import.meta.env.VITE_API_URL}/getAddresses`,
+                {
+                    method: "GET",
+                    credentials: "include"
+                }
+            );
+            const data = await res.json();
+            if (data.success) {
+                setAddresses(data.addresses);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const resetAddressForm = () => {
+        setName('');
+        setEmail('');
+        setStreet('');
+        setApartment('');
+        setCity('');
+        setState('');
+        setPin('');
+        setPhone('');
+        setEditingAddressId(null);
+    };
+
+    // Opens the form pre-filled with an existing address's details so the
+    // user can change them, instead of creating a duplicate.
+    const startEditAddress = (address) => {
+        setEditingAddressId(address._id);
+        setName(address.name || '');
+        setEmail(address.email || '');
+        setStreet(address.address_line || '');
+        setApartment('');
+        setCity(address.city || '');
+        setState(address.state || '');
+        setPin(address.pincode || '');
+        setPhone(address.mobile ? String(address.mobile) : '');
+        setShowAddressForm(true);
+    };
+
+    const updateAddress = async () => {
+        if (!street || !city || !state || !pin || !phone) {
+            handleError("Please fill all required address details");
+            return;
+        }
+
+        let formData = new FormData();
+        const addressLine = apartment ? `${street}, ${apartment}` : street;
+
+        formData.append('street', addressLine);
+        formData.append('city', city);
+        formData.append('state', state);
+        formData.append('pin', pin);
+        formData.append('phone', phone);
+
+        try {
+            const res = await fetch(
+                `${import.meta.env.VITE_API_URL}/updateAddress/${editingAddressId}`,
+                {
+                    method: 'PUT',
+                    body: formData,
+                    credentials: 'include'
+                }
+            );
+            const result = await res.json();
+            if (result.success) {
+                handleSucess("Address updated successfully");
+                setShowAddressForm(false);
+                resetAddressForm();
+                await refetchAddresses();
+            } else {
+                handleError(result.message);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const deleteAddress = async (id) => {
+        try {
+            const res = await fetch(
+                `${import.meta.env.VITE_API_URL}/deleteAddress/${id}`,
+                {
+                    method: 'DELETE',
+                    credentials: 'include'
+                }
+            );
+            const result = await res.json();
+            if (result.success) {
+                handleSucess("Address deleted");
+                const remaining = addresses.filter(a => a._id !== id);
+                setAddresses(remaining);
+                if (addressId === id) {
+                    setAddressId(remaining.length > 0 ? remaining[0]._id : "");
+                }
+            } else {
+                handleError(result.message);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
     // MUI TextField styling — kept identical to the existing site theme
     const textFieldStyles = {
         backgroundColor: '#363535',
@@ -541,7 +652,35 @@ function Checkout() {
                                                                 </p>
                                                             )}
                                                         </div>
+
+                                                        <div className="flex items-center gap-3 shrink-0 !ml-2">
+                                                            <button
+                                                                type="button"
+                                                                onClick={(e) => {
+                                                                    e.preventDefault();
+                                                                    e.stopPropagation();
+                                                                    startEditAddress(address);
+                                                                }}
+                                                                className="text-gray-400 hover:text-amber-400 transition-colors"
+                                                                title="Edit address"
+                                                            >
+                                                                <MdEdit className="text-lg" />
+                                                            </button>
+                                                            <button
+                                                                type="button"
+                                                                onClick={(e) => {
+                                                                    e.preventDefault();
+                                                                    e.stopPropagation();
+                                                                    deleteAddress(address._id);
+                                                                }}
+                                                                className="text-gray-400 hover:text-red-400 transition-colors"
+                                                                title="Delete address"
+                                                            >
+                                                                <MdDelete className="text-lg" />
+                                                            </button>
+                                                        </div>
                                                     </label>
+
                                                 );
                                             })}
                                         </div>
@@ -549,16 +688,144 @@ function Checkout() {
 
                                     {/* ADD NEW ADDRESS — content-sized so it can never be
                                         stretched full-width by a global button reset */}
+                                    {/* ADD NEW ADDRESS — content-sized so it can never be
+                                        stretched full-width by a global button reset */}
                                     {!showAddressForm && (
                                         <span className="inline-block max-w-full">
                                             <Button
                                                 variant="outlined"
-                                                onClick={() => setShowAddressForm(true)}
+                                                onClick={() => {
+                                                    resetAddressForm();
+                                                    setShowAddressForm(true);
+                                                }}
                                                 sx={ghostButtonSx}
                                             >
                                                 + Add new address
                                             </Button>
                                         </span>
+                                    )}
+
+                                    {/* ADDRESS FORM — shared between "add new" and "edit existing" */}
+                                    {showAddressForm && (
+                                        <div className={`box-border ${addresses.length > 0 ? "!mt-8 !pt-7 border-t border-gray-700/50" : ""}`}>
+
+                                            <div className="flex items-center gap-2 !mb-6">
+                                                <MdPerson className="text-amber-400 text-xl shrink-0" />
+                                                <h2 className="text-base sm:text-lg font-semibold text-amber-50">
+                                                    {editingAddressId
+                                                        ? "Edit address"
+                                                        : addresses.length > 0
+                                                            ? "Add a new address"
+                                                            : "Enter your address"}
+                                                </h2>
+                                            </div>
+
+                                            <form className="!space-y-5" onSubmit={(e) => e.preventDefault()}>
+                                                {!editingAddressId && (
+                                                    <div className="grid sm:grid-cols-2 gap-5">
+                                                        <TextField
+                                                            label="Full name *"
+                                                            fullWidth
+                                                            value={name}
+                                                            sx={textFieldStyles}
+                                                            onChange={(e) => setName(e.target.value)}
+                                                        />
+                                                        <TextField
+                                                            label="Email address *"
+                                                            variant="outlined"
+                                                            fullWidth
+                                                            value={email}
+                                                            sx={textFieldStyles}
+                                                            onChange={(e) => setEmail(e.target.value)}
+                                                        />
+                                                    </div>
+                                                )}
+
+                                                <TextField
+                                                    label="Street address *"
+                                                    variant="outlined"
+                                                    fullWidth
+                                                    value={street}
+                                                    sx={textFieldStyles}
+                                                    onChange={(e) => setStreet(e.target.value)}
+                                                />
+
+                                                <TextField
+                                                    label="Apartment / unit (optional)"
+                                                    variant="outlined"
+                                                    fullWidth
+                                                    value={apartment}
+                                                    sx={textFieldStyles}
+                                                    onChange={(e) => setApartment(e.target.value)}
+                                                />
+
+                                                <div className="grid sm:grid-cols-2 gap-5">
+                                                    <TextField
+                                                        label="City *"
+                                                        variant="outlined"
+                                                        value={city}
+                                                        onChange={(e) => setCity(e.target.value)}
+                                                        fullWidth
+                                                        sx={textFieldStyles}
+                                                    />
+                                                    <TextField
+                                                        label="State / province *"
+                                                        variant="outlined"
+                                                        fullWidth
+                                                        value={state}
+                                                        sx={textFieldStyles}
+                                                        onChange={(e) => setState(e.target.value)}
+                                                    />
+                                                </div>
+
+                                                <div className="grid sm:grid-cols-2 gap-5">
+                                                    <TextField
+                                                        label="PIN code / ZIP *"
+                                                        variant="outlined"
+                                                        fullWidth
+                                                        value={pin}
+                                                        sx={textFieldStyles}
+                                                        onChange={(e) => setPin(e.target.value)}
+                                                    />
+                                                    <TextField
+                                                        label="Phone number *"
+                                                        variant="outlined"
+                                                        fullWidth
+                                                        value={phone}
+                                                        sx={textFieldStyles}
+                                                        onChange={(e) => setPhone(e.target.value)}
+                                                    />
+                                                </div>
+
+                                                <div className="flex items-center gap-3">
+                                                    <Button
+                                                        disabled={addressAdded && !editingAddressId}
+                                                        onClick={editingAddressId ? updateAddress : addAddress}
+                                                        sx={{ ...primaryButtonSx, marginTop: '4px' }}
+                                                    >
+                                                        <MdShoppingCart className="!mr-2.5 text-lg" />
+                                                        {editingAddressId
+                                                            ? "Save changes"
+                                                            : addressAdded
+                                                                ? "Address added"
+                                                                : "Add address"}
+                                                    </Button>
+
+                                                    {(editingAddressId || addresses.length > 0) && (
+                                                        <Button
+                                                            variant="text"
+                                                            onClick={() => {
+                                                                resetAddressForm();
+                                                                setShowAddressForm(false);
+                                                            }}
+                                                            sx={{ marginTop: '4px', color: '#9ca3af' }}
+                                                        >
+                                                            Cancel
+                                                        </Button>
+                                                    )}
+                                                </div>
+                                            </form>
+                                        </div>
                                     )}
 
                                     {/* NEW ADDRESS FORM */}

@@ -1,71 +1,83 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { handleSucess, handleError } from '../utils'
+
+const STATUS_OPTIONS = ["placed", "confirmed", "processing", "shipped", "delivered", "cancelled"];
 
 function RecentTable() {
+    const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [updatingId, setUpdatingId] = useState(null);
 
-    const orders = [
-        {
-            id: "ORD-2025-001",
-            date: "2025-07-20",
-            items: "Wireless Headphones, Phone Case",
-            quantity: 2,
-            total: "$149.99",
-            status: "Delivered",
-            trackingId: "TRK789456123"
-        },
-        {
-            id: "ORD-2025-002",
-            date: "2025-07-18",
-            items: "Gaming Mouse, Keyboard",
-            quantity: 2,
-            total: "$89.99",
-            status: "Shipped",
-            trackingId: "TRK456789012"
-        },
-        {
-            id: "ORD-2025-003",
-            date: "2025-07-15",
-            items: "Laptop Stand",
-            quantity: 1,
-            total: "$45.99",
-            status: "Processing",
-            trackingId: "TRK123456789"
-        },
-        {
-            id: "ORD-2025-004",
-            date: "2025-07-12",
-            items: "USB-C Hub, Cable Organizer",
-            quantity: 2,
-            total: "$67.98",
-            status: "Delivered",
-            trackingId: "TRK987654321"
-        },
-        {
-            id: "ORD-2025-005",
-            date: "2025-07-10",
-            items: "Bluetooth Speaker",
-            quantity: 1,
-            total: "$79.99",
-            status: "Cancelled",
-            trackingId: "TRK654321987"
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/getAllOrders`, {
+                    method: 'GET',
+                    credentials: 'include',
+                });
+                const data = await res.json();
+                if (data.success) {
+                    setOrders(data.orders);
+                } else {
+                    setOrders([]);
+                }
+            } catch (error) {
+                console.log(error);
+                setOrders([]);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchOrders();
+    }, []);
+
+    const handleStatusChange = async (orderId, newStatus) => {
+        const previous = orders;
+        setUpdatingId(orderId);
+        setOrders(prev => prev.map(o => o.id === orderId ? { ...o, status: newStatus } : o));
+
+        try {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/updateOrderStatus/${orderId}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ status: newStatus }),
+            });
+            const data = await res.json();
+            if (data.success) {
+                handleSucess(`Order ${orderId} marked as ${newStatus}`);
+            } else {
+                setOrders(previous);
+                handleError(data.message || "Failed to update order status");
+            }
+        } catch (error) {
+            console.log(error);
+            setOrders(previous);
+            handleError("Failed to update order status");
+        } finally {
+            setUpdatingId(null);
         }
-    ];
+    };
 
     const getStatusBadge = (status) => {
         const baseClasses = "!px-3 !py-1 rounded-full text-xs font-semibold uppercase tracking-wide";
-        switch (status.toLowerCase()) {
+        switch (status?.toLowerCase()) {
             case 'delivered':
                 return `${baseClasses} bg-green-900/30 text-green-400 border border-green-700/50`;
             case 'shipped':
                 return `${baseClasses} bg-blue-900/30 text-blue-400 border border-blue-700/50`;
             case 'processing':
                 return `${baseClasses} bg-amber-900/30 text-amber-400 border border-amber-700/50`;
+            case 'confirmed':
+                return `${baseClasses} bg-cyan-900/30 text-cyan-400 border border-cyan-700/50`;
+            case 'placed':
+                return `${baseClasses} bg-gray-900/30 text-gray-300 border border-gray-700/50`;
             case 'cancelled':
                 return `${baseClasses} bg-red-900/30 text-red-400 border border-red-700/50`;
             default:
                 return `${baseClasses} bg-gray-900/30 text-gray-400 border border-gray-700/50`;
         }
     };
-
 
     return (
         <div className="">
@@ -75,31 +87,33 @@ function RecentTable() {
                     <table className="w-full text-sm text-left">
                         <thead className="text-[16px] text-amber-100 uppercase bg-gray-900/80 border-b border-gray-700/50">
                             <tr>
-                                <th scope="col" className="!px-6 !py-4 font-semibold">
-                                    Order ID
-                                </th>
-                                <th scope="col" className="!px-6 !py-4 font-semibold">
-                                    Date
-                                </th>
-                                <th scope="col" className="!px-6 !py-4 font-semibold">
-                                    Items
-                                </th>
-                                <th scope="col" className="!px-6 !py-4 font-semibold text-center">
-                                    Qty
-                                </th>
-                                <th scope="col" className="!px-6 !py-4 font-semibold">
-                                    Total
-                                </th>
-                                <th scope="col" className="!px-6 !py-4 font-semibold">
-                                    Status
-                                </th>
-                                <th scope="col" className="!px-6 !py-4 font-semibold">
-                                    Tracking
-                                </th>
+                                <th scope="col" className="!px-6 !py-4 font-semibold">Order ID</th>
+                                <th scope="col" className="!px-6 !py-4 font-semibold">Date</th>
+                                <th scope="col" className="!px-6 !py-4 font-semibold">Customer</th>
+                                <th scope="col" className="!px-6 !py-4 font-semibold">Items</th>
+                                <th scope="col" className="!px-6 !py-4 font-semibold text-center">Qty</th>
+                                <th scope="col" className="!px-6 !py-4 font-semibold">Total</th>
+                                <th scope="col" className="!px-6 !py-4 font-semibold">Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {orders.map((order, index) => (
+                            {loading && (
+                                <tr>
+                                    <td colSpan={7} className="!px-6 !py-8 text-center text-gray-400">
+                                        Loading orders...
+                                    </td>
+                                </tr>
+                            )}
+
+                            {!loading && orders.length === 0 && (
+                                <tr>
+                                    <td colSpan={7} className="!px-6 !py-8 text-center text-gray-400">
+                                        No orders yet.
+                                    </td>
+                                </tr>
+                            )}
+
+                            {!loading && orders.map((order, index) => (
                                 <tr
                                     key={order.id}
                                     className={`border-b border-gray-700/30 hover:bg-gray-700/20 transition-colors duration-200 ${index % 2 === 0 ? 'bg-gray-800/20' : 'bg-gray-800/10'
@@ -110,10 +124,13 @@ function RecentTable() {
                                     </th>
                                     <td className="!px-6 !py-4 text-gray-300">
                                         {new Date(order.date).toLocaleDateString('en-US', {
-                                            year: 'numeric',
-                                            month: 'short',
-                                            day: 'numeric'
+                                            year: 'numeric', month: 'short', day: 'numeric'
                                         })}
+                                    </td>
+                                    <td className="!px-6 !py-4 text-gray-300">
+                                        <div className="truncate max-w-[160px]" title={order.customerEmail}>
+                                            {order.customerName}
+                                        </div>
                                     </td>
                                     <td className="!px-6 !py-4 text-gray-300 max-w-xs">
                                         <div className="truncate" title={order.items}>
@@ -126,21 +143,23 @@ function RecentTable() {
                                         </span>
                                     </td>
                                     <td className="!px-6 !py-4 text-amber-400 font-semibold">
-                                        {order.total}
+                                        ₹{order.total}
                                     </td>
                                     <td className="!px-6 !py-4">
-                                        <span className={getStatusBadge(order.status)}>
-                                            {order.status}
-                                        </span>
-                                    </td>
-                                    <td className="!px-6 !py-4 text-gray-400 font-mono text-xs">
                                         <div className="flex items-center gap-2">
-                                            <span>{order.trackingId}</span>
-                                            {order.status.toLowerCase() === 'shipped' && (
-                                                <button className="text-amber-400 hover:text-amber-300 transition-colors">
-                                                    Track
-                                                </button>
-                                            )}
+                                            <span className={getStatusBadge(order.status)}>
+                                                {order.status}
+                                            </span>
+                                            <select
+                                                value={order.status}
+                                                disabled={updatingId === order.id}
+                                                onChange={(e) => handleStatusChange(order.id, e.target.value)}
+                                                className="bg-gray-900/70 border border-gray-700/50 rounded-md text-xs text-gray-200 !px-2 !py-1"
+                                            >
+                                                {STATUS_OPTIONS.map(status => (
+                                                    <option key={status} value={status}>{status}</option>
+                                                ))}
+                                            </select>
                                         </div>
                                     </td>
                                 </tr>

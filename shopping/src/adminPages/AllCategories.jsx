@@ -25,7 +25,7 @@ function AllCategories() {
             try {
                 const url = `${import.meta.env.VITE_API_URL}/getcategory`;
                 const response = await fetch(url, {
-                    meathod: 'GET',
+                    method: 'GET',
                     credentials: 'include',
                     headers: {
                         'content-Type': 'application/json'

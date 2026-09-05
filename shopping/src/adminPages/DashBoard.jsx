@@ -7,9 +7,12 @@ import admin_hero from '../assets/admin_hero.png';
 import RecentTable from '../adminComponents/RecentTable.jsx'
 import ProductsTable from '../adminComponents/ProductsTable.jsx'
 import Chart1 from '../adminComponents/Chart1.jsx'
+import { handleError } from '../utils'
 
 function DashBoard() {
     const [allProducts, setAllProducts] = useState([]);
+    const [dashboardStats, setDashboardStats] = useState(null);
+    const [chartData, setChartData] = useState([]);
 
     useEffect(() => {
         const fetchingProducts = async () => {
@@ -17,20 +20,43 @@ function DashBoard() {
                 const url = `${import.meta.env.VITE_API_URL}/getproducts`;
                 const response = await fetch(url, {
                     method: 'GET',
-                    headers: {
-                        credentials: 'include',
-                    }
+                    credentials: 'include'
                 });
                 const result = await response.json();
                 console.log(result);
                 setAllProducts(result.allProducts);
             } catch (error) {
                 console.log(error);
-                handleError(error);
+                handleError('Failed to load products');
             }
         }
         fetchingProducts();
     }, []);
+
+    useEffect(() => {
+        const fetchingStats = async () => {
+            try {
+                const url = `${import.meta.env.VITE_API_URL}/getDashboardStats`;
+                const response = await fetch(url, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                const result = await response.json();
+                if (result.success) {
+                    setDashboardStats(result.stats);
+                    setChartData(result.chart);
+                } else {
+                    handleError('Failed to load dashboard stats');
+                }
+            } catch (error) {
+                console.log(error);
+                handleError('Failed to load dashboard stats');
+            }
+        }
+        fetchingStats();
+    }, []);
+
+
     useEffect(() => {
         let present = Date.now();
         console.log(present.toString());
@@ -89,13 +115,13 @@ function DashBoard() {
 
                     </div>
 
-                    <DashboardSlider />
+                    <DashboardSlider stats={dashboardStats} />
 
                     <RecentTable />
 
                     <ProductsTable allProducts={allProducts} />
 
-                    <Chart1 />
+                    <Chart1 data={chartData} />
 
                 </div>
 

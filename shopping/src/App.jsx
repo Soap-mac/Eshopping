@@ -30,9 +30,10 @@ import AllInnerCategories from './adminPages/AllInnerCategories'
 import EditProducts from './adminPages/EditProduct';
 import ViewProducts from './adminPages/ViewProducts';
 import Products from './pages/Home/Products';
-
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import React from 'react'
 import { createContext } from 'react'
+import ForgotPassword from './pages/Home/ForgotPassword'
 
 const MyContext = createContext();
 
@@ -54,28 +55,29 @@ function App() {
         { path: "Signup", element: <Signup /> },
         { path: "Productlisting", element: <ProductListing /> },
         { path: "Productdetail/:id", element: <ProductDetails /> },
-        { path: "Cart", element: <Cart /> },
-        { path: "Checkout", element: <Checkout /> },
-        { path: "Profile", element: <Profile /> },
-        { path: "Wishlist", element: <Wishlist /> },
-        { path: "Orders", element: <Orders /> },
-        { path: "AdminDashBoard", element: <DashBoard /> },
-        { path: "AllProducts", element: <AllProducts /> },
-        { path: "AddProducts", element: <AddProducts /> },
-        { path: "AllCategories", element: <AllCategories /> },
-        { path: "AddSubCategory", element: <AddSubCategory /> },
-        { path: "AllSubCategories", element: <AllSubCategories /> },
-        { path: "AddCategory", element: <AddCategory /> },
-        { path: "allInnerCategory", element: < AllInnerCategories /> },
-        { path: "addInnerCategory", element: <AddInnerCategory /> },
-        { path: "AddSlider", element: <AddSlider /> },
-        { path: "AllSlider", element: <AllSlider /> },
-        { path: "AllUsers", element: <AllUsers /> },
-        { path: "AllOrders", element: <AllOrders /> },
-        { path: "UpdateCategory", element: <UpdateCategory /> },
-        { path: "EditProduct/:id", element: <EditProducts /> },
-        { path: "ViewProducts", element: <ViewProducts /> },
-        { path: "products/:name", element: <Products /> }
+        { path: "Cart", element: <ProtectedRoute><Cart /></ProtectedRoute> },
+        { path: "Checkout", element: <ProtectedRoute><Checkout /></ProtectedRoute> },
+        { path: "Profile", element: <ProtectedRoute><Profile /></ProtectedRoute> },
+        { path: "Wishlist", element: <ProtectedRoute><Wishlist /></ProtectedRoute> },
+        { path: "Orders", element: <ProtectedRoute><Orders /></ProtectedRoute> },
+        { path: "AdminDashBoard", element: <ProtectedRoute adminOnly><DashBoard /></ProtectedRoute> },
+        { path: "AllProducts", element: <ProtectedRoute adminOnly><AllProducts /></ProtectedRoute> },
+        { path: "AddProducts", element: <ProtectedRoute adminOnly><AddProducts /></ProtectedRoute> },
+        { path: "AllCategories", element: <ProtectedRoute adminOnly><AllCategories /></ProtectedRoute> },
+        { path: "AddSubCategory", element: <ProtectedRoute adminOnly><AddSubCategory /></ProtectedRoute> },
+        { path: "AllSubCategories", element: <ProtectedRoute adminOnly><AllSubCategories /></ProtectedRoute> },
+        { path: "AddCategory", element: <ProtectedRoute adminOnly><AddCategory /></ProtectedRoute> },
+        { path: "allInnerCategory", element: <ProtectedRoute adminOnly><AllInnerCategories /></ProtectedRoute> },
+        { path: "addInnerCategory", element: <ProtectedRoute adminOnly><AddInnerCategory /></ProtectedRoute> },
+        { path: "AddSlider", element: <ProtectedRoute adminOnly><AddSlider /></ProtectedRoute> },
+        { path: "AllSlider", element: <ProtectedRoute adminOnly><AllSlider /></ProtectedRoute> },
+        { path: "AllUsers", element: <ProtectedRoute adminOnly><AllUsers /></ProtectedRoute> },
+        { path: "AllOrders", element: <ProtectedRoute adminOnly><AllOrders /></ProtectedRoute> },
+        { path: "UpdateCategory", element: <ProtectedRoute adminOnly><UpdateCategory /></ProtectedRoute> },
+        { path: "EditProduct/:id", element: <ProtectedRoute adminOnly><EditProducts /></ProtectedRoute> },
+        { path: "ViewProducts", element: <ProtectedRoute adminOnly><ViewProducts /></ProtectedRoute> },
+        { path: "products/:name", element: <Products /> },
+        { path: "ForgotPassword", element: <ForgotPassword /> },
       ]
     }
   ]);
@@ -93,16 +95,11 @@ function App() {
   const [phone, setPhone] = useState('');
 
   const [sliders, setSliders] = useState([]);
-
-  // ============================================
-  // WISHLIST — single shared source of truth.
-  // Fetched once here; every ProductItem card and the WishlistDrawer
-  // just read/write this instead of hitting /getwishlist themselves.
-  // Add/remove are optimistic (instant UI change), and roll back only
-  // if the server call actually fails.
-  // ============================================
-  const [wishlist, setWishlist] = useState({});       // { [productId]: product }
+  const [wishlist, setWishlist] = useState({});
   const [wishlistLoaded, setWishlistLoaded] = useState(false);
+
+  const [role, setRole] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
 
   const fetchWishlist = useCallback(async () => {
     try {
@@ -136,9 +133,6 @@ function App() {
     [wishlist]
   );
 
-  // Returns { success, authRequired } so callers (ProductItem) can tell
-  // "this failed because you're logged out" apart from other failures,
-  // and redirect to /Login only in that case.
   const addToWishlist = useCallback(async (product) => {
     if (!product?._id) return { success: false, authRequired: false };
 
@@ -158,7 +152,7 @@ function App() {
           const next = { ...prev };
           delete next[product._id];
           return next;
-        }); // rollback
+        });
       }
 
       return {
@@ -184,7 +178,7 @@ function App() {
       previousProduct = prev[productId];
       const next = { ...prev };
       delete next[productId];
-      return next; // optimistic
+      return next;
     });
 
     try {
@@ -218,9 +212,6 @@ function App() {
       : addToWishlist(product);
   }, [isWishlisted, addToWishlist, removeFromWishlist]);
 
-  // ============================================
-  // CART
-  // ============================================
   const [cart, setCart] = useState([]);
   const [cartLoaded, setCartLoaded] = useState(false);
 
@@ -294,27 +285,28 @@ function App() {
         );
 
         const result = await response.json();
-        console.log(result)
         if (result.success) {
           setIsLogin(true);
           setName(result.exist.userName);
           setEmail(result.exist.email);
           setAvatar(result.exist.avatar);
+          setRole(result.exist.role);
         }
         else {
           setIsLogin(false);
+          setRole(null);
         }
-      }
-      catch (error) {
+      } catch (error) {
         console.log(error);
         setIsLogin(false);
+        setRole(null);
+      } finally {
+        setAuthLoading(false);
       }
     }
     checkLogin();
   }, []);
 
-  // Fetch wishlist + cart ONCE when the app loads (not per component).
-  // If the visitor isn't logged in yet, these just resolve to empty state.
   useEffect(() => {
     fetchWishlist();
     fetchCart();
@@ -322,6 +314,7 @@ function App() {
 
   const value = {
     setOpenProductModle, setOpenCartDrawer, openProductModle, openCartDrawer, isLogin, setIsLogin, isAuthenticated, setIsAuthenticated,
+    role, setRole, authLoading,
     avatar, setAvatar, name, setName, email, setEmail, phone, setPhone, sliders, setSliders, openWishlistDrawer, setOpenWishlistDrawer,
     wishlist, wishlistLoaded, isWishlisted, addToWishlist, removeFromWishlist, toggleWishlist, refreshWishlist: fetchWishlist,
     cart, cartLoaded, addToCart, refreshCart: fetchCart,

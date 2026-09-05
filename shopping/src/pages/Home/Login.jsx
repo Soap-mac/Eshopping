@@ -128,7 +128,11 @@ function login() {
                                         showPassword && <FaEyeSlash className='text-[#fe6404] text-[25px] absolute top-[45px] right-[10px]' onClick={() => setShowPassword(!showPassword)} />
 
                                     }
+                                    <Link to='/ForgotPassword' className="login-link" style={{ display: 'block', textAlign: 'right', marginTop: '8px', marginLeft: 0 }}>
+                                        Forgot password?
+                                    </Link>
                                 </div>
+
 
                                 <button type="submit" className="login-btn">
                                     Login

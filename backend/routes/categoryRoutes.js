@@ -3,6 +3,8 @@ const router = express.Router();
 const category = require('../models/category');
 const { uploadImage, removeImage } = require('../helpers/cloudinary');
 const multer = require('multer');
+const authentication = require('../middlewares/authVerify');
+const isAdmin = require('../middlewares/isAdmin');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -15,7 +17,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: multer.diskStorage({}), limits: { fileSize: 50 * 1024 * 1024 } });
 
-router.post('/addCategory', upload.single('file'), async (req, res) => {
+router.post('/addCategory', authentication, isAdmin, upload.single('file'), async (req, res) => {
     try {
         const { name } = req.body;
         const image = req.file;
@@ -53,15 +55,13 @@ router.get('/getcategory', async (req, res) => {
     }
 });
 
-router.post('/deletecategory/:name', async (req, res) => {
+router.post('/deletecategory/:name', authentication, isAdmin, async (req, res) => {
     try {
         const { name } = req.params;
         const categoryToDelete = await category.findOne({ name: name });
-        console.log(categoryToDelete);
         if (!categoryToDelete) {
             return res.status(404).json({ message: 'Category not found' });
         }
-        console.log(categoryToDelete.image);
         const publicId = categoryToDelete.image.split('/').pop().split('.')[0];
         const removed = await removeImage('eshopping/' + publicId);
         await category.deleteOne({ name: name });
@@ -72,7 +72,7 @@ router.post('/deletecategory/:name', async (req, res) => {
     }
 });
 
-router.post('/updateCategory/:id', upload.single('file'), async (req, res) => {
+router.post('/updateCategory/:id', authentication, isAdmin, upload.single('file'), async (req, res) => {
     try {
         const { id } = req.params;
         const { name } = req.body;

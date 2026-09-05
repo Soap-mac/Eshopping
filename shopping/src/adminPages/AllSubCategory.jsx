@@ -25,9 +25,7 @@ function AllSubCategories() {
                 const url = `${import.meta.env.VITE_API_URL}/getsubcategory`;
                 const response = await fetch(url, {
                     method: 'GET',
-                    headers: {
-                        credentials: 'include',
-                    }
+                    credentials: 'include',
                 });
                 const result = await response.json();
                 console.log(result);
@@ -94,9 +92,7 @@ function AllSubCategories() {
             const url = `${import.meta.env.VITE_API_URL}/deletesubcategory/${id}`;
             const response = await fetch(url, {
                 method: 'POST',
-                headers: {
-                    credentials: 'include',
-                }
+                credentials: 'include',
             });
             const result = await response.json();
             console.log(result);

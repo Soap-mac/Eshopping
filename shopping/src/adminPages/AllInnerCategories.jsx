@@ -25,9 +25,7 @@ function AllInnerCategories() {
                 const url = `${import.meta.env.VITE_API_URL}/getInnercategory`;
                 const response = await fetch(url, {
                     method: 'GET',
-                    headers: {
-                        credentials: 'include',
-                    }
+                    credentials: 'include'
                 });
                 const result = await response.json();
                 console.log(result);
@@ -91,12 +89,10 @@ function AllInnerCategories() {
         try {
             console.log(id);
             console.log('This is item Id ' + id);
-            const url = `${import.meta.env.VITE_API_URL}/deletesubcategory/${id}`;
+            const url = `${import.meta.env.VITE_API_URL}/deleteInnerCategory/${id}`;
             const response = await fetch(url, {
                 method: 'POST',
-                headers: {
-                    credentials: 'include',
-                }
+                credentials: 'include'
             });
             const result = await response.json();
             console.log(result);

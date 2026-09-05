@@ -70,9 +70,7 @@ function AddInnerCategory() {
                 const url = `${import.meta.env.VITE_API_URL}/getcategory`
                 const response = await fetch(url, {
                     method: 'GET',
-                    headers: {
-                        credentials: 'include',
-                    }
+                    credentials: 'include',
                 });
                 const result = await response.json();
                 console.log(result);

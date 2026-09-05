@@ -8,9 +8,7 @@ const InnerSubCategory = require("../models/innerCategory");
 const products = require("./mockProduct");
 
 
-const MONGO_URI =
-    "mongodb://127.0.0.1:27017/shopping";
-
+const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/shopping";
 
 
 async function seedProducts() {

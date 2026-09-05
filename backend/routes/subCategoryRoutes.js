@@ -4,6 +4,9 @@ const subcategory = require('../models/subcategory');
 const { uploadImage, removeImage } = require('../helpers/cloudinary');
 const multer = require('multer');
 const category = require('../models/category');
+const authentication = require('../middlewares/authVerify');
+const isAdmin = require('../middlewares/isAdmin');
+
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -18,7 +21,7 @@ const upload = multer({ storage: multer.diskStorage({}), limits: { fileSize: 50 
 
 
 
-router.post('/addSubCategory', upload.single('image'), async (req, res) => {
+router.post('/addSubCategory', authentication, isAdmin, upload.single('image'), async (req, res) => {
     try {
         const { name, parentcategory } = req.body;
         const image = req.file;
@@ -65,17 +68,13 @@ router.get('/getsubcategory', async (req, res) => {
     }
 });
 
-router.post('/deletesubcategory/:id', async (req, res) => {
-    console.log('I am getting this item id in backend ' + req.params.id);
+router.post('/deletesubcategory/:id', authentication, isAdmin, async (req, res) => {
     try {
         const id = req.params.id;
-        console.log(id);
         const subcategoryToDelete = await subcategory.findById(id);
-        console.log(subcategoryToDelete);
         if (!subcategoryToDelete) {
             return res.status(404).json({ message: 'Category not found' });
         }
-        console.log(subcategoryToDelete.image);
         const publicId = subcategoryToDelete.image.split('/').pop().split('.')[0];
         const removed = await removeImage('eshopping/' + publicId);
         await subcategory.findByIdAndDelete(id);
@@ -86,7 +85,7 @@ router.post('/deletesubcategory/:id', async (req, res) => {
     }
 });
 
-router.post('/updateCategory/:name', upload.single('file'), async (req, res) => {
+router.post('/updateCategory/:name', authentication, isAdmin, upload.single('file'), async (req, res) => {
     try {
         const { name } = req.params;
         const { newName } = req.body;

@@ -244,19 +244,12 @@ router.get('/getCart', authentication, async (req, res) => {
             return res.status(200).json({ message: 'Your cart is empty', cart: [] });
         }
 
-        console.log("till here")
-
         const allProducts = await CartProduct.find({ userId: userData._id })
             .populate('productId');
-        console.log("All Products is going to be printed..................................................................................................................................................................................")
-        // console.log(allProducts);
-        const enrichedCart = allProducts.map(cartItem => {
-            // console.log(cartItem);
-            const product = cartItem.productId;
-            console.log("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
-            console.log(product);
-            const variant = product.variants.find(v => v.sku === cartItem.variantSku);
 
+        const enrichedCart = allProducts.map(cartItem => {
+            const product = cartItem.productId;
+            const variant = product.variants.find(v => v.sku === cartItem.variantSku);
             return {
                 ...cartItem.toObject(),
                 variantDetails: variant ? {

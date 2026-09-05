@@ -37,9 +37,7 @@ function AddCategory() {
             const url = `${import.meta.env.VITE_API_URL}/addSubCategory`;
             const response = await fetch(url, {
                 method: 'POST',
-                headers: {
-                    credentials: 'include',
-                },
+                credentials: 'include',
                 body: formData
             });
             const result = await response.json();
@@ -68,9 +66,7 @@ function AddCategory() {
                 const url = `${import.meta.env.VITE_API_URL}/getcategory`
                 const response = await fetch(url, {
                     method: 'GET',
-                    headers: {
-                        credentials: 'include',
-                    }
+                    credentials: 'include',
                 });
                 const result = await response.json();
                 console.log(result);

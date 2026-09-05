@@ -3,21 +3,20 @@ const user = require('../models/user');
 const products = require('../models/products');
 const Review = require('../models/review');
 const router = express.Router();
+const authentication = require('../middlewares/authVerify');
 
-router.post('/addReview', async (req, res) => {
+
+router.post('/addReview', authentication, async (req, res) => {
     try {
-        const email = req.cookies.email;
         const { productId, rating, comment } = req.body;
 
-        if (!email) {
-            return res.status(400).json({ message: 'You are not logged in, please login to post a review' });
-        }
+
         console.log(productId + "     " + rating + "     " + comment);
         if (!productId || !rating || !comment) {
             return res.status(400).json({ message: 'Product ID and rating and comment are required' });
         }
 
-        const userData = await user.findOne({ email });
+        const userData = await user.findById({ email });
         if (!userData) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -52,17 +51,28 @@ router.get('/getReview/:id', async (req, res) => {
     }
 });
 
-router.post('/deleteReview/:id', async (req, res) => {
+router.post('/deleteReview/:id', authentication, async (req, res) => {
     try {
         const revId = req.params.id;
 
         const exist = await Review.findById(revId);
         if (!exist) {
-            res.status(401).json({ message: "review not found" });
+            return res.status(404).json({ message: "Review not found" });
         }
+
+        const isOwner = exist.userId.toString() === req.user.id;
+        const isAdmin = req.user.role === 'admin';
+
+        if (!isOwner && !isAdmin) {
+            return res.status(403).json({ message: "You are not allowed to delete this review" });
+        }
+
         await Review.deleteOne({ _id: revId });
+
+        return res.status(200).json({ message: "Review deleted" });
     } catch (error) {
-        return res.status(500).json({ message: "Internal server error", error });
+        console.log(error);
+        return res.status(500).json({ message: "Internal server error", error: error.message });
     }
 });
 

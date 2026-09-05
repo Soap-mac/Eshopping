@@ -5,7 +5,8 @@ const SubCategory = require('../models/subcategory');
 const InnerSubCategory = require('../models/innerCategory');
 const { uploadImage, removeImage } = require('../helpers/cloudinary');
 const multer = require('multer');
-
+const authentication = require('../middlewares/authVerify');
+const isAdmin = require('../middlewares/isAdmin');
 
 const upload = multer({
     storage: multer.diskStorage({}),
@@ -13,7 +14,7 @@ const upload = multer({
 });
 
 
-router.post('/addInnerCategory', upload.single('image'), async (req, res) => {
+router.post('/addInnerCategory', authentication, isAdmin, upload.single('image'), async (req, res) => {
     try {
         const { name, parentCategory, subCategory } = req.body;
         const image = req.file;
@@ -75,17 +76,15 @@ router.get('/getInnerCategory', async (req, res) => {
     }
 });
 
-router.post('/deleteInnerCategory/:id', async (req, res) => {
+router.post('/deleteInnerCategory/:id', authentication, isAdmin, async (req, res) => {
     console.log('I am getting this item id in backend ' + req.params.id);
     try {
         const id = req.params.id;
-        console.log(id);
         const innerCategoryToDelete = await InnerSubCategory.findById(id);
         console.log(innerCategoryToDelete);
         if (!innerCategoryToDelete) {
             return res.status(404).json({ message: 'Inner Category not found' });
         }
-        console.log(innerCategoryToDelete.image);
         const publicId = innerCategoryToDelete.image.split('/').pop().split('.')[0];
         const removed = await removeImage('eshopping/' + publicId);
         await InnerSubCategory.findByIdAndDelete(id);

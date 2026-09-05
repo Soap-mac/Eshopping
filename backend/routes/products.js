@@ -7,6 +7,9 @@ const categorymodel = require('../models/category');
 const subCategorymodel = require('../models/subcategory');
 const innerCategory = require('../models/innerCategory');
 const path = require('path');
+const authentication = require('../middlewares/authVerify');
+const isAdmin = require('../middlewares/isAdmin');
+
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -69,7 +72,7 @@ const generateVariantCombinations = (variantOptions, productName) => {
     });
 };
 
-router.post('/addproduct', upload.array('files'), async (req, res) => {
+router.post('/addproduct', authentication, isAdmin, upload.array('files'), async (req, res) => {
     try {
         const {
             name, price, oldPrice, brand, description,
@@ -254,7 +257,7 @@ router.get('/getProduct/:id', async (req, res) => {
     }
 });
 
-router.delete('/deleteProducts/:id', async (req, res) => {
+router.delete('/deleteProducts/:id', authentication, isAdmin, async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -264,11 +267,14 @@ router.delete('/deleteProducts/:id', async (req, res) => {
             return res.status(404).json({ message: 'Product not found', success: false });
         }
 
-        // Optional: Delete images from Cloudinary
-        // for (const imageUrl of productToDelete.images) {
-        //     const publicId = imageUrl.split('/').pop().split('.')[0];
-        //     await removeImage('eshopping/' + publicId);
-        // }
+        for (const imageUrl of productToDelete.images) {
+            try {
+                const publicId = imageUrl.split('/').pop().split('.')[0];
+                await removeImage('eshopping/' + publicId);
+            } catch (imgError) {
+                console.log('Failed to remove image from Cloudinary: ' + imgError);
+            }
+        }
 
         await Product.deleteOne({ _id: id });
 
@@ -279,7 +285,7 @@ router.delete('/deleteProducts/:id', async (req, res) => {
     }
 });
 
-router.put('/editProduct/:id', upload.array('files'), async (req, res) => {
+router.put('/editProduct/:id', authentication, isAdmin, upload.array('files'), async (req, res) => {
     try {
         const { id } = req.params;
         const {
@@ -397,7 +403,7 @@ router.get('/products/:name', async (req, res) => {
     }
 });
 
-router.patch('/updateVariantStock/:productId/:variantId', async (req, res) => {
+router.patch('/updateVariantStock/:productId/:variantId', authentication, isAdmin, async (req, res) => {
     try {
         const { productId, variantId } = req.params;
         const { stock } = req.body;
@@ -432,7 +438,7 @@ router.patch('/updateVariantStock/:productId/:variantId', async (req, res) => {
     }
 });
 
-router.patch('/decreaseVariantStock/:productId/:variantId', async (req, res) => {
+router.patch('/decreaseVariantStock/:productId/:variantId', authentication, isAdmin, async (req, res) => {
     try {
         const { productId, variantId } = req.params;
         const { quantity } = req.body;

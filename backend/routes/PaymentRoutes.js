@@ -19,7 +19,7 @@ const razorpay = new Razorpay({
     key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
-router.post('/create-order', async (req, res) => {
+router.post('/create-order', authentication, async (req, res) => {
     try {
         const { addressId } = req.body;
 
@@ -39,8 +39,7 @@ router.post('/create-order', async (req, res) => {
             });
         }
 
-        const person = await user.findById({ email });
-
+        const person = await user.findById(req.user.id);
         if (!person) {
             return res.status(404).json({
                 success: false,
@@ -340,15 +339,11 @@ router.post('/verify-payment', async (req, res) => {
     }
 });
 
-router.post('/create-cod-order', async (req, res) => {
+router.post('/create-cod-order', authentication, async (req, res) => {
     try {
 
 
         const { addressId } = req.body;
-
-
-
-
 
         if (!addressId) {
             return res.status(400).json({
@@ -356,11 +351,7 @@ router.post('/create-cod-order', async (req, res) => {
             });
         }
 
-
-        const person = await user.findById({ email });
-
-
-
+        const person = await user.findById(req.user.id);
         if (!person) {
             return res.status(404).json({
                 message: "User not found"

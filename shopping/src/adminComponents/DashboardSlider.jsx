@@ -8,15 +8,70 @@ import { IoBag } from "react-icons/io5";
 import { RiMoneyRupeeCircleFill } from "react-icons/ri";
 import { FaUserAlt } from "react-icons/fa";
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 
-// Import required modules
 import { FreeMode, Navigation } from 'swiper/modules';
 
-function DashboardSlider(props) {
+const formatCurrency = (value) =>
+    `₹${Number(value || 0).toLocaleString('en-IN')}`;
+
+const formatCount = (value) =>
+    Number(value || 0).toLocaleString('en-IN');
+
+// One summary card, driven entirely by real numbers from
+// GET /getDashboardStats instead of hardcoded placeholders.
+function StatCard({ icon, label, value, changePercent, loading }) {
+    const isIncrease = changePercent >= 0;
+
+    return (
+        <div className="min-w-[280px] w-[360px] bg-transparent rounded-xl !p-6 border border-slate-700 hover:border-orange-500 transition-all duration-300 cursor-pointer group hover:shadow-lg hover:shadow-orange-500/10">
+            <div className="flex items-start justify-between !mb-4">
+                <div className="flex items-center !space-x-4">
+                    <div className="!p-3 bg-orange-500 rounded-lg group-hover:bg-orange-400 transition-colors duration-300">
+                        {icon}
+                    </div>
+                    <div>
+                        <p className="text-gray-400 text-sm font-medium">{label}</p>
+                        <b className="text-white text-2xl font-bold">
+                            {loading ? '—' : value}
+                        </b>
+                    </div>
+                </div>
+                <div className="!p-2 bg-slate-700 rounded-lg group-hover:bg-slate-600 transition-colors duration-300">
+                    <IoStatsChartSharp className="text-orange-500 text-[30px]" />
+                </div>
+            </div>
+
+            <div className="flex items-center !space-x-2 !mt-4 !pt-4 border-t border-slate-700">
+                {loading ? (
+                    <p className="text-gray-500 text-xs">Loading...</p>
+                ) : (
+                    <>
+                        <div className="flex items-center !space-x-1">
+                            {isIncrease ? (
+                                <FaAngleDoubleUp className="text-green-500 text-sm" />
+                            ) : (
+                                <FaAnglesDown className="text-red-500 text-sm" />
+                            )}
+                            <span className={`font-semibold text-sm ${isIncrease ? 'text-green-500' : 'text-red-500'}`}>
+                                {isIncrease ? '+' : ''}{changePercent}%
+                            </span>
+                        </div>
+                        <p className="text-gray-400 text-xs">
+                            {isIncrease ? 'Increased' : 'Decreased'} vs last month
+                        </p>
+                    </>
+                )}
+            </div>
+        </div>
+    );
+}
+
+function DashboardSlider({ stats }) {
+    const loading = !stats;
+
     return (
         <div className="w-full max-w-[1260px] !mx-auto !px-4 md:px-6 lg:px-10 !my-6">
             <div className="!mb-6">
@@ -33,114 +88,44 @@ function DashboardSlider(props) {
                 className="dashboard-swiper"
             >
                 <SwiperSlide className="!w-auto">
-                    <div className="min-w-[280px] w-[360px] bg-transparent rounded-xl !p-6 border border-slate-700 hover:border-orange-500 transition-all duration-300 cursor-pointer group hover:shadow-lg hover:shadow-orange-500/10">
-                        <div className="flex items-start justify-between !mb-4">
-                            <div className="flex items-center !space-x-4">
-                                <div className="!p-3 bg-orange-500 rounded-lg group-hover:bg-orange-400 transition-colors duration-300">
-                                    <MdBorderColor className="text-white text-xl" />
-                                </div>
-                                <div>
-                                    <p className="text-gray-400 text-sm font-medium">New Orders</p>
-                                    <b className="text-white text-2xl font-bold">1,390</b>
-                                </div>
-                            </div>
-                            <div className="!p-2 bg-slate-700 rounded-lg group-hover:bg-slate-600 transition-colors duration-300">
-                                <IoStatsChartSharp className="text-orange-500 text-[30px]" />
-                            </div>
-                        </div>
-
-                        <div className="flex items-center !space-x-2 !mt-4 !pt-4 border-t border-slate-700">
-                            <div className="flex items-center !space-x-1">
-                                <FaAngleDoubleUp className="text-green-500 text-sm" />
-                                <span className="text-green-500 font-semibold text-sm">+33.54%</span>
-                            </div>
-                            <p className="text-gray-400 text-xs">Increased last month</p>
-                        </div>
-                    </div>
+                    <StatCard
+                        icon={<MdBorderColor className="text-white text-xl" />}
+                        label="New Orders"
+                        value={!loading && formatCount(stats.newOrders.value)}
+                        changePercent={!loading && stats.newOrders.changePercent}
+                        loading={loading}
+                    />
                 </SwiperSlide>
 
                 <SwiperSlide className="!w-auto">
-                    <div className="min-w-[280px] w-[360px] bg-transparent rounded-xl !p-6 border border-slate-700 hover:border-orange-500 transition-all duration-300 cursor-pointer group hover:shadow-lg hover:shadow-orange-500/10">
-                        <div className="flex items-start justify-between !mb-4">
-                            <div className="flex items-center !space-x-4">
-                                <div className="!p-3 bg-orange-500 rounded-lg group-hover:bg-orange-400 transition-colors duration-300">
-                                    <IoBag className="text-white text-xl" />
-                                </div>
-                                <div>
-                                    <p className="text-gray-400 text-sm font-medium">Sales</p>
-                                    <b className="text-white text-2xl font-bold">$984,367</b>
-                                </div>
-                            </div>
-                            <div className="!p-2 bg-slate-700 rounded-lg group-hover:bg-slate-600 transition-colors duration-300">
-                                <IoStatsChartSharp className="text-orange-500 text-[30px]" />
-                            </div>
-                        </div>
-
-                        <div className="flex items-center !space-x-2 !mt-4 !pt-4 border-t border-slate-700">
-                            <div className="flex items-center !space-x-1">
-                                <FaAnglesDown className="text-red-500 text-sm" />
-                                <span className="text-red-500 font-semibold text-sm">-5.12%</span>
-                            </div>
-                            <p className="text-gray-400 text-xs">Decreased last month</p>
-                        </div>
-                    </div>
+                    <StatCard
+                        icon={<IoBag className="text-white text-xl" />}
+                        label="Sales"
+                        value={!loading && formatCurrency(stats.sales.value)}
+                        changePercent={!loading && stats.sales.changePercent}
+                        loading={loading}
+                    />
                 </SwiperSlide>
 
                 <SwiperSlide className="!w-auto">
-                    <div className="min-w-[280px] w-[360px] bg-transparent rounded-xl !p-6 border border-slate-700 hover:border-orange-500 transition-all duration-300 cursor-pointer group hover:shadow-lg hover:shadow-orange-500/10">
-                        <div className="flex items-start justify-between !mb-4">
-                            <div className="flex items-center !space-x-4">
-                                <div className="!p-3 bg-orange-500 rounded-lg group-hover:bg-orange-400 transition-colors duration-300">
-                                    <RiMoneyRupeeCircleFill className="text-white text-xl" />
-                                </div>
-                                <div>
-                                    <p className="text-gray-400 text-sm font-medium">Revenue</p>
-                                    <b className="text-white text-2xl font-bold">$13,890</b>
-                                </div>
-                            </div>
-                            <div className="!p-2 bg-slate-700 rounded-lg group-hover:bg-slate-600 transition-colors duration-300">
-                                <IoStatsChartSharp className="text-orange-500 text-[30px]" />
-                            </div>
-                        </div>
-
-                        <div className="flex items-center !space-x-2 !mt-4 !pt-4 border-t border-slate-700">
-                            <div className="flex items-center !space-x-1">
-                                <FaAngleDoubleUp className="text-green-500 text-sm" />
-                                <span className="text-green-500 font-semibold text-sm">+33.54%</span>
-                            </div>
-                            <p className="text-gray-400 text-xs">Increased last month</p>
-                        </div>
-                    </div>
+                    <StatCard
+                        icon={<RiMoneyRupeeCircleFill className="text-white text-xl" />}
+                        label="Revenue"
+                        value={!loading && formatCurrency(stats.revenue.value)}
+                        changePercent={!loading && stats.revenue.changePercent}
+                        loading={loading}
+                    />
                 </SwiperSlide>
 
                 <SwiperSlide className="!w-auto">
-                    <div className="min-w-[280px] w-[360px] bg-transparent rounded-xl !p-6 border border-slate-700 hover:border-orange-500 transition-all duration-300 cursor-pointer group hover:shadow-lg hover:shadow-orange-500/10">
-                        <div className="flex items-start justify-between !mb-4">
-                            <div className="flex items-center !space-x-4">
-                                <div className="!p-3 bg-orange-500 rounded-lg group-hover:bg-orange-400 transition-colors duration-300">
-                                    <FaUserAlt className="text-white text-xl" />
-                                </div>
-                                <div>
-                                    <p className="text-gray-400 text-sm font-medium">Customers</p>
-                                    <b className="text-white text-2xl font-bold">2,847</b>
-                                </div>
-                            </div>
-                            <div className="!p-2 bg-slate-700 rounded-lg group-hover:bg-slate-600 transition-colors duration-300">
-                                <IoStatsChartSharp className="text-orange-500 text-[30px]" />
-                            </div>
-                        </div>
-
-                        <div className="flex items-center !space-x-2 !mt-4 !pt-4 border-t border-slate-700">
-                            <div className="flex items-center !space-x-1">
-                                <FaAngleDoubleUp className="text-green-500 text-sm" />
-                                <span className="text-green-500 font-semibold text-sm">+12.8%</span>
-                            </div>
-                            <p className="text-gray-400 text-xs">Increased last month</p>
-                        </div>
-                    </div>
+                    <StatCard
+                        icon={<FaUserAlt className="text-white text-xl" />}
+                        label="Customers"
+                        value={!loading && formatCount(stats.customers.value)}
+                        changePercent={!loading && stats.customers.changePercent}
+                        loading={loading}
+                    />
                 </SwiperSlide>
-
-
             </Swiper>
 
             <style jsx>{`

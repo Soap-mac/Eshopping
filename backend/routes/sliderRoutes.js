@@ -3,6 +3,8 @@ const { uploadImage } = require('../helpers/cloudinary');
 const sliders = require('../models/sliders');
 const router = express.Router();
 const multer = require('multer');
+const authentication = require('../middlewares/authVerify');
+const isAdmin = require('../middlewares/isAdmin');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -15,7 +17,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: multer.diskStorage({}), limits: { fileSize: 50 * 1024 * 1024 } });
 
-router.post('/addSlider', upload.single('file'), async (req, res) => {
+router.post('/addSlider', authentication, isAdmin, upload.single('file'), async (req, res) => {
     try {
         const img = req.file;
         if (!img) {
