@@ -29,7 +29,7 @@ router.post('/upload-avatar', authentication, upload.single('file'), async (req,
             });
         }
 
-        const userExists = await user.findById({ email });
+        const userExists = await user.findById(req.user.id);
         if (userExists.avatar) {
             const publicId = userExists.avatar.split('/').pop().split('.')[0];
             await removeImage('eshopping/' + publicId);
@@ -54,7 +54,7 @@ router.post('/upload-avatar', authentication, upload.single('file'), async (req,
 router.post('/remove-avatar', authentication, async (req, res) => {
     try {
 
-        const userExists = await user.findById({ email });
+        const userExists = await user.findById(req.user.id);
         if (!userExists) {
             return res.json({
                 success: false,
@@ -89,7 +89,7 @@ router.post('/remove-avatar', authentication, async (req, res) => {
 router.get('/profileDetails', authentication, async (req, res) => {
     try {
 
-        const userExists = await user.findById({ email });
+        const userExists = await user.findById(req.user.id);
         if (!userExists) {
             return res.json({
                 success: false,
@@ -118,7 +118,7 @@ router.post('/update-profile', authentication, async (req, res) => {
     try {
         const { name, email, mobile } = req.body;
 
-        const userExists = await user.findById({ email });
+        const userExists = await user.findById(req.user.id);
         if (!userExists) {
             return res.json({
                 success: false,
