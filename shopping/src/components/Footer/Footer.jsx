@@ -157,45 +157,36 @@ function Footer() {
                         </p>
 
                         <ul className="!pt-[20px] text-[#a49a9a] text-[14px]">
-                            <li className="!pb-[10px]">
+                            <li className='!pb-[10px]'>
                                 <Link
-                                    to="/Help"
+                                    to="/Help#delivery"
                                     className="hover:text-orange-400 transition-colors"
                                 >
                                     Delivery
                                 </Link>
                             </li>
 
-                            <li className="!pb-[10px]">
+                            <li className='!pb-[10px]'>
                                 <Link
-                                    to="/Help"
+                                    to="/Help#legal"
                                     className="hover:text-orange-400 transition-colors"
                                 >
                                     Legal Notice
                                 </Link>
                             </li>
 
-                            <li className="!pb-[10px]">
+                            <li className='!pb-[10px]'>
                                 <Link
-                                    to="/Help"
+                                    to="/Help#terms"
                                     className="hover:text-orange-400 transition-colors"
                                 >
                                     Terms and Conditions
                                 </Link>
                             </li>
 
-                            <li className="!pb-[10px]">
+                            <li className='!pb-[10px]'>
                                 <Link
-                                    to="/"
-                                    className="hover:text-orange-400 transition-colors"
-                                >
-                                    About Us
-                                </Link>
-                            </li>
-
-                            <li className="!pb-[10px]">
-                                <Link
-                                    to="/Checkout"
+                                    to="/Help#payment"
                                     className="hover:text-orange-400 transition-colors"
                                 >
                                     Secure Payment
