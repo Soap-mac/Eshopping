@@ -16,7 +16,7 @@ router.post('/addReview', authentication, async (req, res) => {
             return res.status(400).json({ message: 'Product ID and rating and comment are required' });
         }
 
-        const userData = await user.findById({ email });
+        const userData = await user.findById(req.user.id);
         if (!userData) {
             return res.status(404).json({ message: 'User not found' });
         }

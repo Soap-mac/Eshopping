@@ -39,7 +39,7 @@ router.post('/addToCart', authentication, async (req, res) => {
             return res.status(400).json({ message: 'Either variant SKU or selected options are required' });
         }
 
-        const userData = await user.findById({ email });
+        const userData = await user.findById(req.user.id);
         if (!userData) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -144,7 +144,7 @@ router.post('/changeQuantity', authentication, async (req, res) => {
             });
         }
 
-        const userData = await user.findById({ email });
+        const userData = await user.findById(req.user.id);
 
         if (!userData) {
             return res.status(404).json({
@@ -235,7 +235,7 @@ router.get('/getCart', authentication, async (req, res) => {
     try {
 
 
-        const userData = await user.findById({ email });
+        const userData = await user.findById(req.user.id);
         if (!userData) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -282,7 +282,7 @@ router.post('/removeFromcart', authentication, async (req, res) => {
         const { cartItemId, productId, variantSku } = req.body;
 
 
-        const userData = await user.findById({ email });
+        const userData = await user.findById(req.user.id);
         if (!userData) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -323,7 +323,7 @@ router.get('/validateCart', authentication, async (req, res) => {
     try {
 
 
-        const userData = await user.findById({ email });
+        const userData = await user.findById(req.user.id);
         if (!userData) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -375,7 +375,7 @@ router.delete('/clearCart', authentication, async (req, res) => {
     try {
 
 
-        const userData = await user.findById({ email });
+        const userData = await user.findById(req.user.id);
         if (!userData) {
             return res.status(404).json({ message: 'User not found' });
         }

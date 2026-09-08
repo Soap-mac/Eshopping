@@ -16,8 +16,6 @@ function productitems(props) {
     const [imgLoaded, setImgLoaded] = useState(false);
     const [imgError, setImgError] = useState(false);
 
-    // Wishlist state lives in context — no per-card network call, and this
-    // stays in sync everywhere (drawer, other cards) the instant it changes.
     const wishlisted = context?.isWishlisted?.(item?._id) ?? false;
 
     const oldPrice = item?.oldPrice;
@@ -41,8 +39,7 @@ function productitems(props) {
     const handleWishlistToggle = (e) => {
         stopAndRun(e, async () => {
             const result = await context?.toggleWishlist?.(item);
-            // Only redirect if the server actually says "you're not logged in" —
-            // not on every failure (e.g. a harmless race condition).
+
             if (result?.authRequired) {
                 navigate('/Login');
             }

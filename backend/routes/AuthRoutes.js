@@ -233,7 +233,7 @@ router.post('/forgot-password', authLimiter, [
 });
 
 
-router.post('/verify-otp', async (req, res) => {
+router.post('/verify-otp', authLimiter, async (req, res) => {
     try {
         const { email, otp } = req.body;
 
@@ -265,7 +265,7 @@ router.post('/verify-otp', async (req, res) => {
 });
 
 
-router.post('/reset-password', async (req, res) => {
+router.post('/reset-password', authLimiter, async (req, res) => {
     try {
         const { email, otp, newPassword } = req.body;
 
