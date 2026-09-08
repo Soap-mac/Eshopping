@@ -168,6 +168,15 @@ function Footer() {
 
                             <li className='!pb-[10px]'>
                                 <Link
+                                    to="/Help#returns"
+                                    className="hover:text-orange-400 transition-colors"
+                                >
+                                    Returns &amp; Refunds
+                                </Link>
+                            </li>
+
+                            <li className='!pb-[10px]'>
+                                <Link
                                     to="/Help#legal"
                                     className="hover:text-orange-400 transition-colors"
                                 >
@@ -190,6 +199,15 @@ function Footer() {
                                     className="hover:text-orange-400 transition-colors"
                                 >
                                     Secure Payment
+                                </Link>
+                            </li>
+
+                            <li className='!pb-[10px]'>
+                                <Link
+                                    to="/Help#contact"
+                                    className="hover:text-orange-400 transition-colors"
+                                >
+                                    Contact Support
                                 </Link>
                             </li>
                         </ul>
