@@ -233,9 +233,23 @@ router.get("/getMyOrders", authentication, async (req, res) => {
 
 router.get("/getAllOrders", authentication, isAdmin, async (req, res) => {
     try {
-        const orders = await Orders.find()
-            .populate("userId", "userName email")
-            .sort({ createdAt: -1 });
+        const page = Math.max(Number(req.query.page) || 1, 1);
+        const limit = Math.min(
+            Math.max(Number(req.query.limit) || 10, 1),
+            50
+        );
+
+        const skip = (page - 1) * limit;
+
+        const [orders, totalOrders] = await Promise.all([
+            Orders.find()
+                .populate("userId", "userName email")
+                .sort({ createdAt: -1 })
+                .skip(skip)
+                .limit(limit),
+
+            Orders.countDocuments()
+        ]);
 
         const formattedOrders = orders.map(order => ({
             id: order.orderId,
@@ -243,17 +257,31 @@ router.get("/getAllOrders", authentication, isAdmin, async (req, res) => {
             customerName: order.userId?.userName || "Unknown",
             customerEmail: order.userId?.email || "",
             items: order.items.map(item => item.name).join(", "),
-            quantity: order.items.reduce((total, item) => total + item.quantity, 0),
+            quantity: order.items.reduce(
+                (total, item) => total + item.quantity,
+                0
+            ),
             total: order.totalAmount,
             status: order.orderStatus,
             paymentMethod: order.paymentMethod,
             paymentStatus: order.paymentStatus
         }));
 
-        return res.status(200).json({ success: true, orders: formattedOrders });
+        return res.status(200).json({
+            success: true,
+            orders: formattedOrders,
+            totalPages: Math.ceil(totalOrders / limit),
+            currentPage: page,
+            totalOrders
+        });
+
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ success: false, message: "Internal server error" });
+
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error"
+        });
     }
 });
 

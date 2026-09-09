@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CiEdit } from "react-icons/ci";
 import { FaEye } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
@@ -9,227 +9,441 @@ import TextField from '@mui/material/TextField';
 import { Box } from '@mui/material';
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
+import Pagination from '@mui/material/Pagination';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function ProductsTable({
-    allProducts,
+    allProducts = [],
     setAllProducts,
-    category,
+    category = 'All',
     setCategory,
-    setPage
+    page = 1,
+    setPage,
+    totalPages = 1,
+    totalProducts = 0,
+    loading = false,
+    searchQuery = '',
+    setSearchQuery
 }) {
-    // const [category, setCategory] = useState('All');
-    const [searchQuery, setSearchQuery] = useState('');
+    const [searchInput, setSearchInput] = useState(searchQuery);
 
-    const handleSearchChange = (event) => {
-        setSearchQuery(event.target.value.toLowerCase());
+    useEffect(() => {
+        setSearchInput(searchQuery);
+    }, [searchQuery]);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (searchInput !== searchQuery) {
+                setSearchQuery?.(searchInput);
+            }
+        }, 400);
+
+        return () => clearTimeout(timer);
+    }, [searchInput, searchQuery, setSearchQuery]);
+
+    const handleCategoryChange = (event) => {
+        const value = event.target.value;
+
+        setCategory?.(value);
+        setPage?.(1);
     };
 
-
-    const filteredProducts = useMemo(() => {
-
-        if (!allProducts) return [];
-
-        return allProducts.filter(item =>
-            item.name.toLowerCase().includes(searchQuery)
-        );
-
-    }, [allProducts, searchQuery]);
-
-    // console.log(props);
-
-    const handleChange = (event) => {
-        setCategory(event.target.value);
-        setPage(1);
+    const handlePageChange = (_, value) => {
+        setPage?.(value);
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     };
 
     const deleteProduct = async (id) => {
-        console.log(id);
-        const formData = new FormData();
-        formData.append('id', id);
         try {
             const url = `${import.meta.env.VITE_API_URL}/deleteproducts/${id}`;
+
             const response = await fetch(url, {
                 method: 'DELETE',
                 credentials: 'include',
             });
 
-
             const result = await response.json();
-            console.log(result.success);
-            if (result.success) {
-                setAllProducts(prev =>
-                    prev.filter(product => product._id !== id)
-                );
-            }
-            console.log(result);
-        } catch (error) {
 
+            if (!response.ok || !result.success) {
+                console.error(
+                    result?.message || 'Failed to delete product'
+                );
+                return;
+            }
+
+            setAllProducts?.(prev =>
+                prev.filter(product => product._id !== id)
+            );
+
+            if (
+                allProducts.length === 1 &&
+                page > 1
+            ) {
+                setPage?.(page - 1);
+            }
+        } catch (error) {
+            console.error('Delete product error:', error);
         }
-    }
+    };
 
     return (
-        <div className="min-h-screen bg-transparent !p-6 !mt-[20px]">
-            <div className="max-w-7xl !mx-auto">
-                <h3 className='text-orange-500 text-3xl font-bold !mb-8 !px-2'>PRODUCTS</h3>
+        <div className="!min-h-screen !bg-transparent !p-6 !mt-[20px]">
+            <div className="!mx-auto !max-w-7xl">
 
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                    <div className="!text-gray-200">
+                <div className="!mb-8 !flex !flex-col !gap-5 sm:!flex-row sm:!items-center sm:!justify-between">
+                    <div>
+                        <h3 className="!m-0 !text-3xl !font-bold !text-orange-500">
+                            PRODUCTS
+                        </h3>
+
+                        <p className="!m-0 !mt-2 !text-[13px] !text-gray-500">
+                            {totalProducts} total product{totalProducts !== 1 ? 's' : ''}
+                        </p>
+                    </div>
+
+                    <div className="!flex !w-full !flex-col !gap-4 sm:!w-auto sm:!flex-row sm:!items-center">
+
                         <Select
-
-
-                            value={category}
-                            label="Age"
-                            onChange={handleChange}
-                            className='!text-gray-200 !w-[200px] border border-amber-50 !pl-[20px] !mb-[20px] !bg-transparent'
+                            value={category || 'All'}
+                            onChange={handleCategoryChange}
+                            displayEmpty
+                            className="!w-full sm:!w-[200px] !border !border-white/10 !bg-[#151515] !text-gray-200"
                             MenuProps={{
                                 PaperProps: {
                                     sx: {
-                                        background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)',
-
-                                        color: 'white',
-                                        marginLeft: '0px',
-                                        padding: '10px',
-                                        width: '180px'
+                                        backgroundColor: '#151515',
+                                        color: '#fff',
+                                        border: '1px solid rgba(255,255,255,0.08)',
+                                        marginTop: '6px'
                                     }
                                 }
                             }}
+                            sx={{
+                                '& .MuiOutlinedInput-notchedOutline': {
+                                    border: 'none'
+                                },
+                                '& .MuiSelect-select': {
+                                    padding: '10px 14px',
+                                    color: '#e5e7eb'
+                                },
+                                '& .MuiSelect-icon': {
+                                    color: '#f97316'
+                                }
+                            }}
                         >
-                            <MenuItem value={'All'}>All</MenuItem>
-                            <MenuItem value={'Fashion'}>Fashion</MenuItem>
-                            <MenuItem value={'Electronics'}>Electronics</MenuItem>
-                            <MenuItem value={'Beauty'}>Beauty</MenuItem>
-                            <MenuItem value={'Books'}>Books</MenuItem>
-                            <MenuItem value={'Groceries'}>Groceries</MenuItem>
-                            <MenuItem value={'Home'}>Home</MenuItem>
-                        </Select>
-                    </div>
-                    <div className="sm:!mr-[50px]">
-                        <Box
-                        >
+                            <MenuItem value="All">
+                                All
+                            </MenuItem>
 
-                            <TextField value={searchQuery}
-                                onChange={handleSearchChange} sx={{
+                            <MenuItem value="Fashion">
+                                Fashion
+                            </MenuItem>
+
+                            <MenuItem value="Electronics">
+                                Electronics
+                            </MenuItem>
+
+                            <MenuItem value="Beauty">
+                                Beauty
+                            </MenuItem>
+
+                            <MenuItem value="Books">
+                                Books
+                            </MenuItem>
+
+                            <MenuItem value="Groceries">
+                                Groceries
+                            </MenuItem>
+
+                            <MenuItem value="Home">
+                                Home
+                            </MenuItem>
+                        </Select>
+
+                        <Box className="!w-full sm:!w-[240px]">
+                            <TextField
+                                value={searchInput}
+                                onChange={(event) =>
+                                    setSearchInput(event.target.value)
+                                }
+                                id="product-search"
+                                fullWidth
+                                label={
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '8px'
+                                        }}
+                                    >
+                                        <FaMagnifyingGlass />
+                                        <span>Search products</span>
+                                    </div>
+                                }
+                                variant="standard"
+                                sx={{
                                     '& .MuiInput-input': {
                                         color: 'white'
                                     },
                                     '& .MuiInputLabel-root': {
-                                        color: '#d1d5db'
+                                        color: '#9ca3af'
+                                    },
+                                    '& .MuiInputLabel-root.Mui-focused': {
+                                        color: '#f97316'
                                     },
                                     '& .MuiInput-underline:before': {
-                                        borderBottomColor: '#6b7280'
+                                        borderBottomColor: '#4b5563'
                                     },
-                                }} id="standard-basic" label={<div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                    <FaMagnifyingGlass />
-                                    <span>Search</span>
-                                </div>} variant="standard" className='!text-gray-200' />
+                                    '& .MuiInput-underline:hover:before': {
+                                        borderBottomColor: '#f97316'
+                                    },
+                                    '& .MuiInput-underline:after': {
+                                        borderBottomColor: '#f97316'
+                                    }
+                                }}
+                            />
                         </Box>
-                    </div>
 
+                    </div>
                 </div>
 
-                <div className="backdrop-blur-lg bg-gray-900/40 border border-gray-700/50 rounded-2xl shadow-2xl">
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-sm text-left overflow-hidden">
-                            <thead className="text-base text-amber-100 uppercase bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-b border-gray-700/50">
+                <div className="!overflow-hidden !rounded-2xl !border !border-gray-700/50 !bg-gray-900/40 !shadow-2xl">
+
+                    <div className="!overflow-x-auto">
+
+                        <table className="!w-full !min-w-[1050px] !text-left !text-sm">
+
+                            <thead className="!border-b !border-gray-700/50 !bg-gradient-to-r !from-gray-900/90 !to-gray-800/90 !text-base !uppercase !text-amber-100">
                                 <tr>
-                                    <th scope="col" className="!px-6 !py-5 font-semibold">
+                                    <th className="!px-6 !py-5 !font-semibold">
                                         ID
                                     </th>
-                                    <th scope="col" className="!px-6 !py-5 font-semibold ">
+
+                                    <th className="!px-6 !py-5 !font-semibold">
                                         Image
                                     </th>
-                                    <th scope="col" className="!px-6 !py-5 font-semibold ">
+
+                                    <th className="!px-6 !py-5 !font-semibold">
                                         Product
                                     </th>
-                                    <th scope="col" className="!px-6 !py-5 font-semibold  text-center">
+
+                                    <th className="!px-6 !py-5 !font-semibold !text-center">
                                         Category
                                     </th>
-                                    <th scope="col" className="!px-6 !py-5 font-semibold ">
+
+                                    <th className="!px-6 !py-5 !font-semibold">
                                         Sub Category
                                     </th>
-                                    <th scope="col" className="!px-6 !py-5 font-semibold ">
+
+                                    <th className="!px-6 !py-5 !font-semibold">
                                         Price
                                     </th>
-                                    <th scope="col" className="!px-6 !py-5 font-semibold ">
+
+                                    <th className="!px-6 !py-5 !font-semibold">
                                         Sales
                                     </th>
-                                    <th scope="col" className="!px-6 !py-5 font-semibold text-center">
+
+                                    <th className="!px-6 !py-5 !font-semibold !text-center">
                                         Actions
                                     </th>
                                 </tr>
                             </thead>
+
                             <tbody>
-                                {console.log(allProducts)}
-                                {allProducts &&
+                                {loading ? (
+                                    <tr>
+                                        <td
+                                            colSpan={8}
+                                            className="!px-6 !py-20"
+                                        >
+                                            <div className="!flex !flex-col !items-center !justify-center !gap-3">
+                                                <CircularProgress
+                                                    size={35}
+                                                    sx={{
+                                                        color: '#f97316'
+                                                    }}
+                                                />
 
-
-                                    filteredProducts.map((item, index) => (
+                                                <p className="!m-0 !text-[13px] !text-white/40">
+                                                    Loading products...
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ) : allProducts.length > 0 ? (
+                                    allProducts.map((item, index) => (
                                         <tr
                                             key={item._id}
-                                            className={`border-b border-gray-700/30 hover:bg-gradient-to-r hover:from-gray-700/30 hover:to-gray-600/20 transition-all duration-300 transform hover:scale-[1.01] ${index % 2 === 0 ? 'bg-gray-800/20' : 'bg-gray-800/10'
+                                            className={`!border-b !border-gray-700/30 !transition-all !duration-300 hover:!bg-gray-700/20 ${index % 2 === 0
+                                                    ? '!bg-gray-800/20'
+                                                    : '!bg-gray-800/10'
                                                 }`}
                                         >
-                                            <th scope="row" className="!px-6 !py-6 font-semibold text-amber-400 whitespace-nowrap">
+
+                                            <th
+                                                scope="row"
+                                                className="!max-w-[180px] !break-all !px-6 !py-6 !font-semibold !text-amber-400"
+                                            >
                                                 {item._id}
                                             </th>
+
                                             <td className="!px-6 !py-6">
-                                                <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-700/30 border border-gray-600/30 shadow-lg">
+                                                <div className="!h-16 !w-16 !overflow-hidden !rounded-lg !border !border-gray-600/30 !bg-gray-700/30 !shadow-lg">
                                                     <img
-                                                        src={item.images[0]}
-                                                        alt={item.product}
-                                                        className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                                                        src={item?.images?.[0]}
+                                                        alt={
+                                                            item?.name ||
+                                                            'Product'
+                                                        }
+                                                        className="!h-full !w-full !object-cover !transition-transform !duration-300 hover:!scale-110"
                                                     />
                                                 </div>
                                             </td>
-                                            <td className="!px-6 !py-6 text-gray-200 max-w-xs">
-                                                <div className="font-medium text-base">
-                                                    {item.name}
+
+                                            <td className="!max-w-xs !px-6 !py-6 !text-gray-200">
+                                                <div className="!text-base !font-medium">
+                                                    {item?.name || 'Unnamed Product'}
                                                 </div>
                                             </td>
-                                            <td className="!px-6 !py-6 text-center">
-                                                <div className="!px-3 !py-2 rounded-full text-sm font-medium text-gray-200 shadow-md">
-                                                    {item.catName}
+
+                                            <td className="!px-6 !py-6 !text-center">
+                                                <div className="!rounded-full !px-3 !py-2 !text-sm !font-medium !text-gray-200">
+                                                    {item?.catName || '—'}
                                                 </div>
                                             </td>
-                                            <td className="!px-6 !py-6 text-gray-200 font-semibold text-base">
-                                                {item.SubcatName}
+
+                                            <td className="!px-6 !py-6 !text-base !font-semibold !text-gray-200">
+                                                {item?.SubcatName || '—'}
                                             </td>
-                                            <td className="!px-6 !py-6 text-green-400 font-bold text-lg">
-                                                ${item.price}
+
+                                            <td className="!px-6 !py-6 !text-lg !font-bold !text-green-400">
+                                                ₹{Number(item?.price || 0).toLocaleString()}
                                             </td>
-                                            <td className="!px-6 !py-6 text-blue-400 font-semibold text-base">
-                                                {item.sales}
+
+                                            <td className="!px-6 !py-6 !text-base !font-semibold !text-blue-400">
+                                                {item?.sales ?? 0}
                                             </td>
+
                                             <td className="!px-6 !py-6">
-                                                <div className="flex items-center justify-center gap-3">
-                                                    <Tooltip title="View" placement="top">
-                                                        <button className="flex items-center justify-center !p-2 rounded-lg bg-blue-600/20 hover:bg-blue-600/40 border border-blue-500/30 hover:border-blue-400/50 text-blue-400 hover:text-blue-300 transition-all duration-200 hover:scale-110 shadow-md">
+                                                <div className="!flex !items-center !justify-center !gap-3">
+
+                                                    <Tooltip
+                                                        title="View"
+                                                        placement="top"
+                                                    >
+                                                        <Link
+                                                            to={`/Productdetail/${item._id}`}
+                                                            className="!flex !items-center !justify-center !rounded-lg !border !border-blue-500/30 !bg-blue-600/20 !p-2 !text-blue-400 !shadow-md !transition-all !duration-200 hover:!scale-110 hover:!border-blue-400/50 hover:!bg-blue-600/40 hover:!text-blue-300"
+                                                        >
                                                             <FaEye size={16} />
-                                                        </button>
-                                                    </Tooltip>
-                                                    <Tooltip title="Edit" placement="top">
-                                                        <Link to={`/editproduct/${item._id}`}>
-                                                            <button className="flex items-center justify-center !p-2 rounded-lg bg-amber-600/20 hover:bg-amber-600/40 border border-amber-500/30 hover:border-amber-400/50 text-amber-400 hover:text-amber-300 transition-all duration-200 hover:scale-110 shadow-md">
-                                                                <CiEdit size={16} />
-                                                            </button>
                                                         </Link>
                                                     </Tooltip>
-                                                    <Tooltip title="Delete" placement="top">
-                                                        <button className="flex items-center justify-center !p-2 rounded-lg bg-red-600/20 hover:bg-red-600/40 border border-red-500/30 hover:border-red-400/50 text-red-400 hover:text-red-300 transition-all duration-200 hover:scale-110 shadow-md">
-                                                            <FaRegTrashCan size={16} onClick={() => deleteProduct(item._id)} />
+
+                                                    <Tooltip
+                                                        title="Edit"
+                                                        placement="top"
+                                                    >
+                                                        <Link
+                                                            to={`/editproduct/${item._id}`}
+                                                            className="!flex !items-center !justify-center !rounded-lg !border !border-amber-500/30 !bg-amber-600/20 !p-2 !text-amber-400 !shadow-md !transition-all !duration-200 hover:!scale-110 hover:!border-amber-400/50 hover:!bg-amber-600/40 hover:!text-amber-300"
+                                                        >
+                                                            <CiEdit size={16} />
+                                                        </Link>
+                                                    </Tooltip>
+
+                                                    <Tooltip
+                                                        title="Delete"
+                                                        placement="top"
+                                                    >
+                                                        <button
+                                                            type="button"
+                                                            onClick={() =>
+                                                                deleteProduct(item._id)
+                                                            }
+                                                            className="!flex !items-center !justify-center !rounded-lg !border !border-red-500/30 !bg-red-600/20 !p-2 !text-red-400 !shadow-md !transition-all !duration-200 hover:!scale-110 hover:!border-red-400/50 hover:!bg-red-600/40 hover:!text-red-300"
+                                                        >
+                                                            <FaRegTrashCan size={16} />
                                                         </button>
                                                     </Tooltip>
+
                                                 </div>
                                             </td>
                                         </tr>
                                     ))
-                                }
+                                ) : (
+                                    <tr>
+                                        <td
+                                            colSpan={8}
+                                            className="!px-6 !py-20 !text-center"
+                                        >
+                                            <p className="!m-0 !text-[16px] !font-semibold !text-white">
+                                                No products found
+                                            </p>
+
+                                            <p className="!m-0 !mt-2 !text-[13px] !text-gray-500">
+                                                Try changing your search or category filter.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                )}
                             </tbody>
+
                         </table>
+
                     </div>
                 </div>
+
+                {totalPages > 1 && (
+                    <div className="!mt-6 !flex !justify-center !px-2">
+
+                        <Pagination
+                            count={totalPages}
+                            page={page}
+                            onChange={handlePageChange}
+                            siblingCount={1}
+                            boundaryCount={1}
+                            sx={{
+                                '& .MuiPaginationItem-root': {
+                                    color: '#fef3c7'
+                                },
+                                '& .MuiPaginationItem-root.Mui-selected': {
+                                    backgroundColor: '#f97316',
+                                    color: '#fff'
+                                },
+                                '& .MuiPaginationItem-root.Mui-selected:hover': {
+                                    backgroundColor: '#ea580c'
+                                },
+                                '& .MuiPaginationItem-root:hover': {
+                                    backgroundColor:
+                                        'rgba(249,115,22,0.12)'
+                                },
+                                '& .MuiPaginationItem-root.Mui-disabled': {
+                                    color: 'rgba(255,255,255,0.20)'
+                                }
+                            }}
+                        />
+
+                    </div>
+                )}
+
+                {!loading && allProducts.length > 0 && (
+                    <p className="!mt-3 !text-center !text-[12px] !text-white/40">
+                        Showing {(page - 1) * 10 + 1}
+                        {' - '}
+                        {Math.min(
+                            page * 10,
+                            totalProducts
+                        )}
+                        {' of '}
+                        {totalProducts}
+                    </p>
+                )}
+
             </div>
-        </div >
+        </div>
     )
 }
 

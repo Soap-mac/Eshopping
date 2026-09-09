@@ -168,9 +168,13 @@ router.post('/addproduct', authentication, isAdmin, upload.array('files'), async
 
 router.get('/getproducts', async (req, res) => {
     try {
+        const pageNumber = Math.max(Number(req.query.page) || 1, 1);
+        const limitNumber = Math.min(
+            Math.max(Number(req.query.limit) || 10, 1),
+            50
+        );
+
         const {
-            page = 1,
-            limit = 10,
             category,
             subCategory,
             innerSubCategory,
@@ -179,20 +183,38 @@ router.get('/getproducts', async (req, res) => {
             maxPrice,
             search,
             sort = '-createdAt',
-            inStock
+            inStock,
+            discounted
         } = req.query;
 
         const filter = {};
 
-        if (category) filter.catName = category;
-        if (subCategory) filter.SubcatName = subCategory;
-        if (innerSubCategory) filter.innersubcatName = innerSubCategory;
-        if (brand) filter.brand = new RegExp(brand, 'i');
+        if (category) {
+            filter.catName = category;
+        }
+
+        if (subCategory) {
+            filter.SubcatName = subCategory;
+        }
+
+        if (innerSubCategory) {
+            filter.innersubcatName = innerSubCategory;
+        }
+
+        if (brand) {
+            filter.brand = new RegExp(brand, 'i');
+        }
 
         if (minPrice || maxPrice) {
             filter.price = {};
-            if (minPrice) filter.price.$gte = Number(minPrice);
-            if (maxPrice) filter.price.$lte = Number(maxPrice);
+
+            if (minPrice) {
+                filter.price.$gte = Number(minPrice);
+            }
+
+            if (maxPrice) {
+                filter.price.$lte = Number(maxPrice);
+            }
         }
 
         if (search) {
@@ -204,11 +226,25 @@ router.get('/getproducts', async (req, res) => {
         }
 
         if (inStock === 'true') {
-            filter['variants.stock'] = { $gt: 0 };
+            filter.variants = {
+                $elemMatch: {
+                    stock: { $gt: 0 }
+                }
+            };
         }
 
         if (inStock === 'false') {
-            filter['variants.stock'] = { $lte: 0 };
+            filter.variants = {
+                $not: {
+                    $elemMatch: {
+                        stock: { $gt: 0 }
+                    }
+                }
+            };
+        }
+
+        if (discounted === 'true') {
+            filter.discount = { $gt: 0 };
         }
 
         const allProducts = await Product.find(filter)
@@ -216,24 +252,29 @@ router.get('/getproducts', async (req, res) => {
             .populate('subCategory', 'name')
             .populate('innerSubCategory', 'name')
             .sort(sort)
-            .limit(limit * 1)
-            .skip((page - 1) * limit)
+            .limit(limitNumber)
+            .skip((pageNumber - 1) * limitNumber)
             .exec();
 
         const count = await Product.countDocuments(filter);
 
         res.status(200).json({
+            success: true,
             allProducts,
-            totalPages: Math.ceil(count / limit),
-            currentPage: Number(page),
+            totalPages: Math.ceil(count / limitNumber),
+            currentPage: pageNumber,
             totalProducts: count,
-            message: 'All Products fetched',
-            success: true
+            message: 'All Products fetched'
         });
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: 'Internal Server Error', error: error.message });
+
+        res.status(500).json({
+            success: false,
+            message: 'Internal Server Error',
+            error: error.message
+        });
     }
 });
 
