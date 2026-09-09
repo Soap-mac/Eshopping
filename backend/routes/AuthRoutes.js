@@ -115,7 +115,7 @@ router.post('/login', authLimiter, [
     }
 });
 
-router.post('/logout', async (req, res) => {
+router.post('/logout', authMiddleware, async (req, res) => {
     try {
         const exists = await user.findById(req.user.id);
         if (!exists) {

@@ -1,13 +1,18 @@
+import React, { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import CartDrawer from './cartDrawer';
-import WishlistDrawer from './WishlistDrawer';
+
+const CartDrawer = lazy(() => import('./cartDrawer'));
+const WishlistDrawer = lazy(() => import('./WishlistDrawer'));
 
 function Layout() {
     return (
         <>
             <Outlet />
-            <CartDrawer />
-            <WishlistDrawer />
+
+            <Suspense fallback={null}>
+                <CartDrawer />
+                <WishlistDrawer />
+            </Suspense>
         </>
     );
 }

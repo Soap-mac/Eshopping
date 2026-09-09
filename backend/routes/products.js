@@ -207,6 +207,10 @@ router.get('/getproducts', async (req, res) => {
             filter['variants.stock'] = { $gt: 0 };
         }
 
+        if (inStock === 'false') {
+            filter['variants.stock'] = { $lte: 0 };
+        }
+
         const allProducts = await Product.find(filter)
             .populate('category', 'name')
             .populate('subCategory', 'name')
@@ -232,6 +236,30 @@ router.get('/getproducts', async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error', error: error.message });
     }
 });
+
+router.get('/getproductbrands', async (req, res) => {
+    try {
+        const brands = await Product.distinct('brand');
+
+        const cleanBrands = brands
+            .filter(brand => typeof brand === 'string' && brand.trim())
+            .map(brand => brand.trim())
+            .sort((a, b) => a.localeCompare(b));
+
+        res.status(200).json({
+            success: true,
+            brands: cleanBrands
+        });
+    } catch (error) {
+        console.log(error);
+
+        res.status(500).json({
+            success: false,
+            message: 'Failed to fetch product brands'
+        });
+    }
+});
+
 
 router.get('/getProduct/:id', async (req, res) => {
     try {
