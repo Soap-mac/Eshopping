@@ -177,6 +177,28 @@ function Header() {
                                                             </div>
                                                         </Link>
                                                     </MenuItem>
+                                                    {context?.role === 'admin' && (
+                                                        <MenuItem
+                                                            onClick={() => {
+                                                                handleClose();
+                                                                navigate('/AdminDashBoard');
+                                                            }}
+                                                            className="!px-4 !py-3 hover:!bg-gray-700 !transition-colors !duration-200"
+                                                            sx={{
+                                                                color: '#e5e7eb',
+                                                                '&:hover': {
+                                                                    backgroundColor: '#374151'
+                                                                }
+                                                            }}
+                                                        >
+                                                            <div className="flex items-center !space-x-3 !w-full">
+                                                                <span className="text-orange-400 text-sm">⚙</span>
+                                                                <span className="text-sm font-medium">
+                                                                    Admin Dashboard
+                                                                </span>
+                                                            </div>
+                                                        </MenuItem>
+                                                    )}
 
                                                     <MenuItem
                                                         className="!px-4 !py-3 hover:!bg-gray-700 !transition-colors !duration-200"
