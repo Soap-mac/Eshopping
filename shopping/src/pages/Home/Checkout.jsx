@@ -11,9 +11,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { handleSucess, handleError } from "../../utils";
 import { useNavigate } from "react-router-dom";
 
-
 function Checkout() {
-
     const navigate = useNavigate();
     const [cartProducts, setCartProducts] = useState([]);
     const [name, setName] = useState('');
@@ -86,9 +84,6 @@ function Checkout() {
         fetchCart();
     }, []);
 
-    // Mirrors the price resolution used in create-order / create-cod-order on
-    // the server: prefer the matched variant's price, fall back to the base
-    // product price.
     const getUnitPrice = (item) => {
         const product = item.productId;
         if (!product) return 0;
@@ -96,9 +91,6 @@ function Checkout() {
         return (variant && variant.price) || product.price || 0;
     };
 
-    // Populate the order summary as soon as the cart loads (and whenever it
-    // changes), using the same subtotal/tax/delivery formula as the backend,
-    // so the totals aren't stuck at zero until the payment button is clicked.
     useEffect(() => {
         if (!cartProducts || cartProducts.length === 0) {
             setPriceDetails({ subtotal: 0, taxes: 0, deliveryCost: 0, totalAmount: 0 });
@@ -286,8 +278,6 @@ function Checkout() {
         setEditingAddressId(null);
     };
 
-    // Opens the form pre-filled with an existing address's details so the
-    // user can change them, instead of creating a duplicate.
     const startEditAddress = (address) => {
         setEditingAddressId(address._id);
         setName(address.name || '');
@@ -386,9 +376,6 @@ function Checkout() {
             color: '#fef3c7',
             borderRadius: '12px',
         },
-        // The visible border is drawn by the notched-outline fieldset, which
-        // inherits the app's theme shape by default (that's what was causing
-        // the pill/stadium look) — force it explicitly so it always matches.
         '& .MuiOutlinedInput-notchedOutline': {
             borderRadius: '12px',
             borderColor: '#4b5563',
@@ -405,7 +392,6 @@ function Checkout() {
         },
     };
 
-    // Solid amber CTA — used for the two primary actions on the page
     const primaryButtonSx = {
         width: '100%',
         boxSizing: 'border-box',
@@ -541,7 +527,6 @@ function Checkout() {
 
     return (
         <>
-            {/* <Top /> */}
             <Header />
             <Navbar />
 
@@ -555,7 +540,6 @@ function Checkout() {
 
                     <div className="grid lg:grid-cols-5 gap-6 lg:gap-8 items-start">
 
-                        {/* LEFT COLUMN — ADDRESS */}
                         <div className="lg:col-span-3 box-border">
                             <div className="box-border bg-gray-800/50 border border-gray-700/50 rounded-2xl shadow-2xl overflow-hidden">
 
@@ -571,7 +555,6 @@ function Checkout() {
 
                                 <div className="!px-6 sm:!px-8 !py-6 sm:!py-7">
 
-                                    {/* SAVED ADDRESSES */}
                                     {addresses.length > 0 && (
                                         <div className="!space-y-3 !mb-6">
                                             <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider !mb-3">
@@ -581,11 +564,6 @@ function Checkout() {
                                             {addresses.map((address, index) => {
                                                 const selected = addressId === address._id;
 
-                                                // Build one complete, readable address line from
-                                                // whichever fields actually have data — matches the
-                                                // real address document shape (address_line, city,
-                                                // state, pincode), so incomplete records never show
-                                                // a bare trailing "," or "-".
                                                 const addressParts = [
                                                     address.address_line,
                                                     address.city,
@@ -686,10 +664,6 @@ function Checkout() {
                                         </div>
                                     )}
 
-                                    {/* ADD NEW ADDRESS — content-sized so it can never be
-                                        stretched full-width by a global button reset */}
-                                    {/* ADD NEW ADDRESS — content-sized so it can never be
-                                        stretched full-width by a global button reset */}
                                     {!showAddressForm && (
                                         <span className="inline-block max-w-full">
                                             <Button
@@ -705,7 +679,6 @@ function Checkout() {
                                         </span>
                                     )}
 
-                                    {/* ADDRESS FORM — shared between "add new" and "edit existing" */}
                                     {showAddressForm && (
                                         <div className={`box-border ${addresses.length > 0 ? "!mt-8 !pt-7 border-t border-gray-700/50" : ""}`}>
 
@@ -828,7 +801,6 @@ function Checkout() {
                                         </div>
                                     )}
 
-                                    {/* NEW ADDRESS FORM */}
                                     {showAddressForm && (
                                         <div className={`box-border ${addresses.length > 0 ? "!mt-8 !pt-7 border-t border-gray-700/50" : ""}`}>
 
@@ -921,7 +893,6 @@ function Checkout() {
                             </div>
                         </div>
 
-                        {/* RIGHT COLUMN — ORDER SUMMARY */}
                         <div className="lg:col-span-2 box-border lg:sticky lg:top-8">
                             <div className="box-border bg-gray-800/60 border border-gray-700/50 rounded-2xl shadow-2xl overflow-hidden">
 

@@ -20,13 +20,11 @@ const formatCurrency = (value) =>
 const formatCount = (value) =>
     Number(value || 0).toLocaleString('en-IN');
 
-// One summary card, driven entirely by real numbers from
-// GET /getDashboardStats instead of hardcoded placeholders.
 function StatCard({ icon, label, value, changePercent, loading }) {
     const isIncrease = changePercent >= 0;
 
     return (
-        <div className="min-w-[280px] w-[360px] bg-transparent rounded-xl !p-6 border border-slate-700 hover:border-orange-500 transition-all duration-300 cursor-pointer group hover:shadow-lg hover:shadow-orange-500/10">
+        <div className="min-w-70 w-90 bg-transparent rounded-xl !p-6 border border-slate-700 hover:border-orange-500 transition-all duration-300 cursor-pointer group hover:shadow-lg hover:shadow-orange-500/10">
             <div className="flex items-start justify-between !mb-4">
                 <div className="flex items-center !space-x-4">
                     <div className="!p-3 bg-orange-500 rounded-lg group-hover:bg-orange-400 transition-colors duration-300">

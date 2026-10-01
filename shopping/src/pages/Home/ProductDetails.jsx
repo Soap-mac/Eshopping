@@ -137,7 +137,6 @@ function ProductDetails() {
 
     return product && (
         <>
-            {/* <Top /> */}
             <Header />
             <Navbar />
             <div className="breadcrum-container !text-amber-50 !pt-[10px] !pb-[10px] !px-4 sm:!px-8 lg:!px-[90px] bg-[#1e1e1e]">
@@ -275,36 +274,23 @@ function ProductDetails() {
                                 <Rating name='size-small' defaultValue={0} size='medium' className='text-white !pt-3 !pl-[20px]' onChange={(event, newValue) => setRating(newValue)} value={rating} />
                                 <div className="submitReview">
                                     <Button className='!border !border-amber-50 !w-[150px] !ml-[20px] !bg-amber-600 !mt-[20px] !text-[15px] !min-w-[0px] !h-[40px]  !text-amber-50' onClick={submitReview}>Submit</Button>
-
                                 </div>
-
-
                             </Box>
-
-
 
                             <br />
                         </div>
-
                     }
                 </div>
-
             </div>
-
             <div className="w-[100%] min-h-[320px] sm:min-h-[400px] lg:h-[470px] bg-black !pb-6">
                 <p className='text-amber-50 !px-4 sm:!ml-[100px] sm:!px-0 text-[18px] sm:text-[22px] !pt-[20px]'>Product You Might Like</p>
                 <ProductSlider items={6} allProducts={relatedProducts} />
             </div>
-
-
             <div className="!pt-[40px] bg-black">
                 <Footer />
             </div>
-
         </>
-
     )
 }
-
 
 export default ProductDetails

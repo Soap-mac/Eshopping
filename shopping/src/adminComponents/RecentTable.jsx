@@ -221,8 +221,8 @@ function RecentTable() {
                                 <tr
                                     key={order.id}
                                     className={`border-b border-gray-700/30 hover:bg-gray-700/20 transition-colors duration-200 ${index % 2 === 0
-                                            ? 'bg-gray-800/20'
-                                            : 'bg-gray-800/10'
+                                        ? 'bg-gray-800/20'
+                                        : 'bg-gray-800/10'
                                         }`}
                                 >
 
@@ -325,7 +325,6 @@ function RecentTable() {
 
                 </div>
 
-                {/* Pagination */}
                 {!loading && totalPages > 1 && (
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-4 !px-6 !py-4 border-t border-gray-700/50">
 

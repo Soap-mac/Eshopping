@@ -35,8 +35,6 @@ const CustomLegend = ({ payload }) => {
     );
 };
 
-// `data` comes from GET /getDashboardStats - 12 months of
-// { name, TotalSales, TotalUser } - fetched by the parent DashBoard page.
 function Chart1({ data }) {
     const chartData = data && data.length > 0 ? data : [];
     const loading = !data;

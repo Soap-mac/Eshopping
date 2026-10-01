@@ -95,7 +95,6 @@ function EditProducts() {
         formData.append('size', size);
         formData.append('ratings', ratings);
 
-        // Append files correctly
         image.forEach((file) => {
             formData.append('files', file);
         });

@@ -235,7 +235,6 @@ function AllCategories() {
 
                             </div>
 
-                            {/* Empty State */}
                             {filteredCategories.length === 0 && (
                                 <div className="text-center !py-16">
                                     <BiCategory className="text-6xl text-gray-600 !mx-auto !mb-4" />

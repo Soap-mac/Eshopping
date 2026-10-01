@@ -22,13 +22,11 @@ function Home() {
   const abortRef = useRef(null);
 
   useEffect(() => {
-    // serve from cache if we already fetched this category
     if (cacheRef.current[category]) {
       setAllProducts(cacheRef.current[category]);
       return;
     }
 
-    // cancel any in-flight request for a previous tab
     if (abortRef.current) abortRef.current.abort();
     const controller = new AbortController();
     abortRef.current = controller;

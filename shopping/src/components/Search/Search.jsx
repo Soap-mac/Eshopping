@@ -47,7 +47,6 @@ function Search() {
     };
   }, [searchProducts]);
 
-  // Close the results panel on an outside click, without wiping what was typed
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (containerRef.current && !containerRef.current.contains(e.target)) {
@@ -96,7 +95,6 @@ function Search() {
 
   return (
     <div ref={containerRef} className="searchBox relative w-full">
-      {/* Input bar */}
       <div
         className="
           flex items-center h-[46px] w-full rounded-full
@@ -140,7 +138,6 @@ function Search() {
         </button>
       </div>
 
-      {/* Results panel */}
       {showPanel && (
         <div
           className="

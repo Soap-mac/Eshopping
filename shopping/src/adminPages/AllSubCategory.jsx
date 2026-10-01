@@ -115,7 +115,6 @@ function AllSubCategories() {
             </div>
 
             <div className="flex-1 h-full bg-transparent min-w-0">
-                {/* Header Section */}
                 <div className="bg-gradient-to-br from-gray-900/60 to-gray-800/40 backdrop-blur-sm rounded-2xl !p-8 border border-slate-700/50 !mx-4 md:mx-6 lg:mx-10 !my-6 hover:border-orange-500/50 transition-all duration-500 shadow-2xl">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 !mb-6">
                         <div className="flex items-center gap-4">
@@ -145,7 +144,6 @@ function AllSubCategories() {
                 <div className="!mx-4 md:mx-6 lg:mx-10">
                     <div className="min-h-screen bg-transparent !p-6 !mt-[20px]">
                         <div className="max-w-7xl !mx-auto">
-                            {/* Search and Filters Section */}
                             <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 !mb-8">
                                 <div className="flex items-center gap-3">
                                     <h3 className='text-orange-500 text-3xl font-bold !px-2 flex items-center gap-3'>
@@ -199,9 +197,7 @@ function AllSubCategories() {
                                 </div>
                             </div>
 
-                            {/* Enhanced Table */}
                             <div className="backdrop-blur-xl bg-gradient-to-br from-gray-900/50 to-gray-800/30 border border-gray-700/50 rounded-3xl shadow-2xl overflow-hidden">
-                                {/* Table Header with Gradient */}
                                 <div className="bg-gradient-to-r from-gray-900/95 via-gray-800/90 to-gray-900/95 border-b border-gray-700/50 !px-6 !py-4">
                                     <div className="flex items-center gap-3">
                                         <div className="w-2 h-8 bg-gradient-to-b from-orange-500 to-orange-600 rounded-full"></div>
@@ -303,7 +299,6 @@ function AllSubCategories() {
 
                             </div>
 
-                            {/* Empty State */}
                             {filteredCategories.length === 0 && (
                                 <div className="text-center !py-16">
                                     <BiCategory className="text-6xl text-gray-600 !mx-auto !mb-4" />

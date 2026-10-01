@@ -23,7 +23,6 @@ body {
     border-radius: 100%;
     width: 45px;
     height: 45px;
-    /* or your preferred arrow color */
     top: 50%;
     transform: translateY(0%);
 }
@@ -33,7 +32,6 @@ body {
     font-size: 22px !important;
 }
 
-/* Optional: If needed for spacing */
 .swiper-button-next {
     right: -110px;
 }
@@ -42,10 +40,6 @@ body {
     left: 50px;
 }
 
-/* The -110px/50px offsets above only clear the slide edge on very wide
-   desktop viewports where the 90%-wide container leaves that much margin.
-   On tablet/mobile there isn't room, so the arrows would land off-screen —
-   pull them back onto the visible slide instead. */
 @media (max-width: 1279px) {
     .swiper-button-next {
         right: 8px;

@@ -4,12 +4,10 @@ import "./addSlider.css"
 import { useContext } from 'react';
 import { MyContext } from '../../App';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 
-// Import required modules
 import { FreeMode, Navigation } from 'swiper/modules';
 
 

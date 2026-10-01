@@ -17,11 +17,6 @@ function ProductZoom(props) {
         }
     }, [images]);
 
-    // Below the lg breakpoint the thumbnail rail switches from a vertical
-    // side column to a horizontal strip under the main image, which is a
-    // better fit for narrow/portrait screens. Swiper doesn't reliably relay
-    // out when its `direction` prop changes on a live instance, so the
-    // Swiper below is remounted (via `key`) whenever this flips.
     useEffect(() => {
         const mq = window.matchMedia('(max-width: 1023px)');
         const update = () => setIsCompact(mq.matches);

@@ -16,7 +16,6 @@ function ProductDetailComp(props) {
     const discount = props?.product?.discount ?? 0;
     const finalPrice = Math.round(price - (discount / 100) * price);
 
-    // Get all unique variant option types and their values
     const getVariantOptions = () => {
         if (!props.product?.variants || props.product.variants.length === 0) {
             return {};

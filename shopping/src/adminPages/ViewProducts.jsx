@@ -15,7 +15,6 @@ function ViewProducts() {
     const [qtyVal, setQtyval] = useState(1);
 
     const handleCloseProductModal = () => {
-        // Add your close modal logic here
         console.log('Modal closed');
     };
 
@@ -28,7 +27,6 @@ function ViewProducts() {
 
                 <div className="flex-1 overflow-y-auto">
                     <div className="max-w-[1400px] mx-auto !p-8">
-                        {/* Page Header */}
                         <div className="!mb-8">
                             <h1 className="text-amber-50 text-4xl font-bold bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">
                                 Product Details

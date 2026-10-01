@@ -45,39 +45,6 @@ function AllInnerCategories() {
         innerCats();
     }, [status]);
 
-    // const category = [
-    //     {
-    //         id: 1,
-    //         image: "https://m.media-amazon.com/images/I/61udmH26auL._SY550_.jpg",
-    //         category: "Fashion",
-    //         subCategory: ["Men's", "Women's", "Kids"],
-    //     },
-    //     {
-    //         id: 2,
-    //         image: "https://m.media-amazon.com/images/I/61udmH26auL._SY550_.jpg",
-    //         category: "Fashion",
-    //         subCategory: ["Men's", "Women's", "Kids"],
-    //     },
-    //     {
-    //         id: 3,
-    //         image: "https://m.media-amazon.com/images/I/61udmH26auL._SY550_.jpg",
-    //         category: "Fashion",
-    //         subCategory: ["Men's", "Women's", "Kids"],
-    //     },
-    //     {
-    //         id: 4,
-    //         image: "https://m.media-amazon.com/images/I/61udmH26auL._SY550_.jpg",
-    //         category: "Fashion",
-    //         subCategory: ["Men's", "Women's", "Kids"],
-    //     },
-    //     {
-    //         id: 5,
-    //         image: "https://m.media-amazon.com/images/I/61udmH26auL._SY550_.jpg",
-    //         category: "Fashion",
-    //         subCategory: ["Men's", "Women's", "Kids"],
-    //     },
-    // ];
-
     const filteredCategories = allInnerCategories.filter(item =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -321,7 +288,6 @@ function AllInnerCategories() {
 
                             </div>
 
-                            {/* Empty State */}
                             {filteredCategories.length === 0 && (
                                 <div className="text-center !py-16">
                                     <BiCategory className="text-6xl text-gray-600 !mx-auto !mb-4" />

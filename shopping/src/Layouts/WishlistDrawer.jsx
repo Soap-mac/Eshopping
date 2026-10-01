@@ -11,7 +11,7 @@ function WishlistDrawer() {
     const {
         openWishlistDrawer,
         setOpenWishlistDrawer,
-        wishlist,          // { [productId]: product } — shared across the whole app
+        wishlist,
         wishlistLoaded,
         addToCart,
         removeFromWishlist,
@@ -64,7 +64,6 @@ function WishlistDrawer() {
                     </button>
                 </div>
 
-                {/* Body */}
                 <div className="!flex-1 !overflow-y-auto !px-5 !py-5">
                     {!wishlistLoaded ? (
                         <div className="!flex !h-full !items-center !justify-center">
@@ -88,7 +87,6 @@ function WishlistDrawer() {
                     )}
                 </div>
 
-                {/* Footer */}
                 {wishlistProducts.length > 0 && (
                     <>
                         <div className="!relative !px-6">

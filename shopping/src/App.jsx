@@ -37,10 +37,6 @@ import ForgotPassword from './pages/Home/ForgotPassword'
 
 const MyContext = createContext();
 
-// Messages the authVerify middleware / wishlist-auth routes send back
-// when a request comes from a logged-out or expired session. Used to tell
-// "you're not logged in" apart from other failures (e.g. "already wishlisted"),
-// so we only redirect to /Login for the former.
 const AUTH_FAILURE_MESSAGES = ['unauthorized user', 'Invalid token'];
 
 function App() {

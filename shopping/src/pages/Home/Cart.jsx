@@ -90,7 +90,7 @@ function Cart() {
 
     return (
         <>
-            {/* <Top /> */}
+
             <Header />
             <Navbar />
 
@@ -127,22 +127,15 @@ function Cart() {
                             </Button>
 
                         </div>
-
                     ) : (
-
                         <div className="!w-full !grid !grid-cols-1 lg:!grid-cols-[minmax(0,1fr)_360px] !gap-8 xl:!gap-10">
-
                             <section className="!w-full !min-w-0">
-
                                 <div className="!mb-8 !pb-4 !border-b-2 !border-gray-700">
-
                                     <div className="!flex !flex-col sm:!flex-row sm:!items-end sm:!justify-between !gap-2">
-
                                         <div>
                                             <h1 className="!m-0 !mb-2 !text-3xl sm:!text-4xl !font-bold !text-amber-50">
                                                 Your Cart
                                             </h1>
-
                                             <p className="!m-0 !text-base sm:!text-lg !text-gray-400">
                                                 <span className="!font-semibold !text-amber-400">
                                                     {totalItems}
@@ -150,17 +143,12 @@ function Cart() {
                                                 {totalItems === 1 ? "item" : "items"} in your cart
                                             </p>
                                         </div>
-
                                         <span className="!text-sm !text-gray-500">
                                             Review your items before checkout
                                         </span>
-
                                     </div>
-
                                 </div>
-
                                 <div className="!w-full !space-y-6">
-
                                     {cartProducts.map((product) => (
                                         <CartItem
                                             key={product._id}
@@ -168,35 +156,24 @@ function Cart() {
                                             onRemove={removeFromCart}
                                         />
                                     ))}
-
                                 </div>
-
                             </section>
-
                             <aside className="!w-full">
-
                                 <div className="!w-full !bg-gray-800/60 !backdrop-blur-sm !border !border-gray-700/50 !rounded-2xl !p-6 lg:!p-7 lg:!sticky lg:!top-8 !shadow-2xl">
-
                                     <div className="!mb-6 !pb-4 !border-b !border-gray-700/50">
-
                                         <h2 className="!m-0 !text-2xl !font-bold !text-amber-50">
                                             Order Summary
                                         </h2>
-
                                     </div>
-
                                     <div className="!w-full !space-y-4">
-
                                         <div className="!flex !items-center !justify-between !gap-4">
                                             <span className="!text-gray-300">
                                                 Items
                                             </span>
-
                                             <span className="!font-medium !text-amber-50">
                                                 {totalItems}
                                             </span>
                                         </div>
-
                                         <div className="!flex !items-center !justify-between !gap-4">
                                             <span className="!text-gray-300">
                                                 Subtotal
@@ -236,25 +213,17 @@ function Cart() {
                                                 India
                                             </span>
                                         </div>
-
                                     </div>
-
                                     <div className="!mt-6 !pt-5 !border-t !border-gray-700/50">
-
                                         <div className="!flex !items-center !justify-between !gap-4">
-
                                             <span className="!text-xl !font-bold !text-amber-50">
                                                 Grand Total
                                             </span>
-
                                             <span className="!text-2xl !font-black !text-amber-400">
                                                 ₹{grandTotal.toFixed(2)}
                                             </span>
-
                                         </div>
-
                                     </div>
-
                                     <Button
                                         component={Link}
                                         to="/Checkout"

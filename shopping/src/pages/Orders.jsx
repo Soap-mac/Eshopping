@@ -62,7 +62,6 @@ function Orders() {
         day: 'numeric'
     });
 
-    // Pill badge — literal class strings so Tailwind's build-time scanner picks them up
     const getStatusBadge = (status) => {
         const base = "!px-3 !py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider border whitespace-nowrap inline-flex items-center gap-1.5";
         switch (status.toLowerCase()) {
@@ -81,7 +80,6 @@ function Orders() {
         }
     };
 
-    // Left accent stripe on each order card, keyed to the same statuses
     const getStatusStripe = (status) => {
         switch (status.toLowerCase()) {
             case 'delivered': return 'bg-green-500';
@@ -133,7 +131,6 @@ function Orders() {
                             </p>
                         </div>
 
-                        {/* Stat cards */}
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 !mb-8">
                             {stats.map((stat) => (
                                 <div
@@ -151,7 +148,6 @@ function Orders() {
                             ))}
                         </div>
 
-                        {/* Loading skeleton */}
                         {loading && (
                             <div className="flex flex-col gap-4">
                                 {[1, 2, 3].map((i) => (
@@ -167,7 +163,6 @@ function Orders() {
                             </div>
                         )}
 
-                        {/* Order cards */}
                         {!loading && orders.length > 0 && (
                             <div className="flex flex-col gap-4">
                                 {orders.map((order) => (
@@ -244,7 +239,6 @@ function Orders() {
                             </div>
                         )}
 
-                        {/* Empty state */}
                         {!loading && orders.length === 0 && (
                             <div className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/50 rounded-2xl !p-12 text-center shadow-xl">
                                 <div className="!mb-5 inline-flex items-center justify-center rounded-full bg-gray-900/40 border border-gray-700/40 !p-5">

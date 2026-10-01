@@ -3,9 +3,6 @@ jest.mock('../databases/connection', () => ({}));
 const request = require('supertest');
 const app = require('../app');
 
-// These confirm the JWT auth middleware is actually wired onto the routes
-// that require login - the exact bug class fixed in earlier steps, where
-// several routes trusted a spoofable cookie instead of a verified JWT.
 describe('Auth-protected routes reject requests with no valid session', () => {
     it('GET /getCart with no cookies at all is rejected', async () => {
         const res = await request(app).get('/getCart');

@@ -434,10 +434,6 @@ body {
   }
 }
 
-/* The product detail info column is given its width (55%) via an inline
-   style computed from a prop, which can't take a Tailwind responsive
-   class. Below desktop it needs to run full width instead — an external
-   !important rule is the only thing that can beat an inline style. */
 @media (max-width: 1023px) {
   .productDetailInfo {
     width: 100% !important;

@@ -26,7 +26,6 @@ function SidePanel(props) {
             sx={{ width: '100%', height: '100%', bgcolor: '#0D1117', color: 'white', display: 'flex', flexDirection: 'column' }}
             role="presentation"
         >
-            {/* Header */}
             <div className="!px-5 !pt-5 !pb-4 relative">
                 <div className="flex items-center justify-between">
                     <div>
@@ -44,7 +43,6 @@ function SidePanel(props) {
                 <div className="!mt-4 h-px w-full bg-gradient-to-r from-amber-500/60 via-white/10 to-transparent" />
             </div>
 
-            {/* Category list */}
             <ul className="!py-1 overflow-y-auto flex-1">
                 {Object.keys(menus).length === 0 && (
                     <li className="!px-5 !py-3 text-gray-500 text-sm">Loading categories…</li>
@@ -150,8 +148,6 @@ function SidePanel(props) {
                 })}
             </ul>
 
-            {/* Quick links + account CTA — fills the dead space and gives the
-                drawer real utility beyond just category browsing */}
             <div className="!mt-auto border-t border-white/10 !px-5 !pt-4 !pb-6">
                 <p className="text-gray-600 text-[11px] font-semibold tracking-widest uppercase !mb-2">More</p>
                 <ul className="!space-y-0.5 !mb-4">

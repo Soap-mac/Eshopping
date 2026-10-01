@@ -119,8 +119,6 @@ function Profile() {
     }
 
     return (
-
-
         <>
             {isLogin &&
                 <>

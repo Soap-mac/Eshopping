@@ -38,33 +38,6 @@ function AllSliders() {
         fetchSliders();
     }, [])
 
-    // const sliders = [
-    //     {
-    //         id: 1,
-    //         image: "https://img.freepik.com/premium-vector/modern-sale-banner-website-slider-template-design_54925-46.jpg",
-
-    //     },
-    //     {
-    //         id: 2,
-    //         image: "https://img.freepik.com/premium-vector/modern-sale-banner-website-slider-template-design_54925-46.jpg",
-
-    //     },
-    //     {
-    //         id: 3,
-    //         image: "https://img.freepik.com/premium-vector/modern-sale-banner-website-slider-template-design_54925-46.jpg",
-
-    //     },
-    //     {
-    //         id: 4,
-    //         image: "https://img.freepik.com/premium-vector/modern-sale-banner-website-slider-template-design_54925-46.jpg",
-
-    //     },
-    //     {
-    //         id: 5,
-    //         image: "https://img.freepik.com/premium-vector/modern-sale-banner-website-slider-template-design_54925-46.jpg",
-
-    //     },
-    // ];
 
     return (
         <div className="flex justify-between !h-full">
@@ -73,7 +46,6 @@ function AllSliders() {
             </div>
 
             <div className="flex-1 h-full bg-transparent min-w-0">
-                {/* Header Section */}
                 <div className="bg-gradient-to-br from-gray-900/60 to-gray-800/40 backdrop-blur-sm rounded-2xl !p-8 border border-slate-700/50 !mx-4 md:mx-6 lg:mx-10 !my-6 hover:border-orange-500/50 transition-all duration-500 shadow-2xl">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 !mb-6">
                         <div className="flex items-center gap-4">
@@ -176,7 +148,6 @@ function AllSliders() {
 
                             </div>
 
-                            {/* Empty State */}
                             {!sliders && (
                                 <div className="text-center !py-16">
                                     <BiCategory className="text-6xl text-gray-600 !mx-auto !mb-4" />
