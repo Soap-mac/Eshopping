@@ -1,5 +1,5 @@
 const img = (id) =>
-    https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&q=80;
+    "https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&q=80";
 
 const createVariants = (values, baseSku, basePrice, images) => {
     return values.map((value, index) => ({
