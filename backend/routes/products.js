@@ -23,7 +23,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: multer.diskStorage({}), limits: { fileSize: 50 * 1024 * 1024 } });
 
 const generateVariantCombinations = (variantOptions, productName) => {
-    // Filter out empty variant types
     const validVariants = Object.entries(variantOptions).filter(([key, values]) =>
         values && Array.isArray(values) && values.length > 0
     );
@@ -32,7 +31,6 @@ const generateVariantCombinations = (variantOptions, productName) => {
         return [];
     }
 
-    // Generate all combinations
     const combinations = [];
     const keys = validVariants.map(([key]) => key);
     const values = validVariants.map(([, vals]) => vals);
@@ -50,14 +48,12 @@ const generateVariantCombinations = (variantOptions, productName) => {
 
     generateCombos([], 0);
 
-    // Convert combinations to variant objects
     return combinations.map(combo => {
         const options = {};
         keys.forEach((key, index) => {
             options[key] = combo[index];
         });
 
-        // Generate SKU
         const baseSKU = productName.substring(0, 3).toUpperCase().replace(/\s/g, '') || 'PRD';
         const optionString = combo.join('-').toUpperCase().replace(/\s+/g, '');
         const sku = `${baseSKU}-${optionString}`;
@@ -66,7 +62,7 @@ const generateVariantCombinations = (variantOptions, productName) => {
             options: new Map(Object.entries(options)),
             sku: sku,
             stock: 0,
-            price: null, // Will use base price
+            price: null,
             images: []
         };
     });
@@ -82,7 +78,6 @@ router.post('/addproduct', authentication, isAdmin, upload.array('files'), async
 
         const images = req.files;
 
-        // Validation
         if (!name || !price || !brand || !description || !category || !subCategory || !innerSubCategory) {
             return res.status(400).json({ message: 'Fill the important fields' });
         }
@@ -105,8 +100,6 @@ router.post('/addproduct', authentication, isAdmin, upload.array('files'), async
 
         const exists = await Product.findOne({ name });
 
-        // Product with this name already exists -> add these as new variants
-        // instead of creating a duplicate product.
         if (exists) {
             const duplicate = exists.variants.some(v => v.sku === generatedVariants[0].sku);
             if (duplicate) {

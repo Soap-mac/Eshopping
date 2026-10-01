@@ -336,8 +336,6 @@ router.get("/getDashboardStats", authentication, isAdmin, async (req, res) => {
             .filter(o => o.paymentStatus === 'completed')
             .reduce((total, o) => total + (o.totalAmount || 0), 0);
 
-        // Percentage change vs the previous month, guarding the
-        // divide-by-zero case when the previous month had nothing.
         const pctChange = (current, previous) => {
             if (previous === 0) return current > 0 ? 100 : 0;
             return Number((((current - previous) / previous) * 100).toFixed(2));
@@ -349,20 +347,14 @@ router.get("/getDashboardStats", authentication, isAdmin, async (req, res) => {
         const salesThisMonth = sumTotal(thisMonthOrders);
         const salesLastMonth = sumTotal(lastMonthOrders);
 
-        // "Sales" = gross value of orders placed. "Revenue" = money actually
-        // collected (paymentStatus === 'completed'), which is lower than
-        // Sales whenever COD orders haven't been paid/delivered yet.
         const revenueThisMonth = sumCollected(thisMonthOrders);
         const revenueLastMonth = sumCollected(lastMonthOrders);
 
-        // "Customers" is a running total (all registered users right now),
-        // compared against the total as of the start of this month.
         const [totalCustomersNow, totalCustomersLastMonth] = await Promise.all([
             user.countDocuments({ role: 'user' }),
             user.countDocuments({ role: 'user', createdAt: { $lt: startOfThisMonth } }),
         ]);
 
-        // Last 12 months of new signups + sales, oldest to newest, for the chart.
         const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         const chart = [];
 

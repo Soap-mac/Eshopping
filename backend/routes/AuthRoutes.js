@@ -287,8 +287,6 @@ router.post('/reset-password', authLimiter, async (req, res) => {
             return res.status(400).json({ success: false, message: "This code has expired. Please request a new one." });
         }
 
-        // Re-verify the OTP here too, even though /verify-otp already checked it -
-        // never trust that a prior request actually happened.
         const isMatch = await bcrypt.compare(otp, exist.forgot_password_otp);
         if (!isMatch) {
             return res.status(400).json({ success: false, message: "Invalid or expired code" });

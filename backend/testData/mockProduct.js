@@ -1,16 +1,7 @@
-
-// Image helper
 const img = (id) =>
-    `https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&q=80`;
+    https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&q=80;
 
-
-// Variant helper
-const createVariants = (
-    values,
-    baseSku,
-    basePrice,
-    images
-) => {
+const createVariants = (values, baseSku, basePrice, images) => {
     return values.map((value, index) => ({
         options: value.options,
 
@@ -22,24 +13,10 @@ const createVariants = (
 
         images
     }));
+
 };
 
-
-
 const products = [
-
-    /* ===========================
-            FASHION
-       =========================== */
-
-
-    /* -------- MEN SHIRTS -------- */
-
-
-    /* ===========================
-        MEN'S SHIRTS
-   =========================== */
-
 
     {
         name: "Slim Fit Oxford Formal Shirt",
@@ -96,8 +73,6 @@ const products = [
         ]
     },
 
-
-
     {
         name: "Premium Linen Casual Shirt",
 
@@ -145,8 +120,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Checked Casual Cotton Shirt",
 
@@ -174,7 +147,6 @@ const products = [
 
         discount: 35,
 
-
         variants: [
             {
                 options: {
@@ -196,8 +168,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Denim Overshirt Jacket",
@@ -226,7 +196,6 @@ const products = [
 
         discount: 37,
 
-
         variants: [
             {
                 options: {
@@ -249,9 +218,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Premium Black Formal Shirt",
 
@@ -261,24 +227,17 @@ const products = [
             img("photo-1588359348347-9bc6cbb6f8a6"),
             img("photo-1620012253295-c15cc3e65df4")
         ],
-
         brand: "Louis Philippe",
-
         description:
             "Elegant black formal shirt crafted for premium business styling.",
 
         price: 2199,
-
         oldPrice: 3299,
-
         catName: "Fashion",
         SubcatName: "Mens",
         innersubcatName: "Shirts",
-
         rating: 4.8,
-
         discount: 33,
-
 
         variants: [
             {
@@ -287,13 +246,9 @@ const products = [
                     Color: "Black",
                     Material: "Cotton"
                 },
-
                 sku: "FASH-M-SHIRT-005-BLK",
-
                 price: 2199,
-
                 stock: 30,
-
                 images: [
                     img("photo-1598033129183-c4f50c736f10")
                 ]
@@ -302,43 +257,25 @@ const products = [
 
     },
 
-
-
-
-
-    /* ===========================
-            MEN'S T-SHIRTS
-       =========================== */
-
-
     {
         name: "Oversized Premium Cotton T-Shirt",
-
         images: [
             img("photo-1521572163474-6864f9cf17ab"),
             img("photo-1503341504253-dff4815485f1"),
             img("photo-1515886657613-9f3515b0c78f"),
             img("photo-1485230895905-ec40ba36b9bc")
         ],
-
         brand: "H&M",
-
         description:
             "Heavy GSM oversized cotton t-shirt with relaxed streetwear fit.",
 
         price: 899,
-
         oldPrice: 1499,
-
         catName: "Fashion",
         SubcatName: "Mens",
         innersubcatName: "T-Shirts",
-
         rating: 4.6,
-
         discount: 40,
-
-
         variants: [
             {
                 options: {
@@ -346,13 +283,9 @@ const products = [
                     Color: "Black",
                     Material: "Cotton"
                 },
-
                 sku: "FASH-M-TSHIRT-001-BLK",
-
                 price: 899,
-
                 stock: 80,
-
                 images: [
                     img("photo-1521572163474-6864f9cf17ab")
                 ]
@@ -361,36 +294,25 @@ const products = [
 
     },
 
-
-
     {
         name: "Classic Polo T-Shirt",
-
         images: [
             img("photo-1627225924765-552d49cf47ad"),
             img("photo-1503341504253-dff4815485f1"),
             img("photo-1523381294911-8d3cead13475"),
             img("photo-1485968579580-b6d095142e6e")
         ],
-
         brand: "U.S. Polo Assn",
-
         description:
             "Classic polo t-shirt with premium collar design and comfortable cotton fabric.",
 
         price: 1199,
-
         oldPrice: 1799,
-
         catName: "Fashion",
         SubcatName: "Mens",
         innersubcatName: "T-Shirts",
-
         rating: 4.7,
-
         discount: 33,
-
-
         variants: [
             {
                 options: {
@@ -398,13 +320,9 @@ const products = [
                     Color: "Navy Blue",
                     Material: "Cotton"
                 },
-
                 sku: "FASH-M-TSHIRT-002-NVY",
-
                 price: 1199,
-
                 stock: 55,
-
                 images: [
                     img("photo-1627225924765-552d49cf47ad")
                 ]
@@ -412,8 +330,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Graphic Printed Streetwear T-Shirt",
@@ -442,7 +358,6 @@ const products = [
 
         discount: 38,
 
-
         variants: [
             {
                 options: {
@@ -465,7 +380,6 @@ const products = [
 
     },
 
-
     {
         name: "Premium Oxford Cotton Shirt",
 
@@ -481,7 +395,6 @@ const products = [
         description:
             "Premium oxford cotton shirt with a structured collar and comfortable regular fit. Perfect for office and smart casual wear.",
 
-
         price: 1499,
 
         oldPrice: 1999,
@@ -492,11 +405,9 @@ const products = [
 
         innersubcatName: "Shirts",
 
-
         rating: 4.6,
 
         discount: 25,
-
 
         variants: createVariants(
             [
@@ -534,8 +445,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Slim Fit Linen Casual Shirt",
 
@@ -551,7 +460,6 @@ const products = [
         description:
             "Lightweight linen blend shirt designed for summer comfort with a modern slim fit.",
 
-
         price: 1799,
 
         oldPrice: 2299,
@@ -565,7 +473,6 @@ const products = [
         rating: 4.5,
 
         discount: 22,
-
 
         variants: createVariants(
             [
@@ -601,8 +508,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Classic Checked Casual Shirt",
 
@@ -613,17 +518,14 @@ const products = [
             img("photo-1602810318383-e386cc2a3ccf")
         ],
 
-
         brand: "Roadster",
 
         description:
             "Soft cotton checked shirt with a casual pattern suitable for everyday styling.",
 
-
         price: 1299,
 
         oldPrice: 1699,
-
 
         catName: "Fashion",
 
@@ -631,11 +533,9 @@ const products = [
 
         innersubcatName: "Shirts",
 
-
         rating: 4.4,
 
         discount: 18,
-
 
         variants: createVariants(
             [
@@ -661,11 +561,9 @@ const products = [
                 }
             ],
 
-
             "CHECK-SHIRT",
 
             1299,
-
 
             [
                 img("photo-1598032895397-b9472444bf93"),
@@ -674,11 +572,6 @@ const products = [
         )
 
     },
-
-    /* ===========================
-            MEN T-SHIRTS
-       =========================== */
-
 
     {
         name: "Premium Cotton Crew Neck T-Shirt",
@@ -708,7 +601,6 @@ const products = [
         rating: 4.5,
 
         discount: 30,
-
 
         variants: createVariants(
             [
@@ -752,8 +644,6 @@ const products = [
         )
     },
 
-
-
     {
         name: "Oversized Graphic Streetwear T-Shirt",
 
@@ -764,17 +654,14 @@ const products = [
             img("photo-1515886657613-9f3515b0c78f")
         ],
 
-
         brand: "Urban Monkey",
 
         description:
             "Heavyweight oversized t-shirt with premium fabric and modern streetwear graphics.",
 
-
         price: 899,
 
         oldPrice: 1299,
-
 
         catName: "Fashion",
 
@@ -782,11 +669,9 @@ const products = [
 
         innersubcatName: "T-Shirts",
 
-
         rating: 4.7,
 
         discount: 31,
-
 
         variants: createVariants(
             [
@@ -816,16 +701,12 @@ const products = [
 
             899,
 
-
             [
                 img("photo-1503341504253-dff4815485f1"),
                 img("photo-1523381210434-271e8be1f52b")
             ]
         )
     },
-
-
-
 
     {
         name: "Premium Polo T-Shirt",
@@ -837,17 +718,14 @@ const products = [
             img("photo-1515886657613-9f3515b0c78f")
         ],
 
-
         brand: "Allen Cooper",
 
         description:
             "Classic pique polo t-shirt with premium collar design and breathable cotton fabric.",
 
-
         price: 1199,
 
         oldPrice: 1599,
-
 
         catName: "Fashion",
 
@@ -855,11 +733,9 @@ const products = [
 
         innersubcatName: "T-Shirts",
 
-
         rating: 4.6,
 
         discount: 25,
-
 
         variants: createVariants(
             [
@@ -885,11 +761,9 @@ const products = [
                 }
             ],
 
-
             "POLO-TSHIRT",
 
             1199,
-
 
             [
                 img("photo-1581655353564-df123a1eb820"),
@@ -897,13 +771,6 @@ const products = [
             ]
         )
     },
-
-
-    /* ===========================
-        MEN'S T-SHIRTS
-        CONTINUED
-   =========================== */
-
 
     {
         name: "Premium Henley Neck T-Shirt",
@@ -932,7 +799,6 @@ const products = [
 
         discount: 33,
 
-
         variants: [
             {
                 options: {
@@ -954,9 +820,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Dry Fit Sports T-Shirt",
@@ -985,7 +848,6 @@ const products = [
 
         discount: 40,
 
-
         variants: [
             {
                 options: {
@@ -1007,8 +869,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Minimal Solid Cotton T-Shirt",
@@ -1037,7 +897,6 @@ const products = [
 
         discount: 30,
 
-
         variants: [
             {
                 options: {
@@ -1059,11 +918,6 @@ const products = [
         ]
 
     },
-
-    /* ===========================
-              TROUSERS
-       =========================== */
-
 
     {
         name: "Slim Fit Stretch Chino Trousers",
@@ -1092,7 +946,6 @@ const products = [
 
         discount: 36,
 
-
         variants: [
             {
                 options: {
@@ -1114,9 +967,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Classic Formal Office Trousers",
@@ -1145,7 +995,6 @@ const products = [
 
         discount: 34,
 
-
         variants: [
             {
                 options: {
@@ -1167,9 +1016,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Relaxed Fit Cargo Pants",
@@ -1198,7 +1044,6 @@ const products = [
 
         discount: 36,
 
-
         variants: [
             {
                 options: {
@@ -1220,9 +1065,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Premium Black Slim Trousers",
@@ -1251,7 +1093,6 @@ const products = [
 
         discount: 38,
 
-
         variants: [
             {
                 options: {
@@ -1273,9 +1114,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Blue Denim Jeans",
@@ -1304,7 +1142,6 @@ const products = [
 
         discount: 33,
 
-
         variants: [
             {
                 options: {
@@ -1327,12 +1164,6 @@ const products = [
 
     },
 
-
-    /* ===========================
-            MEN TROUSERS
-       =========================== */
-
-
     {
         name: "Slim Fit Chino Trousers",
 
@@ -1343,17 +1174,14 @@ const products = [
             img("photo-1598033129183-c4f50c736f10")
         ],
 
-
         brand: "Allen Cooper",
 
         description:
             "Stretch cotton chino trousers with slim fit design suitable for office and casual occasions.",
 
-
         price: 1499,
 
         oldPrice: 1999,
-
 
         catName: "Fashion",
 
@@ -1361,11 +1189,9 @@ const products = [
 
         innersubcatName: "Trousers",
 
-
         rating: 4.5,
 
         discount: 25,
-
 
         variants: createVariants(
             [
@@ -1395,14 +1221,12 @@ const products = [
 
             1499,
 
-
             [
                 img("photo-1473966968600-fa801b869a1a"),
                 img("photo-1624378439575-d8705ad7ae80")
             ]
         )
     },
-
 
     {
         name: "Premium Formal Dress Trousers",
@@ -1414,17 +1238,14 @@ const products = [
             img("photo-1473966968600-fa801b869a1a")
         ],
 
-
         brand: "Van Heusen",
 
         description:
             "Tailored formal trousers with elegant finishing for professional wear.",
 
-
         price: 1799,
 
         oldPrice: 2399,
-
 
         catName: "Fashion",
 
@@ -1432,11 +1253,9 @@ const products = [
 
         innersubcatName: "Trousers",
 
-
         rating: 4.8,
 
         discount: 25,
-
 
         variants: createVariants(
             [
@@ -1466,14 +1285,12 @@ const products = [
 
             1799,
 
-
             [
                 img("photo-1594938298603-c8148c4dae35"),
                 img("photo-1598033129183-c4f50c736f10")
             ]
         )
     },
-
 
     {
         name: "Relaxed Cargo Utility Trousers",
@@ -1485,17 +1302,14 @@ const products = [
             img("photo-1598033129183-c4f50c736f10")
         ],
 
-
         brand: "StreetForm",
 
         description:
             "Durable cargo trousers with multiple pockets and relaxed streetwear fit.",
 
-
         price: 1599,
 
         oldPrice: 2199,
-
 
         catName: "Fashion",
 
@@ -1503,11 +1317,9 @@ const products = [
 
         innersubcatName: "Trousers",
 
-
         rating: 4.4,
 
         discount: 27,
-
 
         variants: createVariants(
             [
@@ -1533,11 +1345,9 @@ const products = [
                 }
             ],
 
-
             "CARGO-TROUSER",
 
             1599,
-
 
             [
                 img("photo-1515886657613-9f3515b0c78f"),
@@ -1545,12 +1355,6 @@ const products = [
             ]
         )
     },
-
-
-    /* ===========================
-            WOMEN DRESSES
-       =========================== */
-
 
     {
         name: "Floral Summer Midi Dress",
@@ -1580,7 +1384,6 @@ const products = [
         rating: 4.7,
 
         discount: 24,
-
 
         variants: createVariants(
             [
@@ -1617,8 +1420,6 @@ const products = [
         )
     },
 
-
-
     {
         name: "Elegant Party Wear Maxi Dress",
 
@@ -1629,17 +1430,14 @@ const products = [
             img("photo-1496747611176-843222e1e57c")
         ],
 
-
         brand: "Aurelia",
 
         description:
             "Premium maxi dress with flowing silhouette designed for festive occasions and evening events.",
 
-
         price: 2999,
 
         oldPrice: 3999,
-
 
         catName: "Fashion",
 
@@ -1647,11 +1445,9 @@ const products = [
 
         innersubcatName: "Dresses",
 
-
         rating: 4.8,
 
         discount: 25,
-
 
         variants: createVariants(
             [
@@ -1677,7 +1473,6 @@ const products = [
                 }
             ],
 
-
             "MAXI-DRESS",
 
             2999,
@@ -1689,8 +1484,6 @@ const products = [
         )
     },
 
-
-
     {
         name: "Casual Cotton Shirt Dress",
 
@@ -1701,17 +1494,14 @@ const products = [
             img("photo-1595777457583-95e059d581b8")
         ],
 
-
         brand: "Allen Solly",
 
         description:
             "Comfortable cotton shirt dress with a modern casual look for everyday wear.",
 
-
         price: 1599,
 
         oldPrice: 2199,
-
 
         catName: "Fashion",
 
@@ -1719,11 +1509,9 @@ const products = [
 
         innersubcatName: "Dresses",
 
-
         rating: 4.5,
 
         discount: 27,
-
 
         variants: createVariants(
             [
@@ -1760,14 +1548,6 @@ const products = [
         )
     },
 
-
-
-
-    /* ===========================
-            WOMEN TOPS
-       =========================== */
-
-
     {
         name: "Premium Ribbed Casual Top",
 
@@ -1778,17 +1558,14 @@ const products = [
             img("photo-1485230895905-ec40ba36b9bc")
         ],
 
-
         brand: "H&M",
 
         description:
             "Soft ribbed casual top with comfortable stretch fabric and modern styling.",
 
-
         price: 899,
 
         oldPrice: 1299,
-
 
         catName: "Fashion",
 
@@ -1796,11 +1573,9 @@ const products = [
 
         innersubcatName: "Tops",
 
-
         rating: 4.6,
 
         discount: 30,
-
 
         variants: createVariants(
             [
@@ -1837,8 +1612,6 @@ const products = [
         )
     },
 
-
-
     {
         name: "Women's Printed Casual Top",
 
@@ -1849,17 +1622,14 @@ const products = [
             img("photo-1506629905607-d0f4c0a7b6b8")
         ],
 
-
         brand: "FabAlley",
 
         description:
             "Trendy printed top with lightweight fabric suitable for casual and office wear.",
 
-
         price: 1199,
 
         oldPrice: 1699,
-
 
         catName: "Fashion",
 
@@ -1867,11 +1637,9 @@ const products = [
 
         innersubcatName: "Tops",
 
-
         rating: 4.4,
 
         discount: 29,
-
 
         variants: createVariants(
             [
@@ -1908,8 +1676,6 @@ const products = [
         )
     },
 
-
-
     {
         name: "Office Wear Formal Top",
 
@@ -1920,17 +1686,14 @@ const products = [
             img("photo-1485968579580-b6d095142e6e")
         ],
 
-
         brand: "Van Heusen",
 
         description:
             "Elegant formal top designed for professional office outfits.",
 
-
         price: 1399,
 
         oldPrice: 1899,
-
 
         catName: "Fashion",
 
@@ -1938,11 +1701,9 @@ const products = [
 
         innersubcatName: "Tops",
 
-
         rating: 4.7,
 
         discount: 26,
-
 
         variants: createVariants(
             [
@@ -1979,13 +1740,6 @@ const products = [
         )
     },
 
-
-
-    /* ===========================
-            WOMEN JEANS
-       =========================== */
-
-
     {
         name: "High Rise Skinny Fit Jeans",
 
@@ -2001,11 +1755,9 @@ const products = [
         description:
             "Classic high rise skinny jeans with stretch denim for all-day comfort.",
 
-
         price: 1999,
 
         oldPrice: 2999,
-
 
         catName: "Fashion",
 
@@ -2013,11 +1765,9 @@ const products = [
 
         innersubcatName: "Jeans",
 
-
         rating: 4.8,
 
         discount: 33,
-
 
         variants: createVariants(
             [
@@ -2043,7 +1793,6 @@ const products = [
                 }
             ],
 
-
             "SKINNY-JEANS",
 
             1999,
@@ -2055,8 +1804,6 @@ const products = [
         )
     },
 
-
-
     {
         name: "Wide Leg Denim Jeans",
 
@@ -2067,17 +1814,14 @@ const products = [
             img("photo-1594938298603-c8148c4dae35")
         ],
 
-
         brand: "Wrangler",
 
         description:
             "Relaxed wide leg denim jeans with modern street fashion styling.",
 
-
         price: 2299,
 
         oldPrice: 3299,
-
 
         catName: "Fashion",
 
@@ -2085,11 +1829,9 @@ const products = [
 
         innersubcatName: "Jeans",
 
-
         rating: 4.6,
 
         discount: 30,
-
 
         variants: createVariants(
             [
@@ -2115,7 +1857,6 @@ const products = [
                 }
             ],
 
-
             "WIDE-JEANS",
 
             2299,
@@ -2127,8 +1868,6 @@ const products = [
         )
     },
 
-
-
     {
         name: "Classic Straight Fit Jeans",
 
@@ -2139,17 +1878,14 @@ const products = [
             img("photo-1594938298603-c8148c4dae35")
         ],
 
-
         brand: "Lee",
 
         description:
             "Straight fit denim jeans with timeless design and durable fabric.",
 
-
         price: 1899,
 
         oldPrice: 2599,
-
 
         catName: "Fashion",
 
@@ -2157,11 +1893,9 @@ const products = [
 
         innersubcatName: "Jeans",
 
-
         rating: 4.5,
 
         discount: 27,
-
 
         variants: createVariants(
             [
@@ -2198,12 +1932,6 @@ const products = [
         )
     },
 
-
-    /* ===========================
-            MEN FOOTWEAR
-       =========================== */
-
-
     {
         name: "Premium Leather Formal Shoes",
 
@@ -2232,7 +1960,6 @@ const products = [
         rating: 4.7,
 
         discount: 25,
-
 
         variants: createVariants(
             [
@@ -2269,9 +1996,6 @@ const products = [
         )
     },
 
-
-
-
     {
         name: "Running Sports Shoes",
 
@@ -2282,17 +2006,14 @@ const products = [
             img("photo-1539185441755-769473a23570")
         ],
 
-
         brand: "Nike",
 
         description:
             "Lightweight running shoes with breathable mesh upper and responsive cushioning.",
 
-
         price: 4999,
 
         oldPrice: 6999,
-
 
         catName: "Fashion",
 
@@ -2300,11 +2021,9 @@ const products = [
 
         innersubcatName: "Men's Footwear",
 
-
         rating: 4.8,
 
         discount: 28,
-
 
         variants: createVariants(
             [
@@ -2341,9 +2060,6 @@ const products = [
         )
     },
 
-
-
-
     {
         name: "Casual Sneakers",
 
@@ -2354,17 +2070,14 @@ const products = [
             img("photo-1539185441755-769473a23570")
         ],
 
-
         brand: "Puma",
 
         description:
             "Everyday casual sneakers with stylish design and comfortable sole.",
 
-
         price: 2499,
 
         oldPrice: 3499,
-
 
         catName: "Fashion",
 
@@ -2372,11 +2085,9 @@ const products = [
 
         innersubcatName: "Men's Footwear",
 
-
         rating: 4.5,
 
         discount: 29,
-
 
         variants: createVariants(
             [
@@ -2413,14 +2124,6 @@ const products = [
         )
     },
 
-
-
-
-    /* ===========================
-            WOMEN FOOTWEAR
-       =========================== */
-
-
     {
         name: "Women's Premium Heels",
 
@@ -2431,17 +2134,14 @@ const products = [
             img("photo-1603487742131-4160ec999306")
         ],
 
-
         brand: "Metro",
 
         description:
             "Elegant women's heels designed for parties, weddings and formal occasions.",
 
-
         price: 1999,
 
         oldPrice: 2999,
-
 
         catName: "Fashion",
 
@@ -2449,11 +2149,9 @@ const products = [
 
         innersubcatName: "Women's Footwear",
 
-
         rating: 4.6,
 
         discount: 33,
-
 
         variants: createVariants(
             [
@@ -2490,9 +2188,6 @@ const products = [
         )
     },
 
-
-
-
     {
         name: "Women's Casual Sneakers",
 
@@ -2503,17 +2198,14 @@ const products = [
             img("photo-1495555961986-6d4c1ecb7be3")
         ],
 
-
         brand: "Adidas",
 
         description:
             "Comfortable casual sneakers with modern styling for everyday outfits.",
 
-
         price: 2799,
 
         oldPrice: 3999,
-
 
         catName: "Fashion",
 
@@ -2521,11 +2213,9 @@ const products = [
 
         innersubcatName: "Women's Footwear",
 
-
         rating: 4.7,
 
         discount: 30,
-
 
         variants: createVariants(
             [
@@ -2562,9 +2252,6 @@ const products = [
         )
     },
 
-
-
-
     {
         name: "Women's Flat Sandals",
 
@@ -2575,17 +2262,14 @@ const products = [
             img("photo-1543163521-1bf539c55dd2")
         ],
 
-
         brand: "Bata",
 
         description:
             "Comfortable flat sandals with stylish design suitable for daily wear.",
 
-
         price: 999,
 
         oldPrice: 1499,
-
 
         catName: "Fashion",
 
@@ -2593,11 +2277,9 @@ const products = [
 
         innersubcatName: "Women's Footwear",
 
-
         rating: 4.4,
 
         discount: 33,
-
 
         variants: createVariants(
             [
@@ -2634,17 +2316,6 @@ const products = [
         )
     },
 
-
-    /* ===========================
-            ELECTRONICS
-       =========================== */
-
-
-    /* ===========================
-            SMARTPHONES
-       =========================== */
-
-
     {
         name: "Galaxy Ultra Pro Smartphone",
 
@@ -2660,11 +2331,9 @@ const products = [
         description:
             "Flagship smartphone with powerful processor, AMOLED display, professional camera system and long-lasting battery.",
 
-
         price: 69999,
 
         oldPrice: 79999,
-
 
         catName: "Electronics",
 
@@ -2672,11 +2341,9 @@ const products = [
 
         innersubcatName: "Smartphones",
 
-
         rating: 4.8,
 
         discount: 12,
-
 
         variants: [
             {
@@ -2697,7 +2364,6 @@ const products = [
                     img("photo-1598327105666-5b89351aff97")
                 ]
             },
-
 
             {
                 options: {
@@ -2721,9 +2387,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Pixel Pro AI Smartphone",
 
@@ -2734,17 +2397,14 @@ const products = [
             img("photo-1605236453806-6ff36851218e")
         ],
 
-
         brand: "Google",
 
         description:
             "AI-powered smartphone featuring advanced camera processing, clean Android experience and premium OLED display.",
 
-
         price: 59999,
 
         oldPrice: 69999,
-
 
         catName: "Electronics",
 
@@ -2752,11 +2412,9 @@ const products = [
 
         innersubcatName: "Smartphones",
 
-
         rating: 4.7,
 
         discount: 14,
-
 
         variants: [
             {
@@ -2777,7 +2435,6 @@ const products = [
                     img("photo-1511707171634-5f897ff02aa9")
                 ]
             },
-
 
             {
                 options: {
@@ -2801,9 +2458,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "OnePlus Performance 5G Smartphone",
 
@@ -2814,17 +2468,14 @@ const products = [
             img("photo-1511707171634-5f897ff02aa9")
         ],
 
-
         brand: "OnePlus",
 
         description:
             "High-performance 5G smartphone with fast charging, smooth display and flagship-level performance.",
 
-
         price: 44999,
 
         oldPrice: 54999,
-
 
         catName: "Electronics",
 
@@ -2832,11 +2483,9 @@ const products = [
 
         innersubcatName: "Smartphones",
 
-
         rating: 4.6,
 
         discount: 18,
-
 
         variants: [
             {
@@ -2857,7 +2506,6 @@ const products = [
                     img("photo-1605236453806-6ff36851218e")
                 ]
             },
-
 
             {
                 options: {
@@ -2881,14 +2529,6 @@ const products = [
 
     },
 
-
-
-
-    /* ===========================
-            MOBILE ACCESSORIES
-       =========================== */
-
-
     {
         name: "Wireless Fast Charging Power Bank",
 
@@ -2904,11 +2544,9 @@ const products = [
         description:
             "High capacity power bank with fast charging support and compact portable design.",
 
-
         price: 2499,
 
         oldPrice: 3499,
-
 
         catName: "Electronics",
 
@@ -2916,11 +2554,9 @@ const products = [
 
         innersubcatName: "Accessories",
 
-
         rating: 4.7,
 
         discount: 28,
-
 
         variants: [
             {
@@ -2940,7 +2576,6 @@ const products = [
                     img("photo-1585338107529-13afc5f02586")
                 ]
             },
-
 
             {
                 options: {
@@ -2963,9 +2598,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Premium Wireless Earbuds",
 
@@ -2976,17 +2608,14 @@ const products = [
             img("photo-1600294037681-c80b4cb5b434")
         ],
 
-
         brand: "Sony",
 
         description:
             "True wireless earbuds with active noise cancellation and immersive sound quality.",
 
-
         price: 4999,
 
         oldPrice: 6999,
-
 
         catName: "Electronics",
 
@@ -2994,11 +2623,9 @@ const products = [
 
         innersubcatName: "Accessories",
 
-
         rating: 4.8,
 
         discount: 28,
-
 
         variants: [
             {
@@ -3022,13 +2649,6 @@ const products = [
 
     },
 
-
-
-    /* ===========================
-            LAPTOPS
-       =========================== */
-
-
     {
         name: "MacBook Air M Series Laptop",
 
@@ -3048,18 +2668,15 @@ const products = [
 
         oldPrice: 99999,
 
-
         catName: "Electronics",
 
         SubcatName: "Computer Accessories",
 
         innersubcatName: "Laptops",
 
-
         rating: 4.9,
 
         discount: 10,
-
 
         variants: [
             {
@@ -3080,7 +2697,6 @@ const products = [
                     img("photo-1496181133206-80ce9b88a853")
                 ]
             },
-
 
             {
                 options: {
@@ -3104,9 +2720,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Premium Gaming Laptop",
 
@@ -3117,17 +2730,14 @@ const products = [
             img("photo-1525547719571-a2d4ac8945e2")
         ],
 
-
         brand: "ASUS",
 
         description:
             "High performance gaming laptop with dedicated graphics, fast refresh display and powerful processor.",
 
-
         price: 79999,
 
         oldPrice: 94999,
-
 
         catName: "Electronics",
 
@@ -3135,11 +2745,9 @@ const products = [
 
         innersubcatName: "Laptops",
 
-
         rating: 4.7,
 
         discount: 16,
-
 
         variants: [
             {
@@ -3161,7 +2769,6 @@ const products = [
                     img("photo-1593642702821-c8da6771f0c6")
                 ]
             },
-
 
             {
                 options: {
@@ -3186,9 +2793,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "UltraBook Professional Laptop",
 
@@ -3204,11 +2808,9 @@ const products = [
         description:
             "Slim professional laptop designed for students and working professionals with excellent portability.",
 
-
         price: 64999,
 
         oldPrice: 74999,
-
 
         catName: "Electronics",
 
@@ -3216,11 +2818,9 @@ const products = [
 
         innersubcatName: "Laptops",
 
-
         rating: 4.6,
 
         discount: 13,
-
 
         variants: [
             {
@@ -3246,14 +2846,6 @@ const products = [
 
     },
 
-
-
-
-    /* ===========================
-            COMPUTER PERIPHERALS
-       =========================== */
-
-
     {
         name: "Mechanical RGB Gaming Keyboard",
 
@@ -3269,11 +2861,9 @@ const products = [
         description:
             "Mechanical gaming keyboard with RGB lighting and responsive switches.",
 
-
         price: 4999,
 
         oldPrice: 6999,
-
 
         catName: "Electronics",
 
@@ -3281,11 +2871,9 @@ const products = [
 
         innersubcatName: "Peripherals",
 
-
         rating: 4.7,
 
         discount: 28,
-
 
         variants: [
             {
@@ -3309,9 +2897,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Wireless Ergonomic Mouse",
 
@@ -3327,11 +2912,9 @@ const products = [
         description:
             "Comfortable wireless mouse with precise tracking and long battery life.",
 
-
         price: 1999,
 
         oldPrice: 2999,
-
 
         catName: "Electronics",
 
@@ -3339,11 +2922,9 @@ const products = [
 
         innersubcatName: "Peripherals",
 
-
         rating: 4.5,
 
         discount: 33,
-
 
         variants: [
             {
@@ -3367,14 +2948,6 @@ const products = [
 
     },
 
-
-
-
-    /* ===========================
-            HEADPHONES
-       =========================== */
-
-
     {
         name: "Premium Noise Cancelling Headphones",
 
@@ -3385,17 +2958,14 @@ const products = [
             img("photo-1524678606370-a47ad25cb82a")
         ],
 
-
         brand: "Sony",
 
         description:
             "Over-ear wireless headphones with active noise cancellation and premium sound quality.",
 
-
         price: 8999,
 
         oldPrice: 11999,
-
 
         catName: "Electronics",
 
@@ -3403,11 +2973,9 @@ const products = [
 
         innersubcatName: "Headphones",
 
-
         rating: 4.8,
 
         discount: 25,
-
 
         variants: [
             {
@@ -3431,9 +2999,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Studio Wireless Headphones",
 
@@ -3444,17 +3009,14 @@ const products = [
             img("photo-1546435770-a3e426bf472b")
         ],
 
-
         brand: "JBL",
 
         description:
             "Studio-quality wireless headphones delivering deep bass and clear vocals.",
 
-
         price: 5999,
 
         oldPrice: 7999,
-
 
         catName: "Electronics",
 
@@ -3462,11 +3024,9 @@ const products = [
 
         innersubcatName: "Headphones",
 
-
         rating: 4.6,
 
         discount: 25,
-
 
         variants: [
             {
@@ -3490,12 +3050,6 @@ const products = [
 
     },
 
-
-    /* ===========================
-            SPEAKERS
-       =========================== */
-
-
     {
         name: "Premium Bluetooth Portable Speaker",
 
@@ -3511,11 +3065,9 @@ const products = [
         description:
             "Portable Bluetooth speaker with powerful audio output, deep bass and long battery backup.",
 
-
         price: 4999,
 
         oldPrice: 6999,
-
 
         catName: "Electronics",
 
@@ -3523,11 +3075,9 @@ const products = [
 
         innersubcatName: "Speakers",
 
-
         rating: 4.8,
 
         discount: 28,
-
 
         variants: [
             {
@@ -3548,7 +3098,6 @@ const products = [
                     img("photo-1589003077984-894e133dabab")
                 ]
             },
-
 
             {
                 options: {
@@ -3572,9 +3121,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Smart Home Voice Speaker",
 
@@ -3585,17 +3131,14 @@ const products = [
             img("photo-1589003077984-894e133dabab")
         ],
 
-
         brand: "Amazon",
 
         description:
             "Smart speaker with voice assistant, smart home controls and premium audio experience.",
 
-
         price: 4499,
 
         oldPrice: 5999,
-
 
         catName: "Electronics",
 
@@ -3603,11 +3146,9 @@ const products = [
 
         innersubcatName: "Speakers",
 
-
         rating: 4.6,
 
         discount: 25,
-
 
         variants: [
             {
@@ -3631,9 +3172,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Premium Soundbar System",
 
@@ -3644,17 +3182,14 @@ const products = [
             img("photo-1608043152269-423dbba4e7e1")
         ],
 
-
         brand: "Sony",
 
         description:
             "Home theatre soundbar with immersive surround sound and wireless subwoofer support.",
 
-
         price: 12999,
 
         oldPrice: 16999,
-
 
         catName: "Electronics",
 
@@ -3662,11 +3197,9 @@ const products = [
 
         innersubcatName: "Speakers",
 
-
         rating: 4.7,
 
         discount: 24,
-
 
         variants: [
             {
@@ -3691,17 +3224,6 @@ const products = [
 
     },
 
-
-    /* ===========================
-            BEAUTY
-       =========================== */
-
-
-    /* ===========================
-            FACE CARE
-       =========================== */
-
-
     {
         name: "Vitamin C Brightening Face Serum",
 
@@ -3717,11 +3239,9 @@ const products = [
         description:
             "Lightweight vitamin C serum that helps improve skin brightness and provides antioxidant protection.",
 
-
         price: 899,
 
         oldPrice: 1299,
-
 
         catName: "Beauty",
 
@@ -3729,11 +3249,9 @@ const products = [
 
         innersubcatName: "Face Care",
 
-
         rating: 4.7,
 
         discount: 30,
-
 
         variants: [
             {
@@ -3753,7 +3271,6 @@ const products = [
                     img("photo-1556228578-8c89e6adf883")
                 ]
             },
-
 
             {
                 options: {
@@ -3776,9 +3293,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Hydrating Aloe Vera Face Gel",
 
@@ -3789,17 +3303,14 @@ const products = [
             img("photo-1620916566398-39f1143ab7be")
         ],
 
-
         brand: "Mamaearth",
 
         description:
             "Refreshing aloe vera face gel providing deep hydration and soothing care for the skin.",
 
-
         price: 399,
 
         oldPrice: 599,
-
 
         catName: "Beauty",
 
@@ -3807,11 +3318,9 @@ const products = [
 
         innersubcatName: "Face Care",
 
-
         rating: 4.5,
 
         discount: 33,
-
 
         variants: [
             {
@@ -3831,7 +3340,6 @@ const products = [
                     img("photo-1608248543803-ba4f8c70ae0b")
                 ]
             },
-
 
             {
                 options: {
@@ -3854,9 +3362,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Gentle Foaming Face Cleanser",
 
@@ -3867,17 +3372,14 @@ const products = [
             img("photo-1608248543803-ba4f8c70ae0b")
         ],
 
-
         brand: "Cetaphil",
 
         description:
             "Dermatologist-tested gentle cleanser suitable for daily face cleansing.",
 
-
         price: 549,
 
         oldPrice: 699,
-
 
         catName: "Beauty",
 
@@ -3885,11 +3387,9 @@ const products = [
 
         innersubcatName: "Face Care",
 
-
         rating: 4.8,
 
         discount: 21,
-
 
         variants: [
             {
@@ -3913,14 +3413,6 @@ const products = [
 
     },
 
-
-
-
-    /* ===========================
-            BODY CARE
-       =========================== */
-
-
     {
         name: "Shea Butter Body Lotion",
 
@@ -3931,17 +3423,14 @@ const products = [
             img("photo-1620916566398-39f1143ab7be")
         ],
 
-
         brand: "Nivea",
 
         description:
             "Moisturizing body lotion enriched with shea butter for long-lasting hydration.",
 
-
         price: 499,
 
         oldPrice: 699,
-
 
         catName: "Beauty",
 
@@ -3949,11 +3438,9 @@ const products = [
 
         innersubcatName: "Body Care",
 
-
         rating: 4.6,
 
         discount: 28,
-
 
         variants: [
             {
@@ -3973,7 +3460,6 @@ const products = [
                     img("photo-1556228578-8c89e6adf883")
                 ]
             },
-
 
             {
                 options: {
@@ -3996,9 +3482,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Luxury Body Scrub",
 
@@ -4009,17 +3492,14 @@ const products = [
             img("photo-1620916566398-39f1143ab7be")
         ],
 
-
         brand: "Body Shop",
 
         description:
             "Exfoliating body scrub that removes dead skin and leaves skin feeling smooth.",
 
-
         price: 799,
 
         oldPrice: 1099,
-
 
         catName: "Beauty",
 
@@ -4027,11 +3507,9 @@ const products = [
 
         innersubcatName: "Body Care",
 
-
         rating: 4.5,
 
         discount: 27,
-
 
         variants: [
             {
@@ -4055,9 +3533,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Vitamin E Body Oil",
 
@@ -4068,17 +3543,14 @@ const products = [
             img("photo-1612817288484-6f916006741a")
         ],
 
-
         brand: "Forest Essentials",
 
         description:
             "Nourishing body oil with vitamin E formula for smooth and glowing skin.",
 
-
         price: 999,
 
         oldPrice: 1499,
-
 
         catName: "Beauty",
 
@@ -4086,11 +3558,9 @@ const products = [
 
         innersubcatName: "Body Care",
 
-
         rating: 4.7,
 
         discount: 33,
-
 
         variants: [
             {
@@ -4114,19 +3584,6 @@ const products = [
 
     },
 
-
-    // id="beauty-haircare-part"
-
-    /* ===========================
-            HAIRCARE
-       =========================== */
-
-
-    /* ===========================
-            SHAMPOO & CONDITIONER
-       =========================== */
-
-
     {
         name: "Argan Oil Repair Shampoo",
 
@@ -4137,17 +3594,14 @@ const products = [
             img("photo-1620916566398-39f1143ab7be")
         ],
 
-
         brand: "L'Oreal Paris",
 
         description:
             "Repair shampoo enriched with argan oil that helps restore damaged hair and improves smoothness.",
 
-
         price: 499,
 
         oldPrice: 699,
-
 
         catName: "Beauty",
 
@@ -4155,11 +3609,9 @@ const products = [
 
         innersubcatName: "Shampoo & Conditioner",
 
-
         rating: 4.7,
 
         discount: 28,
-
 
         variants: [
             {
@@ -4179,7 +3631,6 @@ const products = [
                     img("photo-1608248543803-ba4f8c70ae0b")
                 ]
             },
-
 
             {
                 options: {
@@ -4202,9 +3653,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Keratin Smooth Conditioner",
 
@@ -4215,17 +3663,14 @@ const products = [
             img("photo-1612817288484-6f916006741a")
         ],
 
-
         brand: "Tresemme",
 
         description:
             "Keratin infused conditioner that provides smoothness, shine and frizz control.",
 
-
         price: 399,
 
         oldPrice: 599,
-
 
         catName: "Beauty",
 
@@ -4233,11 +3678,9 @@ const products = [
 
         innersubcatName: "Shampoo & Conditioner",
 
-
         rating: 4.6,
 
         discount: 33,
-
 
         variants: [
             {
@@ -4257,7 +3700,6 @@ const products = [
                     img("photo-1556228720-195a672e8a03")
                 ]
             },
-
 
             {
                 options: {
@@ -4280,9 +3722,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Anti Hair Fall Shampoo",
 
@@ -4293,17 +3732,14 @@ const products = [
             img("photo-1608248543803-ba4f8c70ae0b")
         ],
 
-
         brand: "Mamaearth",
 
         description:
             "Natural ingredient based shampoo designed to reduce hair fall and strengthen roots.",
 
-
         price: 449,
 
         oldPrice: 649,
-
 
         catName: "Beauty",
 
@@ -4311,11 +3747,9 @@ const products = [
 
         innersubcatName: "Shampoo & Conditioner",
 
-
         rating: 4.5,
 
         discount: 30,
-
 
         variants: [
             {
@@ -4339,14 +3773,6 @@ const products = [
 
     },
 
-
-
-
-    /* ===========================
-            HAIR STYLING
-       =========================== */
-
-
     {
         name: "Professional Hair Styling Wax",
 
@@ -4357,17 +3783,14 @@ const products = [
             img("photo-1608248543803-ba4f8c70ae0b")
         ],
 
-
         brand: "Beardo",
 
         description:
             "Strong hold hair styling wax for creating modern hairstyles with matte finish.",
 
-
         price: 299,
 
         oldPrice: 499,
-
 
         catName: "Beauty",
 
@@ -4375,11 +3798,9 @@ const products = [
 
         innersubcatName: "Hair Styling",
 
-
         rating: 4.4,
 
         discount: 40,
-
 
         variants: [
             {
@@ -4404,9 +3825,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Heat Protection Hair Spray",
 
@@ -4417,17 +3835,14 @@ const products = [
             img("photo-1612817288484-6f916006741a")
         ],
 
-
         brand: "Schwarzkopf",
 
         description:
             "Professional hair spray providing heat protection and long-lasting styling.",
 
-
         price: 599,
 
         oldPrice: 899,
-
 
         catName: "Beauty",
 
@@ -4435,11 +3850,9 @@ const products = [
 
         innersubcatName: "Hair Styling",
 
-
         rating: 4.6,
 
         discount: 33,
-
 
         variants: [
             {
@@ -4463,9 +3876,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Curl Defining Hair Cream",
 
@@ -4476,17 +3886,14 @@ const products = [
             img("photo-1612817288484-6f916006741a")
         ],
 
-
         brand: "Moroccanoil",
 
         description:
             "Nourishing styling cream designed to define curls and reduce frizz.",
 
-
         price: 999,
 
         oldPrice: 1399,
-
 
         catName: "Beauty",
 
@@ -4494,11 +3901,9 @@ const products = [
 
         innersubcatName: "Hair Styling",
 
-
         rating: 4.7,
 
         discount: 28,
-
 
         variants: [
             {
@@ -4522,17 +3927,6 @@ const products = [
 
     },
 
-
-    /* ===========================
-            MAKEUP
-       =========================== */
-
-
-    /* ===========================
-            EYES
-       =========================== */
-
-
     {
         name: "Volume Boost Mascara",
 
@@ -4543,17 +3937,14 @@ const products = [
             img("photo-1583241800698-9a8f7f5f7b4d")
         ],
 
-
         brand: "Maybelline",
 
         description:
             "Long-lasting mascara that adds volume and definition to eyelashes.",
 
-
         price: 499,
 
         oldPrice: 699,
-
 
         catName: "Beauty",
 
@@ -4561,11 +3952,9 @@ const products = [
 
         innersubcatName: "Eyes",
 
-
         rating: 4.7,
 
         discount: 28,
-
 
         variants: [
             {
@@ -4590,9 +3979,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Precision Liquid Eyeliner",
 
@@ -4603,17 +3989,14 @@ const products = [
             img("photo-1583241800698-9a8f7f5f7b4d")
         ],
 
-
         brand: "Lakme",
 
         description:
             "Highly pigmented liquid eyeliner with smooth application and long wear.",
 
-
         price: 299,
 
         oldPrice: 499,
-
 
         catName: "Beauty",
 
@@ -4621,11 +4004,9 @@ const products = [
 
         innersubcatName: "Eyes",
 
-
         rating: 4.5,
 
         discount: 40,
-
 
         variants: [
             {
@@ -4649,9 +4030,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Professional Eyeshadow Palette",
 
@@ -4662,17 +4040,14 @@ const products = [
             img("photo-1631214540242-5c1b6d4d4b8c")
         ],
 
-
         brand: "Colorbar",
 
         description:
             "Multi shade eyeshadow palette with highly pigmented colors for everyday and party makeup.",
 
-
         price: 1299,
 
         oldPrice: 1799,
-
 
         catName: "Beauty",
 
@@ -4680,11 +4055,9 @@ const products = [
 
         innersubcatName: "Eyes",
 
-
         rating: 4.6,
 
         discount: 28,
-
 
         variants: [
             {
@@ -4708,14 +4081,6 @@ const products = [
 
     },
 
-
-
-
-    /* ===========================
-            LIPS
-       =========================== */
-
-
     {
         name: "Matte Liquid Lipstick",
 
@@ -4726,17 +4091,14 @@ const products = [
             img("photo-1587017539504-67cfbddac569")
         ],
 
-
         brand: "MAC",
 
         description:
             "Highly pigmented matte liquid lipstick with comfortable long-lasting finish.",
 
-
         price: 999,
 
         oldPrice: 1499,
-
 
         catName: "Beauty",
 
@@ -4744,11 +4106,9 @@ const products = [
 
         innersubcatName: "Lips",
 
-
         rating: 4.8,
 
         discount: 33,
-
 
         variants: [
             {
@@ -4768,7 +4128,6 @@ const products = [
                     img("photo-1591360236480-4ed861025e4c")
                 ]
             },
-
 
             {
                 options: {
@@ -4791,9 +4150,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Glossy Lip Gloss",
 
@@ -4804,17 +4160,14 @@ const products = [
             img("photo-1631730486572-226d1f7b5d08")
         ],
 
-
         brand: "Nykaa",
 
         description:
             "Hydrating lip gloss that provides glossy shine with smooth application.",
 
-
         price: 499,
 
         oldPrice: 799,
-
 
         catName: "Beauty",
 
@@ -4822,11 +4175,9 @@ const products = [
 
         innersubcatName: "Lips",
 
-
         rating: 4.5,
 
         discount: 37,
-
 
         variants: [
             {
@@ -4850,9 +4201,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Nourishing Tinted Lip Balm",
 
@@ -4863,17 +4211,14 @@ const products = [
             img("photo-1591360236480-4ed861025e4c")
         ],
 
-
         brand: "Himalaya",
 
         description:
             "Moisturizing tinted lip balm that keeps lips soft with natural color.",
 
-
         price: 199,
 
         oldPrice: 299,
-
 
         catName: "Beauty",
 
@@ -4881,11 +4226,9 @@ const products = [
 
         innersubcatName: "Lips",
 
-
         rating: 4.4,
 
         discount: 33,
-
 
         variants: [
             {
@@ -4909,20 +4252,6 @@ const products = [
 
     },
 
-
-    /* ===========================
-            BOOKS
-       =========================== */
-
-
-    /* ===========================
-            FICTION
-       =========================== */
-
-
-    /* -------- Romance -------- */
-
-
     {
         name: "The Love We Never Had",
 
@@ -4933,17 +4262,14 @@ const products = [
             img("photo-1532012197267-da84d127e765")
         ],
 
-
         brand: "Penguin Random House",
 
         description:
             "A bestselling romance novel exploring love, relationships and emotional journeys.",
 
-
         price: 399,
 
         oldPrice: 499,
-
 
         catName: "Books",
 
@@ -4951,11 +4277,9 @@ const products = [
 
         innersubcatName: "Romance",
 
-
         rating: 4.6,
 
         discount: 20,
-
 
         variants: [
             {
@@ -4976,7 +4300,6 @@ const products = [
                     img("photo-1543002588-bfa74002ed7e")
                 ]
             },
-
 
             {
                 options: {
@@ -5000,9 +4323,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Pride and Prejudice",
 
@@ -5013,17 +4333,14 @@ const products = [
             img("photo-1544947950-fa07a98d237f")
         ],
 
-
         brand: "Penguin Classics",
 
         description:
             "Classic romantic literature masterpiece loved by generations of readers.",
 
-
         price: 299,
 
         oldPrice: 399,
-
 
         catName: "Books",
 
@@ -5031,11 +4348,9 @@ const products = [
 
         innersubcatName: "Romance",
 
-
         rating: 4.8,
 
         discount: 25,
-
 
         variants: [
             {
@@ -5059,12 +4374,6 @@ const products = [
 
     },
 
-
-
-
-    /* -------- Science Fiction -------- */
-
-
     {
         name: "Dune: Science Fiction Epic",
 
@@ -5075,17 +4384,14 @@ const products = [
             img("photo-1543002588-bfa74002ed7e")
         ],
 
-
         brand: "Ace Books",
 
         description:
             "Epic science fiction novel featuring futuristic worlds, politics and adventure.",
 
-
         price: 499,
 
         oldPrice: 699,
-
 
         catName: "Books",
 
@@ -5093,11 +4399,9 @@ const products = [
 
         innersubcatName: "Science Fiction",
 
-
         rating: 4.9,
 
         discount: 28,
-
 
         variants: [
             {
@@ -5122,9 +4426,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "The Martian",
 
@@ -5135,17 +4436,14 @@ const products = [
             img("photo-1544947950-fa07a98d237f")
         ],
 
-
         brand: "Crown Publishing",
 
         description:
             "Science fiction survival story about an astronaut stranded on Mars.",
 
-
         price: 349,
 
         oldPrice: 499,
-
 
         catName: "Books",
 
@@ -5153,11 +4451,9 @@ const products = [
 
         innersubcatName: "Science Fiction",
 
-
         rating: 4.7,
 
         discount: 30,
-
 
         variants: [
             {
@@ -5181,17 +4477,6 @@ const products = [
 
     },
 
-
-
-
-    /* ===========================
-            NON FICTION
-       =========================== */
-
-
-    /* -------- Biographies -------- */
-
-
     {
         name: "Steve Jobs Biography",
 
@@ -5202,17 +4487,14 @@ const products = [
             img("photo-1543002588-bfa74002ed7e")
         ],
 
-
         brand: "Simon & Schuster",
 
         description:
             "Detailed biography covering the life, innovation and journey of Steve Jobs.",
 
-
         price: 599,
 
         oldPrice: 799,
-
 
         catName: "Books",
 
@@ -5220,11 +4502,9 @@ const products = [
 
         innersubcatName: "Biographies",
 
-
         rating: 4.8,
 
         discount: 25,
-
 
         variants: [
             {
@@ -5248,9 +4528,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Wings of Fire",
 
@@ -5261,17 +4538,14 @@ const products = [
             img("photo-1532012197267-da84d127e765")
         ],
 
-
         brand: "Universities Press",
 
         description:
             "Inspirational autobiography of Dr. APJ Abdul Kalam covering his journey and achievements.",
 
-
         price: 250,
 
         oldPrice: 350,
-
 
         catName: "Books",
 
@@ -5279,11 +4553,9 @@ const products = [
 
         innersubcatName: "Biographies",
 
-
         rating: 4.9,
 
         discount: 28,
-
 
         variants: [
             {
@@ -5307,12 +4579,6 @@ const products = [
 
     },
 
-
-    /* ===========================
-            SELF HELP
-       =========================== */
-
-
     {
         name: "Atomic Habits",
 
@@ -5328,11 +4594,9 @@ const products = [
         description:
             "A practical guide to building good habits, breaking bad ones and improving everyday life.",
 
-
         price: 499,
 
         oldPrice: 699,
-
 
         catName: "Books",
 
@@ -5340,11 +4604,9 @@ const products = [
 
         innersubcatName: "Self-Help",
 
-
         rating: 4.9,
 
         discount: 28,
-
 
         variants: [
             {
@@ -5369,9 +4631,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "The Psychology of Money",
 
@@ -5382,17 +4641,14 @@ const products = [
             img("photo-1544947950-fa07a98d237f")
         ],
 
-
         brand: "Harriman House",
 
         description:
             "A book about money management, investing behaviour and financial decision making.",
 
-
         price: 399,
 
         oldPrice: 599,
-
 
         catName: "Books",
 
@@ -5400,11 +4656,9 @@ const products = [
 
         innersubcatName: "Self-Help",
 
-
         rating: 4.8,
 
         discount: 33,
-
 
         variants: [
             {
@@ -5428,9 +4682,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Deep Work",
 
@@ -5441,17 +4692,14 @@ const products = [
             img("photo-1544947950-fa07a98d237f")
         ],
 
-
         brand: "Grand Central Publishing",
 
         description:
             "Guide to focused productivity and achieving meaningful results in a distracted world.",
 
-
         price: 449,
 
         oldPrice: 649,
-
 
         catName: "Books",
 
@@ -5459,11 +4707,9 @@ const products = [
 
         innersubcatName: "Self-Help",
 
-
         rating: 4.7,
 
         discount: 30,
-
 
         variants: [
             {
@@ -5487,17 +4733,6 @@ const products = [
 
     },
 
-
-
-
-    /* ===========================
-            ACADEMIC
-       =========================== */
-
-
-    /* -------- School Textbooks -------- */
-
-
     {
         name: "NCERT Mathematics Class 10",
 
@@ -5508,17 +4743,14 @@ const products = [
             img("photo-1543002588-bfa74002ed7e")
         ],
 
-
         brand: "NCERT",
 
         description:
             "Official school mathematics textbook for Class 10 students.",
 
-
         price: 250,
 
         oldPrice: 300,
-
 
         catName: "Books",
 
@@ -5526,11 +4758,9 @@ const products = [
 
         innersubcatName: "School-Textbooks",
 
-
         rating: 4.8,
 
         discount: 17,
-
 
         variants: [
             {
@@ -5555,9 +4785,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Physics Class 12 Textbook",
 
@@ -5568,17 +4795,14 @@ const products = [
             img("photo-1532012197267-da84d127e765")
         ],
 
-
         brand: "NCERT",
 
         description:
             "Class 12 physics textbook covering concepts, examples and exercises.",
 
-
         price: 300,
 
         oldPrice: 400,
-
 
         catName: "Books",
 
@@ -5586,11 +4810,9 @@ const products = [
 
         innersubcatName: "School-Textbooks",
 
-
         rating: 4.7,
 
         discount: 25,
-
 
         variants: [
             {
@@ -5615,12 +4837,6 @@ const products = [
 
     },
 
-
-
-
-    /* -------- Competitive Textbooks -------- */
-
-
     {
         name: "Data Structures and Algorithms Complete Guide",
 
@@ -5631,17 +4847,14 @@ const products = [
             img("photo-1543002588-bfa74002ed7e")
         ],
 
-
         brand: "McGraw Hill",
 
         description:
             "Comprehensive DSA preparation book for programming interviews and competitive exams.",
 
-
         price: 799,
 
         oldPrice: 999,
-
 
         catName: "Books",
 
@@ -5649,11 +4862,9 @@ const products = [
 
         innersubcatName: "Competitive-Textbooks",
 
-
         rating: 4.8,
 
         discount: 20,
-
 
         variants: [
             {
@@ -5678,9 +4889,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Cracking the Coding Interview",
 
@@ -5691,17 +4899,14 @@ const products = [
             img("photo-1544947950-fa07a98d237f")
         ],
 
-
         brand: "CareerCup",
 
         description:
             "Popular programming interview preparation book containing coding problems and solutions.",
 
-
         price: 999,
 
         oldPrice: 1299,
-
 
         catName: "Books",
 
@@ -5709,11 +4914,9 @@ const products = [
 
         innersubcatName: "Competitive-Textbooks",
 
-
         rating: 4.9,
 
         discount: 23,
-
 
         variants: [
             {
@@ -5738,21 +4941,6 @@ const products = [
 
     },
 
-
-
-    /* ===========================
-            GROCERIES
-       =========================== */
-
-
-    /* ===========================
-            FRESH PRODUCE
-       =========================== */
-
-
-    /* -------- Fruits -------- */
-
-
     {
         name: "Fresh Alphonso Mangoes",
 
@@ -5763,17 +4951,14 @@ const products = [
             img("photo-1625167171750-419e3812a95d")
         ],
 
-
         brand: "Fresh Farm",
 
         description:
             "Premium quality Alphonso mangoes with naturally sweet taste and fresh farm delivery.",
 
-
         price: 499,
 
         oldPrice: 699,
-
 
         catName: "Groceries",
 
@@ -5781,11 +4966,9 @@ const products = [
 
         innersubcatName: "Fruits",
 
-
         rating: 4.8,
 
         discount: 28,
-
 
         variants: [
             {
@@ -5805,7 +4988,6 @@ const products = [
                     img("photo-1591073113125-e46713c829ed")
                 ]
             },
-
 
             {
                 options: {
@@ -5828,9 +5010,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Fresh Red Apples",
 
@@ -5841,17 +5020,14 @@ const products = [
             img("photo-1568702846914-96b305d2aaeb")
         ],
 
-
         brand: "Fresh Farm",
 
         description:
             "Crisp and juicy red apples sourced from premium orchards.",
 
-
         price: 199,
 
         oldPrice: 299,
-
 
         catName: "Groceries",
 
@@ -5859,11 +5035,9 @@ const products = [
 
         innersubcatName: "Fruits",
 
-
         rating: 4.7,
 
         discount: 33,
-
 
         variants: [
             {
@@ -5883,7 +5057,6 @@ const products = [
                     img("photo-1570913149827-d2ac84ab3f9a")
                 ]
             },
-
 
             {
                 options: {
@@ -5906,9 +5079,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Fresh Organic Bananas",
 
@@ -5919,17 +5089,14 @@ const products = [
             img("photo-1574226516831-e1dff420e12f")
         ],
 
-
         brand: "Organic Valley",
 
         description:
             "Naturally grown fresh bananas rich in nutrients and perfect for daily consumption.",
 
-
         price: 60,
 
         oldPrice: 80,
-
 
         catName: "Groceries",
 
@@ -5937,11 +5104,9 @@ const products = [
 
         innersubcatName: "Fruits",
 
-
         rating: 4.5,
 
         discount: 25,
-
 
         variants: [
             {
@@ -5965,9 +5130,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Fresh Orange Pack",
 
@@ -5978,17 +5140,14 @@ const products = [
             img("photo-1619566636858-adf3ef46400b")
         ],
 
-
         brand: "Fresh Farm",
 
         description:
             "Sweet and juicy oranges packed with freshness and natural vitamin C.",
 
-
         price: 150,
 
         oldPrice: 220,
-
 
         catName: "Groceries",
 
@@ -5996,11 +5155,9 @@ const products = [
 
         innersubcatName: "Fruits",
 
-
         rating: 4.6,
 
         discount: 32,
-
 
         variants: [
             {
@@ -6023,12 +5180,6 @@ const products = [
 
     },
 
-
-
-
-    /* -------- Vegetables -------- */
-
-
     {
         name: "Fresh Farm Tomatoes",
 
@@ -6039,17 +5190,14 @@ const products = [
             img("photo-1595854341625-f33ee10dbf94")
         ],
 
-
         brand: "Fresh Farm",
 
         description:
             "Fresh red tomatoes suitable for cooking salads and everyday meals.",
 
-
         price: 50,
 
         oldPrice: 70,
-
 
         catName: "Groceries",
 
@@ -6057,11 +5205,9 @@ const products = [
 
         innersubcatName: "Vegetables",
 
-
         rating: 4.5,
 
         discount: 28,
-
 
         variants: [
             {
@@ -6085,9 +5231,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Fresh Green Broccoli",
 
@@ -6098,17 +5241,14 @@ const products = [
             img("photo-1597362925123-77861d3fbac7")
         ],
 
-
         brand: "Organic Valley",
 
         description:
             "Fresh green broccoli packed with nutrients and ideal for healthy meals.",
 
-
         price: 120,
 
         oldPrice: 160,
-
 
         catName: "Groceries",
 
@@ -6116,11 +5256,9 @@ const products = [
 
         innersubcatName: "Vegetables",
 
-
         rating: 4.6,
 
         discount: 25,
-
 
         variants: [
             {
@@ -6144,9 +5282,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Fresh Potato Pack",
 
@@ -6157,17 +5292,14 @@ const products = [
             img("photo-1584270354949-c26b0d5b4a0c")
         ],
 
-
         brand: "Fresh Farm",
 
         description:
             "Premium quality potatoes suitable for everyday cooking.",
 
-
         price: 60,
 
         oldPrice: 90,
-
 
         catName: "Groceries",
 
@@ -6175,11 +5307,9 @@ const products = [
 
         innersubcatName: "Vegetables",
 
-
         rating: 4.4,
 
         discount: 33,
-
 
         variants: [
             {
@@ -6202,15 +5332,6 @@ const products = [
 
     },
 
-
-    /* ===========================
-            PACKAGED FOOD
-       =========================== */
-
-
-    /* -------- Snacks -------- */
-
-
     {
         name: "Premium Potato Chips",
 
@@ -6221,17 +5342,14 @@ const products = [
             img("photo-1600952841320-db92ec4047ca")
         ],
 
-
         brand: "Lays",
 
         description:
             "Crispy potato chips with delicious seasoning and perfect crunch for snacking.",
 
-
         price: 50,
 
         oldPrice: 70,
-
 
         catName: "Groceries",
 
@@ -6239,11 +5357,9 @@ const products = [
 
         innersubcatName: "Snacks",
 
-
         rating: 4.7,
 
         discount: 28,
-
 
         variants: [
             {
@@ -6263,7 +5379,6 @@ const products = [
                     img("photo-1581441363689-1f3c3c414635")
                 ]
             },
-
 
             {
                 options: {
@@ -6286,9 +5401,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Chocolate Cream Cookies",
 
@@ -6299,17 +5411,14 @@ const products = [
             img("photo-1589985270826-4b7bb135bc9d")
         ],
 
-
         brand: "Oreo",
 
         description:
             "Crunchy chocolate sandwich cookies filled with smooth vanilla cream.",
 
-
         price: 40,
 
         oldPrice: 60,
-
 
         catName: "Groceries",
 
@@ -6317,11 +5426,9 @@ const products = [
 
         innersubcatName: "Snacks",
 
-
         rating: 4.8,
 
         discount: 33,
-
 
         variants: [
             {
@@ -6341,7 +5448,6 @@ const products = [
                     img("photo-1558961363-7b2d8f4f6f87")
                 ]
             },
-
 
             {
                 options: {
@@ -6364,9 +5470,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Premium Dark Chocolate Bar",
 
@@ -6377,17 +5480,14 @@ const products = [
             img("photo-1511381939415-e44015466834")
         ],
 
-
         brand: "Cadbury",
 
         description:
             "Rich dark chocolate with smooth texture and premium cocoa flavour.",
 
-
         price: 150,
 
         oldPrice: 220,
-
 
         catName: "Groceries",
 
@@ -6395,11 +5495,9 @@ const products = [
 
         innersubcatName: "Snacks",
 
-
         rating: 4.6,
 
         discount: 32,
-
 
         variants: [
             {
@@ -6423,12 +5521,6 @@ const products = [
 
     },
 
-
-
-
-    /* -------- Beverages -------- */
-
-
     {
         name: "Premium Instant Coffee Powder",
 
@@ -6439,17 +5531,14 @@ const products = [
             img("photo-1509042239860-f550ce710b93")
         ],
 
-
         brand: "Nescafe",
 
         description:
             "Premium instant coffee powder delivering rich aroma and strong flavour.",
 
-
         price: 299,
 
         oldPrice: 399,
-
 
         catName: "Groceries",
 
@@ -6457,11 +5546,9 @@ const products = [
 
         innersubcatName: "Beverages",
 
-
         rating: 4.7,
 
         discount: 25,
-
 
         variants: [
             {
@@ -6481,7 +5568,6 @@ const products = [
                     img("photo-1495474472287-4d71bcdd2085")
                 ]
             },
-
 
             {
                 options: {
@@ -6504,9 +5590,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Mixed Fruit Juice",
 
@@ -6517,17 +5600,14 @@ const products = [
             img("photo-1544145945-f90425340c7e")
         ],
 
-
         brand: "Real",
 
         description:
             "Refreshing mixed fruit juice made with a blend of natural fruit flavours.",
 
-
         price: 120,
 
         oldPrice: 160,
-
 
         catName: "Groceries",
 
@@ -6535,11 +5615,9 @@ const products = [
 
         innersubcatName: "Beverages",
 
-
         rating: 4.5,
 
         discount: 25,
-
 
         variants: [
             {
@@ -6563,9 +5641,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Classic Cola Soft Drink",
 
@@ -6576,17 +5651,14 @@ const products = [
             img("photo-1621506289937-a8e4df240d0b")
         ],
 
-
         brand: "Coca Cola",
 
         description:
             "Classic carbonated soft drink with refreshing cola flavour.",
 
-
         price: 40,
 
         oldPrice: 60,
-
 
         catName: "Groceries",
 
@@ -6594,11 +5666,9 @@ const products = [
 
         innersubcatName: "Beverages",
 
-
         rating: 4.6,
 
         discount: 33,
-
 
         variants: [
             {
@@ -6618,7 +5688,6 @@ const products = [
                     img("photo-1544145945-f90425340c7e")
                 ]
             },
-
 
             {
                 options: {
@@ -6641,16 +5710,6 @@ const products = [
 
     },
 
-
-
-    /* ===========================
-            DAIRY & BAKERY
-       =========================== */
-
-
-    /* -------- Dairy -------- */
-
-
     {
         name: "Fresh Full Cream Milk",
 
@@ -6666,11 +5725,9 @@ const products = [
         description:
             "Fresh full cream milk with rich taste and essential nutrients for daily consumption.",
 
-
         price: 70,
 
         oldPrice: 80,
-
 
         catName: "Groceries",
 
@@ -6678,11 +5735,9 @@ const products = [
 
         innersubcatName: "Dairy",
 
-
         rating: 4.8,
 
         discount: 12,
-
 
         variants: [
             {
@@ -6702,7 +5757,6 @@ const products = [
                     img("photo-1550583724-b2692b85b150")
                 ]
             },
-
 
             {
                 options: {
@@ -6725,9 +5779,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Premium Cheddar Cheese",
 
@@ -6738,17 +5789,14 @@ const products = [
             img("photo-1563636619-e9143da7973b")
         ],
 
-
         brand: "Britannia",
 
         description:
             "Premium cheddar cheese slices perfect for sandwiches, burgers and cooking.",
 
-
         price: 220,
 
         oldPrice: 280,
-
 
         catName: "Groceries",
 
@@ -6756,11 +5804,9 @@ const products = [
 
         innersubcatName: "Dairy",
 
-
         rating: 4.6,
 
         discount: 21,
-
 
         variants: [
             {
@@ -6784,9 +5830,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Salted Butter Block",
 
@@ -6797,17 +5840,14 @@ const products = [
             img("photo-1486297678162-eb2a19b0a32d")
         ],
 
-
         brand: "Amul",
 
         description:
             "Creamy salted butter suitable for breakfast, baking and cooking.",
 
-
         price: 120,
 
         oldPrice: 150,
-
 
         catName: "Groceries",
 
@@ -6815,11 +5855,9 @@ const products = [
 
         innersubcatName: "Dairy",
 
-
         rating: 4.7,
 
         discount: 20,
-
 
         variants: [
             {
@@ -6843,12 +5881,6 @@ const products = [
 
     },
 
-
-
-
-    /* -------- Bakery -------- */
-
-
     {
         name: "Premium White Bread",
 
@@ -6859,17 +5891,14 @@ const products = [
             img("photo-1598373182133-52452f7691ef")
         ],
 
-
         brand: "Britannia",
 
         description:
             "Soft and fresh white bread perfect for breakfast and daily meals.",
 
-
         price: 45,
 
         oldPrice: 60,
-
 
         catName: "Groceries",
 
@@ -6877,11 +5906,9 @@ const products = [
 
         innersubcatName: "Bakery",
 
-
         rating: 4.6,
 
         discount: 25,
-
 
         variants: [
             {
@@ -6905,9 +5932,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Chocolate Truffle Cake",
 
@@ -6918,17 +5942,14 @@ const products = [
             img("photo-1571115177098-24ec42ed204d")
         ],
 
-
         brand: "Theobroma",
 
         description:
             "Rich chocolate truffle cake with premium chocolate layers and creamy frosting.",
 
-
         price: 799,
 
         oldPrice: 999,
-
 
         catName: "Groceries",
 
@@ -6936,11 +5957,9 @@ const products = [
 
         innersubcatName: "Bakery",
 
-
         rating: 4.9,
 
         discount: 20,
-
 
         variants: [
             {
@@ -6960,7 +5979,6 @@ const products = [
                     img("photo-1551024506-0bccd828d307")
                 ]
             },
-
 
             {
                 options: {
@@ -6983,9 +6001,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Butter Croissant Pack",
 
@@ -6996,17 +6011,14 @@ const products = [
             img("photo-1598373182133-52452f7691ef")
         ],
 
-
         brand: "Modern Bakery",
 
         description:
             "Freshly baked buttery croissants with a flaky golden texture.",
 
-
         price: 180,
 
         oldPrice: 250,
-
 
         catName: "Groceries",
 
@@ -7014,11 +6026,9 @@ const products = [
 
         innersubcatName: "Bakery",
 
-
         rating: 4.7,
 
         discount: 28,
-
 
         variants: [
             {
@@ -7042,22 +6052,6 @@ const products = [
 
     },
 
-
-    // id="home-furniture-part"
-
-    /* ===========================
-                HOME
-       =========================== */
-
-
-    /* ===========================
-              FURNITURE
-       =========================== */
-
-
-    /* -------- Living Room -------- */
-
-
     {
         name: "Modern L Shape Sofa Set",
 
@@ -7068,17 +6062,14 @@ const products = [
             img("photo-1586023492125-27b2c045efd7")
         ],
 
-
         brand: "Urban Ladder",
 
         description:
             "Premium L shaped sofa with comfortable cushioning and modern design for contemporary living rooms.",
 
-
         price: 39999,
 
         oldPrice: 49999,
-
 
         catName: "Home",
 
@@ -7086,11 +6077,9 @@ const products = [
 
         innersubcatName: "Living Room",
 
-
         rating: 4.8,
 
         discount: 20,
-
 
         variants: [
             {
@@ -7111,7 +6100,6 @@ const products = [
                     img("photo-1550226891-ef816aed4a98")
                 ]
             },
-
 
             {
                 options: {
@@ -7135,9 +6123,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Wooden Coffee Table",
 
@@ -7148,17 +6133,14 @@ const products = [
             img("photo-1600210492486-724fe5c67fb0")
         ],
 
-
         brand: "Pepperfry",
 
         description:
             "Elegant wooden coffee table designed for modern living spaces with durable construction.",
 
-
         price: 6999,
 
         oldPrice: 8999,
-
 
         catName: "Home",
 
@@ -7166,11 +6148,9 @@ const products = [
 
         innersubcatName: "Living Room",
 
-
         rating: 4.6,
 
         discount: 22,
-
 
         variants: [
             {
@@ -7195,9 +6175,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Modern Wooden TV Unit",
 
@@ -7208,17 +6185,14 @@ const products = [
             img("photo-1616486338812-3dadae4b4ace")
         ],
 
-
         brand: "Godrej Interio",
 
         description:
             "Stylish TV cabinet with storage compartments suitable for modern homes.",
 
-
         price: 14999,
 
         oldPrice: 19999,
-
 
         catName: "Home",
 
@@ -7226,11 +6200,9 @@ const products = [
 
         innersubcatName: "Living Room",
 
-
         rating: 4.5,
 
         discount: 25,
-
 
         variants: [
             {
@@ -7255,12 +6227,6 @@ const products = [
 
     },
 
-
-
-
-    /* -------- Bed Room -------- */
-
-
     {
         name: "Premium King Size Wooden Bed",
 
@@ -7271,17 +6237,14 @@ const products = [
             img("photo-1586023492125-27b2c045efd7")
         ],
 
-
         brand: "Wakefit",
 
         description:
             "Strong wooden king size bed with elegant design and spacious sleeping area.",
 
-
         price: 32999,
 
         oldPrice: 42999,
-
 
         catName: "Home",
 
@@ -7289,11 +6252,9 @@ const products = [
 
         innersubcatName: "Bed Room",
 
-
         rating: 4.8,
 
         discount: 23,
-
 
         variants: [
             {
@@ -7318,9 +6279,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Sliding Door Wardrobe",
 
@@ -7331,17 +6289,14 @@ const products = [
             img("photo-1618221195710-dd6b41faaea6")
         ],
 
-
         brand: "IKEA",
 
         description:
             "Spacious modern wardrobe with sliding doors and multiple storage sections.",
 
-
         price: 24999,
 
         oldPrice: 32999,
-
 
         catName: "Home",
 
@@ -7349,11 +6304,9 @@ const products = [
 
         innersubcatName: "Bed Room",
 
-
         rating: 4.6,
 
         discount: 24,
-
 
         variants: [
             {
@@ -7378,9 +6331,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Bedside Table With Drawer",
 
@@ -7391,17 +6341,14 @@ const products = [
             img("photo-1532372576444-dda954194ad0")
         ],
 
-
         brand: "Nilkamal",
 
         description:
             "Compact bedside table with storage drawer for bedrooms and modern interiors.",
 
-
         price: 2999,
 
         oldPrice: 3999,
-
 
         catName: "Home",
 
@@ -7409,11 +6356,9 @@ const products = [
 
         innersubcatName: "Bed Room",
 
-
         rating: 4.5,
 
         discount: 25,
-
 
         variants: [
             {
@@ -7438,17 +6383,6 @@ const products = [
 
     },
 
-
-    // id="home-kitchen-part"
-
-    /* ===========================
-          KITCHEN & DINING
-       =========================== */
-
-
-    /* -------- Cookware -------- */
-
-
     {
         name: "Non Stick Cookware Set",
 
@@ -7459,17 +6393,14 @@ const products = [
             img("photo-1600566753086-00f18fb6b3ea")
         ],
 
-
         brand: "Prestige",
 
         description:
             "Premium non-stick cookware set including frying pan, kadai and sauce pan for modern kitchens.",
 
-
         price: 2499,
 
         oldPrice: 3499,
-
 
         catName: "Home",
 
@@ -7477,11 +6408,9 @@ const products = [
 
         innersubcatName: "Cookware",
 
-
         rating: 4.7,
 
         discount: 28,
-
 
         variants: [
             {
@@ -7502,7 +6431,6 @@ const products = [
                     img("photo-1556911220-e15b29be8c8f")
                 ]
             },
-
 
             {
                 options: {
@@ -7526,9 +6454,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Stainless Steel Pressure Cooker",
 
@@ -7539,17 +6464,14 @@ const products = [
             img("photo-1600566753086-00f18fb6b3ea")
         ],
 
-
         brand: "Hawkins",
 
         description:
             "Durable stainless steel pressure cooker suitable for everyday cooking.",
 
-
         price: 1899,
 
         oldPrice: 2499,
-
 
         catName: "Home",
 
@@ -7557,11 +6479,9 @@ const products = [
 
         innersubcatName: "Cookware",
 
-
         rating: 4.8,
 
         discount: 24,
-
 
         variants: [
             {
@@ -7585,9 +6505,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Premium Granite Frying Pan",
 
@@ -7598,17 +6515,14 @@ const products = [
             img("photo-1600566753086-00f18fb6b3ea")
         ],
 
-
         brand: "Wonderchef",
 
         description:
             "Granite coated frying pan with durable non-stick surface for healthy cooking.",
 
-
         price: 999,
 
         oldPrice: 1499,
-
 
         catName: "Home",
 
@@ -7616,11 +6530,9 @@ const products = [
 
         innersubcatName: "Cookware",
 
-
         rating: 4.6,
 
         discount: 33,
-
 
         variants: [
             {
@@ -7645,12 +6557,6 @@ const products = [
 
     },
 
-
-
-
-    /* -------- Tableware -------- */
-
-
     {
         name: "Elegant Ceramic Dinner Set",
 
@@ -7661,17 +6567,14 @@ const products = [
             img("photo-1610701596007-11502861dcfa")
         ],
 
-
         brand: "La Opala",
 
         description:
             "Premium ceramic dinner set with elegant design suitable for everyday and special occasions.",
 
-
         price: 2999,
 
         oldPrice: 3999,
-
 
         catName: "Home",
 
@@ -7679,11 +6582,9 @@ const products = [
 
         innersubcatName: "Tableware",
 
-
         rating: 4.7,
 
         discount: 25,
-
 
         variants: [
             {
@@ -7708,9 +6609,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Premium Coffee Mug Set",
 
@@ -7721,17 +6619,14 @@ const products = [
             img("photo-1509042239860-f550ce710b93")
         ],
 
-
         brand: "Milton",
 
         description:
             "Stylish ceramic coffee mugs perfect for tea, coffee and beverages.",
 
-
         price: 799,
 
         oldPrice: 1199,
-
 
         catName: "Home",
 
@@ -7739,11 +6634,9 @@ const products = [
 
         innersubcatName: "Tableware",
 
-
         rating: 4.5,
 
         discount: 33,
-
 
         variants: [
             {
@@ -7768,9 +6661,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Crystal Glass Tumbler Set",
 
@@ -7781,17 +6671,14 @@ const products = [
             img("photo-1603199506016-b9a594b593c0")
         ],
 
-
         brand: "Borosil",
 
         description:
             "Premium glass tumbler set with elegant transparent design for dining tables.",
 
-
         price: 699,
 
         oldPrice: 999,
-
 
         catName: "Home",
 
@@ -7799,11 +6686,9 @@ const products = [
 
         innersubcatName: "Tableware",
 
-
         rating: 4.6,
 
         discount: 30,
-
 
         variants: [
             {
@@ -7828,17 +6713,6 @@ const products = [
 
     },
 
-
-    // id="home-decor-part"
-
-    /* ===========================
-            HOME DECOR
-       =========================== */
-
-
-    /* -------- Lighting -------- */
-
-
     {
         name: "Modern LED Ceiling Light",
 
@@ -7849,17 +6723,14 @@ const products = [
             img("photo-1507473885765-e6ed057f782c")
         ],
 
-
         brand: "Philips",
 
         description:
             "Modern LED ceiling light with elegant design and energy efficient illumination.",
 
-
         price: 2499,
 
         oldPrice: 3499,
-
 
         catName: "Home",
 
@@ -7867,11 +6738,9 @@ const products = [
 
         innersubcatName: "Lighting",
 
-
         rating: 4.7,
 
         discount: 28,
-
 
         variants: [
             {
@@ -7892,7 +6761,6 @@ const products = [
                     img("photo-1513506003901-1e6a229e2d15")
                 ]
             },
-
 
             {
                 options: {
@@ -7916,9 +6784,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Decorative Table Lamp",
 
@@ -7929,17 +6794,14 @@ const products = [
             img("photo-1524484485831-a92ffc0de03f")
         ],
 
-
         brand: "Halonix",
 
         description:
             "Elegant table lamp designed to enhance bedroom and living room interiors.",
 
-
         price: 1299,
 
         oldPrice: 1799,
-
 
         catName: "Home",
 
@@ -7947,11 +6809,9 @@ const products = [
 
         innersubcatName: "Lighting",
 
-
         rating: 4.5,
 
         discount: 28,
-
 
         variants: [
             {
@@ -7976,9 +6836,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Smart RGB LED Lamp",
 
@@ -7989,17 +6846,14 @@ const products = [
             img("photo-1540932239986-30128078f3c5")
         ],
 
-
         brand: "Wipro",
 
         description:
             "Smart RGB LED lamp with adjustable colours and modern home lighting control.",
 
-
         price: 1999,
 
         oldPrice: 2999,
-
 
         catName: "Home",
 
@@ -8007,11 +6861,9 @@ const products = [
 
         innersubcatName: "Lighting",
 
-
         rating: 4.6,
 
         discount: 33,
-
 
         variants: [
             {
@@ -8036,12 +6888,6 @@ const products = [
 
     },
 
-
-
-
-    /* -------- Furnishing -------- */
-
-
     {
         name: "Premium Blackout Curtains",
 
@@ -8052,17 +6898,14 @@ const products = [
             img("photo-1558997519-83ea9252edf8")
         ],
 
-
         brand: "Spaces",
 
         description:
             "Premium blackout curtains designed for privacy and stylish room decoration.",
 
-
         price: 2499,
 
         oldPrice: 3499,
-
 
         catName: "Home",
 
@@ -8070,11 +6913,9 @@ const products = [
 
         innersubcatName: "Furnishing",
 
-
         rating: 4.7,
 
         discount: 28,
-
 
         variants: [
             {
@@ -8099,9 +6940,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Decorative Cushion Set",
 
@@ -8112,17 +6950,14 @@ const products = [
             img("photo-1616486338812-3dadae4b4ace")
         ],
 
-
         brand: "Home Centre",
 
         description:
             "Soft decorative cushions with premium fabric covers for sofas and beds.",
 
-
         price: 899,
 
         oldPrice: 1299,
-
 
         catName: "Home",
 
@@ -8130,11 +6965,9 @@ const products = [
 
         innersubcatName: "Furnishing",
 
-
         rating: 4.6,
 
         discount: 30,
-
 
         variants: [
             {
@@ -8159,9 +6992,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Luxury Cotton Bedsheet Set",
 
@@ -8172,17 +7002,14 @@ const products = [
             img("photo-1616486338812-3dadae4b4ace")
         ],
 
-
         brand: "Bombay Dyeing",
 
         description:
             "Premium cotton bedsheet set with elegant patterns and soft comfortable fabric.",
 
-
         price: 1499,
 
         oldPrice: 2199,
-
 
         catName: "Home",
 
@@ -8190,11 +7017,9 @@ const products = [
 
         innersubcatName: "Furnishing",
 
-
         rating: 4.8,
 
         discount: 32,
-
 
         variants: [
             {
@@ -8215,7 +7040,6 @@ const products = [
                     img("photo-1616627451515-cbc80e5ece35")
                 ]
             },
-
 
             {
                 options: {
@@ -8238,12 +7062,6 @@ const products = [
         ]
 
     },
-
-
-    /* ===========================
-        MORE MEN'S SHIRTS
-   =========================== */
-
 
     {
         name: "Premium Floral Printed Shirt",
@@ -8288,8 +7106,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Premium Mandarin Collar Shirt",
 
@@ -8332,9 +7148,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Premium Checked Flannel Shirt",
@@ -8379,15 +7192,6 @@ const products = [
 
     },
 
-
-
-
-
-    /* ===========================
-            MORE MEN'S T-SHIRTS
-       =========================== */
-
-
     {
         name: "Oversized Graphic Streetwear Tee",
 
@@ -8430,9 +7234,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Premium Supima Cotton T-Shirt",
@@ -8477,14 +7278,6 @@ const products = [
 
     },
 
-
-
-
-    /* ===========================
-            MORE TROUSERS
-       =========================== */
-
-
     {
         name: "Slim Fit Black Chinos",
 
@@ -8527,9 +7320,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Classic Blue Slim Jeans",
@@ -8574,15 +7364,6 @@ const products = [
 
     },
 
-
-
-
-
-    /* ===========================
-              MEN'S FOOTWEAR
-       =========================== */
-
-
     {
         name: "Air Running Sneakers",
 
@@ -8625,9 +7406,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Classic Leather Formal Shoes",
@@ -8672,13 +7450,6 @@ const products = [
 
     },
 
-
-    /* ===========================
-          MEN'S FOOTWEAR
-          CONTINUED
-   =========================== */
-
-
     {
         name: "Premium White Casual Sneakers",
 
@@ -8721,8 +7492,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Street Style High Top Sneakers",
@@ -8771,9 +7540,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Premium Running Shoes",
 
@@ -8820,9 +7586,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Classic Brown Leather Loafers",
@@ -8871,9 +7634,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Black Chelsea Leather Boots",
 
@@ -8920,9 +7680,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Canvas Casual Slip On Shoes",
@@ -8971,9 +7728,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Premium Black Oxford Shoes",
 
@@ -9020,9 +7774,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Everyday Comfort Walking Shoes",
@@ -9071,11 +7822,6 @@ const products = [
 
     },
 
-    /* ===========================
-        WOMEN'S DRESSES
-   =========================== */
-
-
     {
         name: "Floral Printed Maxi Dress",
 
@@ -9122,9 +7868,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Elegant Black Party Dress",
@@ -9173,9 +7916,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Cotton Summer Casual Dress",
 
@@ -9222,9 +7962,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Satin Evening Gown",
@@ -9273,9 +8010,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Printed A-Line Midi Dress",
 
@@ -9322,14 +8056,6 @@ const products = [
         ]
 
     },
-
-
-
-
-    /* ===========================
-              WOMEN'S TOPS
-       =========================== */
-
 
     {
         name: "Premium Ribbed Crop Top",
@@ -9378,9 +8104,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Oversized Casual Women's Shirt Top",
 
@@ -9428,13 +8151,6 @@ const products = [
 
     },
 
-
-    /* ===========================
-        WOMEN'S TOPS
-        CONTINUED
-   =========================== */
-
-
     {
         name: "Elegant Chiffon Party Top",
 
@@ -9477,8 +8193,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Women's Linen Casual Shirt Top",
@@ -9523,8 +8237,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Women's Basic Cotton Tank Top",
 
@@ -9567,14 +8279,6 @@ const products = [
         ]
 
     },
-
-
-
-
-    /* ===========================
-              WOMEN'S JEANS
-       =========================== */
-
 
     {
         name: "High Waist Skinny Fit Jeans",
@@ -9619,9 +8323,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Wide Leg Denim Jeans",
 
@@ -9664,9 +8365,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Black High Rise Mom Jeans",
@@ -9711,14 +8409,6 @@ const products = [
 
     },
 
-
-
-
-    /* ===========================
-            WOMEN'S FOOTWEAR
-       =========================== */
-
-
     {
         name: "Classic Block Heel Sandals",
 
@@ -9761,9 +8451,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Women's White Lifestyle Sneakers",
@@ -9808,9 +8495,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Women's Ballet Flats",
 
@@ -9853,12 +8537,6 @@ const products = [
         ]
 
     },
-
-
-    /* ===========================
-       MORE WOMEN'S DRESSES
-   =========================== */
-
 
     {
         name: "Women's Floral Wrap Dress",
@@ -9907,9 +8585,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Women's Denim Shirt Dress",
 
@@ -9956,9 +8631,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Women's Casual Cotton Shirt Dress",
@@ -10007,14 +8679,6 @@ const products = [
 
     },
 
-
-
-
-    /* ===========================
-              MORE WOMEN JEANS
-       =========================== */
-
-
     {
         name: "Women's Straight Fit Blue Jeans",
 
@@ -10061,9 +8725,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Women's Distressed Boyfriend Jeans",
@@ -10112,15 +8773,6 @@ const products = [
 
     },
 
-
-
-
-    /* ===========================
-            WOMEN FOOTWEAR
-            CONTINUED
-       =========================== */
-
-
     {
         name: "Women's Stiletto Party Heels",
 
@@ -10167,9 +8819,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Women's Casual Sneakers",
@@ -10218,9 +8867,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Women's Flat Sandals",
 
@@ -10267,9 +8913,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Women's Premium Leather Loafers",
@@ -10318,12 +8961,6 @@ const products = [
 
     },
 
-
-    /* ===========================
-          SMARTPHONES
-   =========================== */
-
-
     {
         name: "iPhone 15 Pro Max",
 
@@ -10351,7 +8988,6 @@ const products = [
 
         discount: 10,
 
-
         variants: [
             {
                 options: {
@@ -10373,9 +9009,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Samsung Galaxy S25 Ultra",
@@ -10404,7 +9037,6 @@ const products = [
 
         discount: 11,
 
-
         variants: [
             {
                 options: {
@@ -10426,9 +9058,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Google Pixel 9 Pro",
@@ -10457,7 +9086,6 @@ const products = [
 
         discount: 9,
 
-
         variants: [
             {
                 options: {
@@ -10479,9 +9107,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "OnePlus 13 5G",
@@ -10510,7 +9135,6 @@ const products = [
 
         discount: 12,
 
-
         variants: [
             {
                 options: {
@@ -10532,9 +9156,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Samsung Galaxy A55 5G",
@@ -10563,7 +9184,6 @@ const products = [
 
         discount: 13,
 
-
         variants: [
             {
                 options: {
@@ -10585,9 +9205,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "iPhone 14",
@@ -10616,7 +9233,6 @@ const products = [
 
         discount: 14,
 
-
         variants: [
             {
                 options: {
@@ -10638,7 +9254,6 @@ const products = [
         ]
 
     },
-
 
     {
         name: "Nothing Phone 3",
@@ -10667,7 +9282,6 @@ const products = [
 
         discount: 10,
 
-
         variants: [
             {
                 options: {
@@ -10689,12 +9303,6 @@ const products = [
         ]
 
     },
-
-
-    /* ===========================
-        MOBILE ACCESSORIES
-   =========================== */
-
 
     {
         name: "MagSafe Silicone Case for iPhone",
@@ -10723,7 +9331,6 @@ const products = [
 
         discount: 20,
 
-
         variants: [
             {
                 options: {
@@ -10744,9 +9351,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Samsung Fast Wireless Charger",
@@ -10775,7 +9379,6 @@ const products = [
 
         discount: 28,
 
-
         variants: [
             {
                 options: {
@@ -10796,9 +9399,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "120W GaN Fast Charger",
@@ -10827,7 +9427,6 @@ const products = [
 
         discount: 33,
 
-
         variants: [
             {
                 options: {
@@ -10848,9 +9447,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "20000mAh Fast Charging Power Bank",
@@ -10879,7 +9475,6 @@ const products = [
 
         discount: 28,
 
-
         variants: [
             {
                 options: {
@@ -10900,9 +9495,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Tempered Glass Screen Protector",
@@ -10931,7 +9523,6 @@ const products = [
 
         discount: 30,
 
-
         variants: [
             {
                 options: {
@@ -10952,9 +9543,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Magnetic Car Phone Holder",
@@ -10983,7 +9571,6 @@ const products = [
 
         discount: 33,
 
-
         variants: [
             {
                 options: {
@@ -11004,9 +9591,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Apple AirTag Tracker",
@@ -11035,7 +9619,6 @@ const products = [
 
         discount: 12,
 
-
         variants: [
             {
                 options: {
@@ -11056,9 +9639,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Premium Smart Watch",
@@ -11087,7 +9667,6 @@ const products = [
 
         discount: 11,
 
-
         variants: [
             {
                 options: {
@@ -11108,12 +9687,6 @@ const products = [
         ]
 
     },
-
-
-    /* ===========================
-            LAPTOPS
-   =========================== */
-
 
     {
         name: "Apple MacBook Pro M4",
@@ -11142,7 +9715,6 @@ const products = [
 
         discount: 10,
 
-
         variants: [
             {
                 options: {
@@ -11164,9 +9736,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Apple MacBook Air M3",
@@ -11195,7 +9764,6 @@ const products = [
 
         discount: 13,
 
-
         variants: [
             {
                 options: {
@@ -11217,9 +9785,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Dell XPS 14 Laptop",
@@ -11248,7 +9813,6 @@ const products = [
 
         discount: 12,
 
-
         variants: [
             {
                 options: {
@@ -11270,9 +9834,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Lenovo Yoga Slim 7",
@@ -11301,7 +9862,6 @@ const products = [
 
         discount: 10,
 
-
         variants: [
             {
                 options: {
@@ -11323,9 +9883,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "ASUS ROG Gaming Laptop",
@@ -11354,7 +9911,6 @@ const products = [
 
         discount: 13,
 
-
         variants: [
             {
                 options: {
@@ -11376,9 +9932,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "HP Spectre x360 OLED Laptop",
@@ -11407,7 +9960,6 @@ const products = [
 
         discount: 14,
 
-
         variants: [
             {
                 options: {
@@ -11429,7 +9981,6 @@ const products = [
         ]
 
     },
-
 
     {
         name: "Acer Aspire 5 Laptop",
@@ -11458,7 +10009,6 @@ const products = [
 
         discount: 16,
 
-
         variants: [
             {
                 options: {
@@ -11480,7 +10030,6 @@ const products = [
         ]
 
     },
-
 
     {
         name: "Microsoft Surface Laptop",
@@ -11509,7 +10058,6 @@ const products = [
 
         discount: 15,
 
-
         variants: [
             {
                 options: {
@@ -11531,11 +10079,6 @@ const products = [
         ]
 
     },
-
-    /* ===========================
-          PERIPHERALS
-   =========================== */
-
 
     {
         name: "Logitech MX Mechanical Keyboard",
@@ -11564,7 +10107,6 @@ const products = [
 
         discount: 18,
 
-
         variants: [
             {
                 options: {
@@ -11585,7 +10127,6 @@ const products = [
         ]
 
     },
-
 
     {
         name: "Razer BlackWidow V4 Gaming Keyboard",
@@ -11614,7 +10155,6 @@ const products = [
 
         discount: 25,
 
-
         variants: [
             {
                 options: {
@@ -11635,7 +10175,6 @@ const products = [
         ]
 
     },
-
 
     {
         name: "Logitech MX Master 3S Wireless Mouse",
@@ -11664,7 +10203,6 @@ const products = [
 
         discount: 18,
 
-
         variants: [
             {
                 options: {
@@ -11685,7 +10223,6 @@ const products = [
         ]
 
     },
-
 
     {
         name: "Razer DeathAdder V3 Gaming Mouse",
@@ -11714,7 +10251,6 @@ const products = [
 
         discount: 22,
 
-
         variants: [
             {
                 options: {
@@ -11735,7 +10271,6 @@ const products = [
         ]
 
     },
-
 
     {
         name: "Dell UltraSharp 27 Inch Monitor",
@@ -11764,7 +10299,6 @@ const products = [
 
         discount: 17,
 
-
         variants: [
             {
                 options: {
@@ -11785,7 +10319,6 @@ const products = [
         ]
 
     },
-
 
     {
         name: "LG UltraGear Gaming Monitor",
@@ -11814,7 +10347,6 @@ const products = [
 
         discount: 19,
 
-
         variants: [
             {
                 options: {
@@ -11835,9 +10367,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Logitech Brio 4K Webcam",
@@ -11866,7 +10395,6 @@ const products = [
 
         discount: 20,
 
-
         variants: [
             {
                 options: {
@@ -11887,9 +10415,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Samsung Portable External SSD 1TB",
@@ -11918,7 +10443,6 @@ const products = [
 
         discount: 21,
 
-
         variants: [
             {
                 options: {
@@ -11939,9 +10463,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "HP Wireless Printer",
@@ -11970,7 +10491,6 @@ const products = [
 
         discount: 18,
 
-
         variants: [
             {
                 options: {
@@ -11991,9 +10511,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Aluminium Laptop Stand",
@@ -12022,7 +10539,6 @@ const products = [
 
         discount: 25,
 
-
         variants: [
             {
                 options: {
@@ -12043,12 +10559,6 @@ const products = [
         ]
 
     },
-
-
-    /* ===========================
-          HEADPHONES
-   =========================== */
-
 
     {
         name: "Apple AirPods Pro 2nd Generation",
@@ -12077,7 +10587,6 @@ const products = [
 
         discount: 7,
 
-
         variants: [
             {
                 options: {
@@ -12098,9 +10607,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Sony WH-1000XM5 Wireless Headphones",
@@ -12129,7 +10635,6 @@ const products = [
 
         discount: 14,
 
-
         variants: [
             {
                 options: {
@@ -12150,9 +10655,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Bose QuietComfort Ultra Headphones",
@@ -12181,7 +10683,6 @@ const products = [
 
         discount: 12,
 
-
         variants: [
             {
                 options: {
@@ -12202,9 +10703,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Samsung Galaxy Buds3 Pro",
@@ -12233,7 +10731,6 @@ const products = [
 
         discount: 18,
 
-
         variants: [
             {
                 options: {
@@ -12254,9 +10751,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Sony WF-1000XM5 True Wireless Earbuds",
@@ -12285,7 +10779,6 @@ const products = [
 
         discount: 15,
 
-
         variants: [
             {
                 options: {
@@ -12306,9 +10799,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "JBL Live 660NC Wireless Headphones",
@@ -12337,7 +10827,6 @@ const products = [
 
         discount: 25,
 
-
         variants: [
             {
                 options: {
@@ -12358,9 +10847,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Razer BlackShark V2 Gaming Headset",
@@ -12389,7 +10875,6 @@ const products = [
 
         discount: 20,
 
-
         variants: [
             {
                 options: {
@@ -12410,9 +10895,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Boat Airdopes 141 TWS Earbuds",
@@ -12441,7 +10923,6 @@ const products = [
 
         discount: 56,
 
-
         variants: [
             {
                 options: {
@@ -12462,11 +10943,6 @@ const products = [
         ]
 
     },
-
-    /* ===========================
-            SPEAKERS
-   =========================== */
-
 
     {
         name: "JBL PartyBox 310 Portable Speaker",
@@ -12495,7 +10971,6 @@ const products = [
 
         discount: 16,
 
-
         variants: [
             {
                 options: {
@@ -12516,9 +10991,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "JBL Flip 6 Portable Bluetooth Speaker",
@@ -12547,7 +11019,6 @@ const products = [
 
         discount: 20,
 
-
         variants: [
             {
                 options: {
@@ -12568,9 +11039,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Bose SoundLink Flex Speaker",
@@ -12599,7 +11067,6 @@ const products = [
 
         discount: 20,
 
-
         variants: [
             {
                 options: {
@@ -12620,9 +11087,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Sony SRS-XB100 Wireless Speaker",
@@ -12651,7 +11115,6 @@ const products = [
 
         discount: 25,
 
-
         variants: [
             {
                 options: {
@@ -12672,9 +11135,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Marshall Acton III Bluetooth Speaker",
@@ -12703,7 +11163,6 @@ const products = [
 
         discount: 14,
 
-
         variants: [
             {
                 options: {
@@ -12724,9 +11183,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Amazon Echo Dot 5th Gen Smart Speaker",
@@ -12755,7 +11211,6 @@ const products = [
 
         discount: 15,
 
-
         variants: [
             {
                 options: {
@@ -12776,9 +11231,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Google Nest Audio Smart Speaker",
@@ -12807,7 +11259,6 @@ const products = [
 
         discount: 20,
 
-
         variants: [
             {
                 options: {
@@ -12828,9 +11279,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Sony HT-S40R Home Theatre System",
@@ -12859,7 +11307,6 @@ const products = [
 
         discount: 17,
 
-
         variants: [
             {
                 options: {
@@ -12880,9 +11327,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Boat Stone 1200 Bluetooth Speaker",
@@ -12911,7 +11355,6 @@ const products = [
 
         discount: 37,
 
-
         variants: [
             {
                 options: {
@@ -12932,12 +11375,6 @@ const products = [
         ]
 
     },
-
-
-    /* ===========================
-          FACE CARE
-   =========================== */
-
 
     {
         name: "Minimalist 10% Niacinamide Face Serum",
@@ -12966,7 +11403,6 @@ const products = [
 
         discount: 14,
 
-
         variants: [
             {
                 options: {
@@ -12987,9 +11423,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "The Ordinary Hyaluronic Acid 2% + B5 Serum",
@@ -13018,7 +11451,6 @@ const products = [
 
         discount: 18,
 
-
         variants: [
             {
                 options: {
@@ -13039,9 +11471,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "CeraVe Hydrating Facial Cleanser",
@@ -13070,7 +11499,6 @@ const products = [
 
         discount: 20,
 
-
         variants: [
             {
                 options: {
@@ -13091,9 +11519,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Neutrogena Hydro Boost Water Gel",
@@ -13122,7 +11547,6 @@ const products = [
 
         discount: 30,
 
-
         variants: [
             {
                 options: {
@@ -13143,9 +11567,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Plum Green Tea Pore Cleansing Face Wash",
@@ -13174,7 +11595,6 @@ const products = [
 
         discount: 20,
 
-
         variants: [
             {
                 options: {
@@ -13195,9 +11615,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "L'Oréal Paris Revitalift Night Cream",
@@ -13226,7 +11643,6 @@ const products = [
 
         discount: 25,
 
-
         variants: [
             {
                 options: {
@@ -13247,9 +11663,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Cetaphil Moisturizing Lotion",
@@ -13278,7 +11691,6 @@ const products = [
 
         discount: 22,
 
-
         variants: [
             {
                 options: {
@@ -13299,9 +11711,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Mamaearth Vitamin C Face Serum",
@@ -13330,7 +11739,6 @@ const products = [
 
         discount: 25,
 
-
         variants: [
             {
                 options: {
@@ -13351,9 +11759,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "COSRX Advanced Snail 96 Mucin Essence",
@@ -13382,7 +11787,6 @@ const products = [
 
         discount: 19,
 
-
         variants: [
             {
                 options: {
@@ -13403,12 +11807,6 @@ const products = [
         ]
 
     },
-
-
-    /* ===========================
-          BODY CARE
-   =========================== */
-
 
     {
         name: "Nivea Nourishing Body Lotion",
@@ -13458,9 +11856,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Vaseline Intensive Care Body Lotion",
 
@@ -13508,9 +11903,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "The Body Shop Shea Body Butter",
@@ -13560,9 +11952,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Neutrogena Ultra Sheer Sunscreen SPF 50",
 
@@ -13610,9 +11999,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Minimalist SPF 50 PA++++ Sunscreen",
@@ -13662,9 +12048,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Dove Deep Moisture Body Wash",
 
@@ -13712,9 +12095,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Bath & Body Works Japanese Cherry Blossom Mist",
@@ -13764,9 +12144,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "L'Oréal Paris Glycolic Bright Body Lotion",
 
@@ -13814,9 +12191,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Tree Hut Shea Sugar Body Scrub",
@@ -13866,9 +12240,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Aveeno Daily Moisturizing Body Lotion",
 
@@ -13917,12 +12288,6 @@ const products = [
 
     },
 
-
-    /* ===========================
-      SHAMPOO & CONDITIONER
-   =========================== */
-
-
     {
         name: "L'Oréal Paris Total Repair 5 Shampoo",
 
@@ -13950,7 +12315,6 @@ const products = [
 
         discount: 17,
 
-
         variants: [
             {
                 options: {
@@ -13971,9 +12335,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "L'Oréal Professionnel Absolut Repair Shampoo",
@@ -14002,7 +12363,6 @@ const products = [
 
         discount: 18,
 
-
         variants: [
             {
                 options: {
@@ -14023,9 +12383,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Olaplex No.4 Bond Maintenance Shampoo",
@@ -14054,7 +12411,6 @@ const products = [
 
         discount: 17,
 
-
         variants: [
             {
                 options: {
@@ -14075,9 +12431,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Tresemmé Keratin Smooth Shampoo",
@@ -14106,7 +12459,6 @@ const products = [
 
         discount: 20,
 
-
         variants: [
             {
                 options: {
@@ -14127,9 +12479,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Dove Intense Repair Shampoo",
@@ -14158,7 +12507,6 @@ const products = [
 
         discount: 25,
 
-
         variants: [
             {
                 options: {
@@ -14179,9 +12527,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Head & Shoulders Anti Dandruff Shampoo",
@@ -14210,7 +12555,6 @@ const products = [
 
         discount: 22,
 
-
         variants: [
             {
                 options: {
@@ -14231,9 +12575,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Mamaearth Onion Hair Fall Control Shampoo",
@@ -14262,7 +12603,6 @@ const products = [
 
         discount: 20,
 
-
         variants: [
             {
                 options: {
@@ -14283,9 +12623,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "OGX Coconut Milk Shampoo",
@@ -14314,7 +12651,6 @@ const products = [
 
         discount: 18,
 
-
         variants: [
             {
                 options: {
@@ -14335,9 +12671,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Moroccanoil Hydrating Conditioner",
@@ -14366,7 +12699,6 @@ const products = [
 
         discount: 17,
 
-
         variants: [
             {
                 options: {
@@ -14387,9 +12719,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Minimalist Maleic Bond Repair Complex",
@@ -14418,7 +12747,6 @@ const products = [
 
         discount: 13,
 
-
         variants: [
             {
                 options: {
@@ -14439,12 +12767,6 @@ const products = [
         ]
 
     },
-
-
-    /* ===========================
-          HAIR STYLING
-   =========================== */
-
 
     {
         name: "Dyson Supersonic Hair Dryer",
@@ -14494,9 +12816,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Philips Hair Dryer 1600W",
 
@@ -14544,9 +12863,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Dyson Corrale Hair Straightener",
@@ -14596,9 +12912,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Philips Kerashine Hair Straightener",
 
@@ -14646,9 +12959,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Moroccanoil Treatment Hair Serum",
@@ -14698,9 +13008,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "L'Oréal Paris Extraordinary Oil Serum",
 
@@ -14748,9 +13055,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Schwarzkopf Professional Hair Styling Wax",
@@ -14800,9 +13104,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Toni & Guy Sea Salt Texturizing Spray",
 
@@ -14850,9 +13151,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Wahl Professional Hair Clipper",
@@ -14902,9 +13200,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Beardo Hair Styling Cream",
 
@@ -14953,11 +13248,6 @@ const products = [
 
     },
 
-    /* ===========================
-            EYES
-   =========================== */
-
-
     {
         name: "Maybelline Lash Sensational Mascara",
 
@@ -14985,7 +13275,6 @@ const products = [
 
         discount: 17,
 
-
         variants: [
             {
                 options: {
@@ -15006,9 +13295,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "L'Oréal Paris Voluminous Mascara",
@@ -15037,7 +13323,6 @@ const products = [
 
         discount: 20,
 
-
         variants: [
             {
                 options: {
@@ -15058,9 +13343,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "MAC Eye Shadow Palette",
@@ -15089,7 +13371,6 @@ const products = [
 
         discount: 12,
 
-
         variants: [
             {
                 options: {
@@ -15110,9 +13391,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Huda Beauty Nude Eyeshadow Palette",
@@ -15141,7 +13419,6 @@ const products = [
 
         discount: 13,
 
-
         variants: [
             {
                 options: {
@@ -15162,9 +13439,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Lakme Absolute Precision Eyeliner",
@@ -15193,7 +13467,6 @@ const products = [
 
         discount: 18,
 
-
         variants: [
             {
                 options: {
@@ -15214,9 +13487,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Maybelline Colossal Kajal",
@@ -15245,7 +13515,6 @@ const products = [
 
         discount: 20,
 
-
         variants: [
             {
                 options: {
@@ -15266,9 +13535,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Nykaa Rock The Line Kajal",
@@ -15297,7 +13563,6 @@ const products = [
 
         discount: 25,
 
-
         variants: [
             {
                 options: {
@@ -15318,9 +13583,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Benefit Cosmetics Brow Pencil",
@@ -15349,7 +13611,6 @@ const products = [
 
         discount: 12,
 
-
         variants: [
             {
                 options: {
@@ -15370,9 +13631,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "e.l.f. Putty Eye Primer",
@@ -15401,7 +13659,6 @@ const products = [
 
         discount: 22,
 
-
         variants: [
             {
                 options: {
@@ -15422,9 +13679,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Urban Decay Naked Eyeshadow Palette",
@@ -15453,7 +13707,6 @@ const products = [
 
         discount: 13,
 
-
         variants: [
             {
                 options: {
@@ -15474,12 +13727,6 @@ const products = [
         ]
 
     },
-
-
-    /* ===========================
-            LIPS
-   =========================== */
-
 
     {
         name: "MAC Matte Lipstick Ruby Woo",
@@ -15529,8 +13776,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Maybelline SuperStay Matte Ink Liquid Lipstick",
 
@@ -15578,8 +13823,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Lakme Absolute Matte Revolution Lipstick",
@@ -15629,8 +13872,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Huda Beauty Power Bullet Matte Lipstick",
 
@@ -15678,8 +13919,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Nykaa So Creme Creamy Matte Lipstick",
@@ -15729,8 +13968,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Fenty Beauty Gloss Bomb Universal Lip Gloss",
 
@@ -15778,8 +14015,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Dior Lip Glow Oil",
@@ -15829,8 +14064,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Vaseline Lip Therapy Original",
 
@@ -15878,8 +14111,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Laneige Lip Sleeping Mask",
@@ -15929,8 +14160,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Colorbar Waterproof Lip Liner",
 
@@ -15979,11 +14208,6 @@ const products = [
 
     },
 
-    /* ===========================
-          ROMANCE BOOKS
-   =========================== */
-
-
     {
         name: "The Love Hypothesis",
 
@@ -16011,7 +14235,6 @@ const products = [
 
         discount: 20,
 
-
         variants: [
             {
                 options: {
@@ -16032,9 +14255,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "It Ends With Us",
@@ -16063,7 +14283,6 @@ const products = [
 
         discount: 30,
 
-
         variants: [
             {
                 options: {
@@ -16084,9 +14303,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "It Starts With Us",
@@ -16115,7 +14331,6 @@ const products = [
 
         discount: 20,
 
-
         variants: [
             {
                 options: {
@@ -16136,9 +14351,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Pride and Prejudice",
@@ -16167,7 +14379,6 @@ const products = [
 
         discount: 25,
 
-
         variants: [
             {
                 options: {
@@ -16188,9 +14399,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "The Fault In Our Stars",
@@ -16219,7 +14427,6 @@ const products = [
 
         discount: 25,
 
-
         variants: [
             {
                 options: {
@@ -16240,9 +14447,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "The Notebook",
@@ -16271,7 +14475,6 @@ const products = [
 
         discount: 22,
 
-
         variants: [
             {
                 options: {
@@ -16292,9 +14495,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Me Before You",
@@ -16323,7 +14523,6 @@ const products = [
 
         discount: 20,
 
-
         variants: [
             {
                 options: {
@@ -16344,9 +14543,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "The Spanish Love Deception",
@@ -16375,7 +14571,6 @@ const products = [
 
         discount: 18,
 
-
         variants: [
             {
                 options: {
@@ -16395,9 +14590,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "The Hating Game",
@@ -16426,7 +14618,6 @@ const products = [
 
         discount: 25,
 
-
         variants: [
             {
                 options: {
@@ -16446,9 +14637,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "November 9",
@@ -16477,7 +14665,6 @@ const products = [
 
         discount: 22,
 
-
         variants: [
             {
                 options: {
@@ -16498,11 +14685,6 @@ const products = [
         ]
 
     },
-
-    /* ===========================
-      SCIENCE FICTION BOOKS
-   =========================== */
-
 
     {
         name: "Dune",
@@ -16552,9 +14734,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "The Martian",
 
@@ -16602,9 +14781,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Project Hail Mary",
@@ -16654,9 +14830,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Foundation",
 
@@ -16704,9 +14877,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "The Three Body Problem",
@@ -16756,9 +14926,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Ender's Game",
 
@@ -16806,9 +14973,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "Ready Player One",
@@ -16858,9 +15022,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Neuromancer",
 
@@ -16908,9 +15069,6 @@ const products = [
         ]
 
     },
-
-
-
 
     {
         name: "1984",
@@ -16960,9 +15118,6 @@ const products = [
 
     },
 
-
-
-
     {
         name: "Do Androids Dream of Electric Sheep?",
 
@@ -17010,12 +15165,6 @@ const products = [
         ]
 
     },
-
-
-    /* ===========================
-        BIOGRAPHY BOOKS
-   =========================== */
-
 
     {
         name: "Steve Jobs",
@@ -17065,8 +15214,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Elon Musk",
 
@@ -17114,8 +15261,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Wings of Fire",
@@ -17165,8 +15310,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Becoming",
 
@@ -17214,8 +15357,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Long Walk to Freedom",
@@ -17265,8 +15406,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Shoe Dog",
 
@@ -17314,8 +15453,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Einstein: His Life and Universe",
@@ -17365,8 +15502,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Open: An Autobiography",
 
@@ -17414,8 +15549,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "The Diary of a Young Girl",
@@ -17465,8 +15598,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Playing It My Way",
 
@@ -17514,11 +15645,6 @@ const products = [
         ]
 
     },
-
-    /* ===========================
-          SELF HELP BOOKS
-   =========================== */
-
 
     {
         name: "Atomic Habits",
@@ -17568,8 +15694,6 @@ const products = [
 
     },
 
-
-
     {
         name: "The Psychology of Money",
 
@@ -17617,8 +15741,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Rich Dad Poor Dad",
@@ -17668,8 +15790,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Deep Work",
 
@@ -17717,8 +15837,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Think and Grow Rich",
@@ -17768,8 +15886,6 @@ const products = [
 
     },
 
-
-
     {
         name: "The 7 Habits of Highly Effective People",
 
@@ -17817,8 +15933,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Ikigai",
@@ -17868,8 +15982,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Mindset",
 
@@ -17917,8 +16029,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Can't Hurt Me",
@@ -17968,8 +16078,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Make Your Bed",
 
@@ -18017,11 +16125,6 @@ const products = [
         ]
 
     },
-
-    /* ===========================
-      SCHOOL TEXTBOOKS
-   =========================== */
-
 
     {
         name: "NCERT Mathematics Class 10",
@@ -18071,8 +16174,6 @@ const products = [
 
     },
 
-
-
     {
         name: "NCERT Science Class 10",
 
@@ -18120,8 +16221,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "NCERT Physics Class 12",
@@ -18171,8 +16270,6 @@ const products = [
 
     },
 
-
-
     {
         name: "NCERT Chemistry Class 12",
 
@@ -18220,8 +16317,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "NCERT Biology Class 12",
@@ -18271,8 +16366,6 @@ const products = [
 
     },
 
-
-
     {
         name: "RD Sharma Mathematics Class 12",
 
@@ -18320,8 +16413,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "HC Verma Concepts of Physics Volume 1",
@@ -18371,8 +16462,6 @@ const products = [
 
     },
 
-
-
     {
         name: "S Chand Biology Class 11",
 
@@ -18420,8 +16509,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Computer Science With Python Class 12",
@@ -18471,8 +16558,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Together With Mathematics Class 10",
 
@@ -18520,11 +16605,6 @@ const products = [
         ]
 
     },
-
-    /* ===========================
-   COMPETITIVE TEXTBOOKS
-   =========================== */
-
 
     {
         name: "Concepts of Physics HC Verma Volume 2",
@@ -18575,8 +16655,6 @@ const products = [
 
     },
 
-
-
     {
         name: "JEE Main Mathematics Arihant",
 
@@ -18625,8 +16703,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Problems in General Physics IE Irodov",
 
@@ -18674,8 +16750,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "NCERT Biology Class 11 and 12 Combo",
@@ -18726,8 +16800,6 @@ const products = [
 
     },
 
-
-
     {
         name: "MTG NEET Previous Year Papers",
 
@@ -18775,8 +16847,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "GATE Computer Science Made Easy",
@@ -18826,8 +16896,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Cracking the Coding Interview",
 
@@ -18875,8 +16943,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Quantitative Aptitude for Competitive Examinations",
@@ -18926,8 +16992,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Lucent General Knowledge",
 
@@ -18975,8 +17039,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Indian Polity by Laxmikanth",
@@ -19026,13 +17088,6 @@ const products = [
 
     },
 
-    /* ===========================
-        GROCERIES
-        FRESH PRODUCE
-        FRUITS
-   =========================== */
-
-
     {
         name: "Fresh Royal Gala Apples 1kg",
 
@@ -19078,8 +17133,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Alphonso Mangoes Premium Box",
@@ -19127,8 +17180,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Fresh Bananas Premium Robusta",
 
@@ -19174,8 +17225,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Fresh Strawberries Premium Pack",
@@ -19223,8 +17272,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Imported Kiwi Fruit",
 
@@ -19270,8 +17317,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Fresh Oranges",
@@ -19319,8 +17364,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Premium Green Grapes",
 
@@ -19366,8 +17409,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Fresh Pomegranate",
@@ -19415,8 +17456,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Fresh Pineapple",
 
@@ -19462,8 +17501,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Dragon Fruit Premium",
@@ -19511,13 +17548,6 @@ const products = [
 
     },
 
-    /* ===========================
-        GROCERIES
-        FRESH PRODUCE
-        VEGETABLES
-   =========================== */
-
-
     {
         name: "Fresh Red Tomatoes",
 
@@ -19563,8 +17593,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Premium Potato",
@@ -19612,8 +17640,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Fresh Onion",
 
@@ -19659,8 +17685,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Organic Carrots",
@@ -19708,8 +17732,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Fresh Green Capsicum",
 
@@ -19755,8 +17777,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Fresh Broccoli",
@@ -19804,8 +17824,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Fresh Spinach Leaves",
 
@@ -19851,8 +17869,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Fresh Cucumber",
@@ -19900,8 +17916,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Button Mushrooms",
 
@@ -19947,8 +17961,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Green Peas Premium",
@@ -19996,13 +18008,6 @@ const products = [
 
     },
 
-    /* ===========================
-      GROCERIES
-      PACKAGED FOOD
-      SNACKS
-   =========================== */
-
-
     {
         name: "Lay's Classic Salted Chips",
 
@@ -20048,8 +18053,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Kurkure Masala Munch",
@@ -20097,8 +18100,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Oreo Original Chocolate Cream Biscuits",
 
@@ -20144,8 +18145,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Parle-G Original Biscuits",
@@ -20193,8 +18192,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Haldiram's Aloo Bhujia",
 
@@ -20240,8 +18237,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Dark Chocolate 70% Cocoa",
@@ -20289,8 +18284,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Britannia Good Day Cashew Cookies",
 
@@ -20336,8 +18329,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Mixed Dry Fruits Premium Pack",
@@ -20385,8 +18376,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Too Yumm Multigrain Chips",
 
@@ -20432,8 +18421,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Maggi Instant Noodles",
@@ -20481,14 +18468,6 @@ const products = [
 
     },
 
-
-    /* ===========================
-      GROCERIES
-      PACKAGED FOOD
-      BEVERAGES
-   =========================== */
-
-
     {
         name: "Coca Cola Soft Drink",
 
@@ -20534,8 +18513,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Pepsi Black Zero Sugar",
@@ -20583,8 +18560,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Fanta Orange Drink",
 
@@ -20630,8 +18605,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Sprite Lemon Lime Drink",
@@ -20679,8 +18652,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Real Mixed Fruit Juice",
 
@@ -20726,8 +18697,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Tropicana Orange Juice",
@@ -20775,8 +18744,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Red Bull Energy Drink",
 
@@ -20822,8 +18789,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Nescafe Classic Instant Coffee",
@@ -20871,8 +18836,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Tata Tea Premium",
 
@@ -20918,8 +18881,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Bournvita Health Drink",
@@ -20967,14 +18928,6 @@ const products = [
 
     },
 
-
-    /* ===========================
-      GROCERIES
-      DAIRY & BAKERY
-      DAIRY
-   =========================== */
-
-
     {
         name: "Amul Taaza Toned Milk",
 
@@ -21020,8 +18973,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Mother Dairy Full Cream Milk",
@@ -21069,8 +19020,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Amul Fresh Paneer",
 
@@ -21116,8 +19065,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Amul Butter",
@@ -21165,8 +19112,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Amul Processed Cheese Slices",
 
@@ -21213,8 +19158,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Nestle Milkmaid Condensed Milk",
 
@@ -21260,8 +19203,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Epigamia Greek Yogurt",
@@ -21310,8 +19251,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Amul Pure Cow Ghee",
 
@@ -21357,8 +19296,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Kwality Walls Vanilla Ice Cream",
@@ -21406,8 +19343,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Amul Chocolate Flavoured Milk",
 
@@ -21453,13 +19388,6 @@ const products = [
         ]
 
     },
-
-    /* ===========================
-      GROCERIES
-      DAIRY & BAKERY
-      BAKERY
-   =========================== */
-
 
     {
         name: "Britannia White Sandwich Bread",
@@ -21507,8 +19435,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Harvest Whole Wheat Bread",
 
@@ -21554,8 +19480,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Chocolate Truffle Cake",
@@ -21603,8 +19527,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Blueberry Muffins Pack",
 
@@ -21650,8 +19572,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Butter Croissant",
@@ -21699,8 +19619,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Garlic Bread Loaf",
 
@@ -21746,8 +19664,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Chocolate Brownie Box",
@@ -21795,8 +19711,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Pizza Base Pack",
 
@@ -21842,8 +19756,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Chocolate Donuts",
@@ -21891,8 +19803,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Butter Cookies Premium",
 
@@ -21938,13 +19848,6 @@ const products = [
         ]
 
     },
-
-    /* ===========================
-          HOME
-       FURNITURE
-       LIVING ROOM
-   =========================== */
-
 
     {
         name: "Premium 3 Seater Fabric Sofa",
@@ -21994,8 +19897,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Modern L Shape Corner Sofa",
 
@@ -22043,8 +19944,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Wooden Coffee Table",
@@ -22094,8 +19993,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Luxury Recliner Chair",
 
@@ -22142,8 +20039,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Modern TV Entertainment Unit",
@@ -22192,8 +20087,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Accent Lounge Chair",
 
@@ -22240,8 +20133,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Wooden Bookshelf 5 Tier",
@@ -22290,8 +20181,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Modern Side Table",
 
@@ -22337,8 +20226,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Luxury Storage Cabinet",
@@ -22387,8 +20274,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Bean Bag Lounge Chair",
 
@@ -22435,13 +20320,6 @@ const products = [
         ]
 
     },
-
-    /* ===========================
-          HOME
-       FURNITURE
-        BED ROOM
-   =========================== */
-
 
     {
         name: "King Size Wooden Bed",
@@ -22491,8 +20369,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Queen Size Storage Bed",
 
@@ -22539,8 +20415,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "6 Door Wooden Wardrobe",
@@ -22589,8 +20463,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Modern Dressing Table With Mirror",
 
@@ -22636,8 +20508,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Memory Foam Mattress",
@@ -22686,8 +20556,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Bedside Night Stand",
 
@@ -22733,8 +20601,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Study Table With Drawer",
@@ -22783,8 +20649,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Ergonomic Bedroom Chair",
 
@@ -22830,8 +20694,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Wooden Chest Of Drawers",
@@ -22879,8 +20741,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Premium Pillow Set",
 
@@ -22927,14 +20787,6 @@ const products = [
 
     },
 
-
-    /* ===========================
-          HOME
-     KITCHEN & DINING
-        COOKWARE
-   =========================== */
-
-
     {
         name: "Prestige Aluminium Pressure Cooker",
 
@@ -22981,8 +20833,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Hawkins Stainless Steel Pressure Cooker",
@@ -23031,8 +20881,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Non Stick Fry Pan",
 
@@ -23079,8 +20927,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Granite Coating Kadai",
@@ -23129,8 +20975,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Stainless Steel Cookware Set",
 
@@ -23177,8 +21021,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Cast Iron Tawa",
@@ -23227,8 +21069,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Kitchen Knife Set",
 
@@ -23274,8 +21114,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Wooden Cooking Spoon Set",
@@ -23323,8 +21161,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Airtight Food Storage Containers",
 
@@ -23371,8 +21207,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Electric Hand Blender",
 
@@ -23418,13 +21252,6 @@ const products = [
         ]
 
     },
-
-    /* ===========================
-          HOME
-     KITCHEN & DINING
-        COOKWARE
-   =========================== */
-
 
     {
         name: "Prestige Aluminium Pressure Cooker",
@@ -23473,8 +21300,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Hawkins Stainless Steel Pressure Cooker",
 
@@ -23521,8 +21346,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Non Stick Fry Pan",
@@ -23571,8 +21394,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Granite Coating Kadai",
 
@@ -23619,8 +21440,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Stainless Steel Cookware Set",
@@ -23669,8 +21488,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Cast Iron Tawa",
 
@@ -23718,8 +21535,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Kitchen Knife Set",
 
@@ -23765,8 +21580,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Wooden Cooking Spoon Set",
@@ -23814,8 +21627,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Airtight Food Storage Containers",
 
@@ -23862,8 +21673,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Electric Hand Blender",
 
@@ -23909,13 +21718,6 @@ const products = [
         ]
 
     },
-
-    /* ===========================
-          HOME
-     KITCHEN & DINING
-        TABLEWARE
-   =========================== */
-
 
     {
         name: "Borosil Opal Glass Dinner Set",
@@ -23964,8 +21766,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Ceramic Coffee Mug Set",
 
@@ -24012,8 +21812,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Stainless Steel Cutlery Set",
@@ -24062,8 +21860,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Premium Glass Tumbler Set",
 
@@ -24109,8 +21905,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "White Ceramic Dinner Plates Set",
@@ -24159,8 +21953,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Wooden Serving Tray",
 
@@ -24207,8 +21999,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Soup Bowl Ceramic Set",
 
@@ -24254,8 +22044,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Insulated Stainless Steel Bottle",
@@ -24304,8 +22092,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Glass Tea Cup Set",
 
@@ -24352,8 +22138,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Marble Design Serving Bowl",
 
@@ -24399,13 +22183,6 @@ const products = [
         ]
 
     },
-
-    /* ===========================
-          HOME
-       HOME DECOR
-        LIGHTING
-   =========================== */
-
 
     {
         name: "Modern LED Ceiling Light",
@@ -24454,8 +22231,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Crystal Chandelier Hanging Light",
 
@@ -24502,8 +22277,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Minimal Table Lamp",
@@ -24552,8 +22325,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Smart WiFi LED Bulb",
 
@@ -24601,8 +22372,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Decorative Floor Lamp",
 
@@ -24648,8 +22417,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "LED Strip Lights RGB",
@@ -24698,8 +22465,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Wall Mounted Decorative Light",
 
@@ -24745,8 +22510,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Night Lamp With Sensor",
@@ -24794,8 +22557,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Antique Lantern Decorative Light",
 
@@ -24842,8 +22603,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Smart Ceiling Panel Light",
 
@@ -24889,13 +22648,6 @@ const products = [
         ]
 
     },
-
-    /* ===========================
-          HOME
-       HOME DECOR
-       FURNISHING
-   =========================== */
-
 
     {
         name: "Premium Cotton Bedsheet Set",
@@ -24944,8 +22696,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Blackout Window Curtains",
 
@@ -24992,8 +22742,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Decorative Cushion Cover Set",
@@ -25042,8 +22790,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Luxury Area Rug",
 
@@ -25090,8 +22836,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Soft Microfiber Blanket",
@@ -25140,8 +22884,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Premium Sofa Cover Set",
 
@@ -25188,8 +22930,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Cotton Hand Towel Set",
@@ -25238,8 +22978,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Anti Slip Floor Mat",
 
@@ -25285,8 +23023,6 @@ const products = [
         ]
 
     },
-
-
 
     {
         name: "Decorative Wall Tapestry",
@@ -25334,8 +23070,6 @@ const products = [
 
     },
 
-
-
     {
         name: "Premium Table Runner",
 
@@ -25382,9 +23116,6 @@ const products = [
         ]
 
     },
-
-
-
 
 ];
 
